@@ -1,0 +1,44 @@
+<form>
+  <div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <md-icon class="material-icons md-dark md-inactive">email</md-icon>
+      <md-input-container fxFlex="80%">
+        <input mdInput type="email" placeholder="Email" required>
+        <md-error>This field is required</md-error>
+      </md-input-container>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <md-icon>lock_open</md-icon>
+      <md-input-container fxFlex="80%">
+        <input mdInput type="password" placeholder="Password" required>
+        <md-error>This field is required</md-error>
+      </md-input-container>
+      <button md-mini-fab color="white"><md-icon>remove_red_eye</md-icon></button>
+
+    </div>
+    <button md-button>LOGIN</button>
+
+  </div>
+</form>
+
+
+<!--<div>-->
+<!--<md-toolbar color="primary">-->
+<!--<span>Aurora TMS</span>-->
+<!--<span class="example-spacer"></span>-->
+<!--<button md-button [mdMenuTriggerFor]="appMenu">-->
+<!--<md-icon>menu</md-icon> Menu-->
+<!--</button>-->
+<!--</md-toolbar>-->
+
+<!--<md-menu #appMenu="mdMenu">-->
+<!--<button md-menu-item>Settings</button>-->
+<!--<button md-menu-item>Help</button>-->
+<!--</md-menu>-->
+
+<!--<ul>-->
+<!--<li *ngFor="let todo of todos; let i = index">-->
+<!--{{i}} {{todo.title}}-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
