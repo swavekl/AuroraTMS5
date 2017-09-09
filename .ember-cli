@@ -1,0 +1,6 @@
+{
+    "port": 4201,
+    "liveReload": true,
+    "host": "gateway-pc",
+    "live-reload-port": 49153
+}
