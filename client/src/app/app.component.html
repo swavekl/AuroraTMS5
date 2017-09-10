@@ -1,3 +1,12 @@
 <div fxLayout="column" style="border: 2px solid red" fxFill>
     <router-outlet></router-outlet>
+  Hello here
+  <div>
+    <ul>
+      <li *ngFor="let todo of todos; let i = index">
+        {{i}} {{todo.title}} MMM
+      </li>
+    </ul>
+  </div>
+  End Hello
 </div>
