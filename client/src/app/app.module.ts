@@ -17,12 +17,15 @@ import { TodosService } from './todos.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
+import { TournamentModule } from './tournament/tournament.module';
+import { MainMenuComponent } from './main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignInComponent
+    SignInComponent,
+    MainMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { SignInComponent } from './login/sign-in/sign-in.component';
     MdIconModule,
     MdTabsModule,
     FlexLayoutModule,
+    TournamentModule,
     RouterModule.forRoot(rootRouterConfig),
   ],
   providers: [
