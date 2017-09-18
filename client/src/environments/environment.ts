@@ -4,5 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  // base url for request from client
+  origin : 'http://gateway-pc:9001'
+
 };

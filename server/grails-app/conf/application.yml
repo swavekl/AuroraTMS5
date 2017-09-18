@@ -2,7 +2,7 @@
 grails:
     profile: angular2
     codegen:
-        defaultPackage: auroratms5
+        defaultPackage: org.auroratms
     spring:
         transactionManagement:
             proxies: false
@@ -24,6 +24,8 @@ endpoints:
     jmx:
         enabled: true
 
+server:
+  port: 9001
 ---
 grails:
     mime:
@@ -68,9 +70,11 @@ grails:
 hibernate:
     cache:
         queries: false
+        provider_class: net.sf.ehcache.hibernate.EhCacheProvider
         use_second_level_cache: true
         use_query_cache: false
-        region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+        region:
+             factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
 
 dataSource:
     pooled: true
@@ -115,3 +119,4 @@ environments:
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 
+#        grails.assets.url: https://auroratms.s3-us-east-2.amazonaws.com/auroratms/

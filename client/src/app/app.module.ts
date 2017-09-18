@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http, XHRBackend, RequestOptions} from '@angular/http';
+import { httpFactory } from "./http/http-factory";
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -19,6 +20,8 @@ import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { TournamentModule } from './tournament/tournament.module';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,15 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
   ],
   providers: [
     TodosService,
-    BaseService
+    AuthenticationService,
+    AuthGuard,
+    BaseService,
+    {
+      provide: Http,
+      // this is the factory we need to use to replace standard Http service with our own InterceptedHttp
+      useFactory: httpFactory,
+      deps: [XHRBackend, RequestOptions]
+    }
   ],
   bootstrap: [AppComponent]
 })

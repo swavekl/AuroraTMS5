@@ -1,4 +1,4 @@
-package auroratms5
+package org.auroratms
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification

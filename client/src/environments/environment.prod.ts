@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+
+    // base url for request from client
+    origin : 'http://gateway-pc:9001'
 };

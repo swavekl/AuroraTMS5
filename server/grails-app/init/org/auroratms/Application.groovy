@@ -1,4 +1,4 @@
-package auroratms5
+package org.auroratms
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration

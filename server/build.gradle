@@ -13,7 +13,7 @@ buildscript {
 }
 
 version "0.1"
-group "auroratms5"
+group "org.auroratms"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
@@ -63,11 +63,18 @@ dependencies {
     runtime "com.h2database:h2"
     runtime 'mysql:mysql-connector-java:5.1.36'
     runtime "org.grails.plugins:asset-pipeline"
+
+    testCompile "org.grails:grails-gorm-testing-support:1.1.1"
+    testCompile "org.grails:grails-web-testing-support:1.1.1"
+
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
     testCompile "org.grails:grails-datastore-rest-client"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+
+    compile 'org.grails.plugins:spring-security-core:3.1.2'
+    compile "org.grails.plugins:spring-security-rest:2.0.0.M2"
 }
 
 bootRun {

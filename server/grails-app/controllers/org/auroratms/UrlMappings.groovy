@@ -1,4 +1,4 @@
-package auroratms5
+package org.auroratms
 
 class UrlMappings {
 
@@ -10,6 +10,11 @@ class UrlMappings {
         put "/$controller/$id(.$format)?"(action:"update")
         patch "/$controller/$id(.$format)?"(action:"patch")
 
+        '/sanctionrequests'(resources: 'sanctionrequest') {
+            collection {
+                '/search'(controller: 'sanctionrequest', action: 'search')
+            }
+        }
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')
         "404"(view: '/notFound')
