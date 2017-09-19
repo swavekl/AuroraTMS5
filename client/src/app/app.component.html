@@ -2,7 +2,7 @@
 
 
   <md-sidenav-container class="example-container">
-    <md-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
+    <md-sidenav #sidenav class="example-sidenav" mode="side" opened="{{ !isMobile }}" >
       <app-main-menu></app-main-menu>
     </md-sidenav>
 
