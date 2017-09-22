@@ -13,7 +13,8 @@ export class TodosService extends BaseService {
    }
 
    getServiceUrl() {
-      return this.getBaseUrl() + "/todo";
+      //return this.getBaseUrl() + "/todo";
+      return "/todo";
    }
 
   getTodos(){

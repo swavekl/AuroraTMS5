@@ -3,18 +3,14 @@ package org.auroratms
 class UrlMappings {
 
     static mappings = {
-        delete "/$controller/$id(.$format)?"(action:"delete")
-        get "/$controller(.$format)?"(action:"index")
-        get "/$controller/$id(.$format)?"(action:"show")
-        post "/$controller(.$format)?"(action:"save")
-        put "/$controller/$id(.$format)?"(action:"update")
-        patch "/$controller/$id(.$format)?"(action:"patch")
+        '/api/insurancerequest'(resources: 'insuranceRequest')
 
-        '/sanctionrequests'(resources: 'sanctionrequest') {
+        '/api/sanctionrequest'(resources: 'sanctionRequest') {
             collection {
-                '/search'(controller: 'sanctionrequest', action: 'search')
+                get '/search'(controller: 'sanctionRequest', action: 'search')
             }
         }
+
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')
         "404"(view: '/notFound')

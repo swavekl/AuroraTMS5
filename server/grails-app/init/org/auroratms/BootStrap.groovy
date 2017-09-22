@@ -25,8 +25,16 @@ class BootStrap {
         new SanctionRequest(tournamentName: '2018 Aurora Summer Open').save()
         new SanctionRequest(tournamentName: '2018 Aurora Fall Open').save()
 
+        new InsuranceRequest(contactName: 'Swavek Lorenc').save()
+        new InsuranceRequest(contactName: 'Mario Lorenc').save()
+
         5.times {
             new Todo(title: "Todo title + ${it}").save()
+        }
+
+        Todo.withSession {
+            it.flush()
+            it.clear()
         }
     }
     def destroy = {

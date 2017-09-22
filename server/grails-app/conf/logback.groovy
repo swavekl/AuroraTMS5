@@ -37,3 +37,8 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
 else {
     root(ERROR, ['STDOUT'])
 }
+
+// for debugging restful api access
+//logger("org.springframework.security", DEBUG, ['STDOUT'], false)
+//logger("grails.plugin.springsecurity", DEBUG, ['STDOUT'], false)
+//logger("org.pac4j", DEBUG, ['STDOUT'], false)

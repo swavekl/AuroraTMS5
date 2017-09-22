@@ -5,7 +5,7 @@ import grails.rest.*
 import grails.converters.*
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured('ROLE_USER')
+@Secured(['ROLE_TOURNAMENT_DIRECTOR'])
 class SanctionRequestController extends RestfulController {
     static responseFormats = ['json', 'xml']
 

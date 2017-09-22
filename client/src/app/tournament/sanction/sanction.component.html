@@ -1,1 +1,8 @@
 This is where the list of sanction applications will go!!
+<div>
+<ul>
+<li *ngFor="let sanctionRequest of sanctionRequests; let i = index">
+{{i}} {{sanctionRequest.tournamentName}}
+</li>
+</ul>
+</div>

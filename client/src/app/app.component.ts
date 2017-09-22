@@ -33,6 +33,7 @@ export class AppComponent {
   }
 
     ngOnInit() {
+    /*
     this.todosService.getTodos().subscribe(
     data =>
     {
@@ -45,5 +46,6 @@ export class AppComponent {
                                         console.log(err);
                                     }
     );
+    */
   }
 }
