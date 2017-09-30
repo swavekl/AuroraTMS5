@@ -21,6 +21,7 @@ export class SignInComponent implements OnInit {
     { }
 
   ngOnInit() {
+
   console.log ('in SignInComponent.ngOnInit');
         // reset login status
         this.authenticationService.logout();
@@ -41,7 +42,7 @@ export class SignInComponent implements OnInit {
                         this.router.navigate([this.returnUrl]);
                     },
                     error => {
-      console.log ('error logging in');
+      console.log ('error logging in', error);
                         //this.alertService.error(error);
                         this.loading = false;
                     });
@@ -49,6 +50,9 @@ export class SignInComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
+
+
+
   }
 
 }

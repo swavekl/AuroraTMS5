@@ -1,8 +1,30 @@
-This is where the list of sanction applications will go!!
-<div>
-<ul>
-<li *ngFor="let sanctionRequest of sanctionRequests; let i = index">
-{{i}} {{sanctionRequest.tournamentName}}
-</li>
-</ul>
+<!--This is where the list of sanction applications will go!!-->
+<!--<div>-->
+<!--<ul>-->
+<!--<li *ngFor="let sanctionRequest of sanctionRequests; let i = index">-->
+<!--{{i}} {{sanctionRequest.tournamentName}}, {{ sanctionRequest.startDate | date}}, {{ sanctionRequest.endDate | date}}-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+
+<div class="sanction-table mat-elevation-z8">
+  <md-table #sanctiontable [dataSource]="dataSource">
+    <ng-container mdColumnDef="tournamentName">
+      <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
+      <md-cell *mdCellDef="let tournament">{{ tournament.tournamentName }}</md-cell>
+    </ng-container>
+    <ng-container mdColumnDef="startDate">
+      <md-header-cell *mdHeaderCellDef> StartDate </md-header-cell>
+      <md-cell *mdCellDef="let tournament">{{ tournament.startDate  | date}}</md-cell>
+    </ng-container>
+    <ng-container mdColumnDef="endDate">
+      <md-header-cell *mdHeaderCellDef> EndDate </md-header-cell>
+      <md-cell *mdCellDef="let tournament">{{ tournament.endDate  | date}}</md-cell>
+    </ng-container>
+
+    <md-header-row *mdHeaderRowDef="displayColumns"></md-header-row>
+    <md-row *mdRowDef="let row; columns: displayColumns;"></md-row>
+  </md-table>
 </div>
+
+

@@ -3,8 +3,8 @@ package org.auroratms
 class SanctionRequest {
 
     String tournamentName
-//    Date startDate
-//    Date endDate
+    Date startDate
+    Date endDate
 //    Date alternateStartDate
 //    Date alternateEndDate
 //

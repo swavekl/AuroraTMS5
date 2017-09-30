@@ -8,6 +8,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
 
+import { MdTableModule } from "@angular/material";
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdTabsModule } from '@angular/material';
 import 'hammerjs';
@@ -22,13 +24,15 @@ import { TournamentModule } from './tournament/tournament.module';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuard } from './guards/auth.guard';
+import { RegisterComponent } from './login/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignInComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +43,7 @@ import { AuthGuard } from './guards/auth.guard';
     MdButtonModule,
     MdCardModule,
     MdMenuModule,
+    MdTableModule,
     MdToolbarModule,
     MdIconModule,
     MdTabsModule,
@@ -60,4 +65,6 @@ import { AuthGuard } from './guards/auth.guard';
   ],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }

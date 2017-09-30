@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { DataSource } from '@angular/cdk/collections';
 import { SanctionService, SanctionRequest } from './sanction.service';
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/of';
+
 
 @Component({
   selector: 'app-sanction',
@@ -8,7 +12,9 @@ import { SanctionService, SanctionRequest } from './sanction.service';
 })
 export class SanctionComponent implements OnInit {
 
-  sanctionRequests: SanctionRequest[];
+  // sanctionRequests: SanctionRequest[];
+  displayColumns = ['tournamentName', 'startDate', 'endDate'];
+  dataSource: SanctionDataSource;
 
   constructor(private sanctionService: SanctionService) {
   }
@@ -17,8 +23,10 @@ export class SanctionComponent implements OnInit {
     this.sanctionService.list().subscribe(
     data =>
     {
-      this.sanctionRequests = data;
-      console.log ('sanctionRequests', this.sanctionRequests);
+      // this.sanctionRequests = data;
+      // console.log ('sanctionRequests', this.sanctionRequests);
+      this.dataSource = new SanctionDataSource(data);
+      console.log('datasource', this.dataSource);
     },
     err => {
         // Log errors if any
@@ -26,4 +34,17 @@ export class SanctionComponent implements OnInit {
     }
     );
   }
+}
+
+
+
+export class SanctionDataSource extends DataSource<any> {
+  constructor(private myData: SanctionRequest[]) {
+    super();
+    // console.log('data', this.myData);
+  }
+  connect():Observable<SanctionRequest[]> {
+    return Observable.of(this.myData);
+  }
+  disconnect() {}
 }
