@@ -2,6 +2,7 @@
   height: 500px;
 }
 
-.insurance-table {
-  width: 600px;
+#insurancecard {
+  width: 800px;
+  height: 100%;
 }

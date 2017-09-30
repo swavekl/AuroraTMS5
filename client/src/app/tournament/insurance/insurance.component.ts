@@ -20,7 +20,6 @@ export class InsuranceComponent implements OnInit {
     this.insuranceService.list().subscribe(
       data => {
         this.dataSource = new InsuranceDataSource(data);
-        console.log('datasource', this.dataSource);
       }, err => {
         console.log(err);
       }
