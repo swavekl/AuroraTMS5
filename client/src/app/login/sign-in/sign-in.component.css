@@ -1,0 +1,10 @@
+.facebook-button {
+  src: 'client/src/assets/images/FB-f-Logo__blue_29.png'
+}
+
+.my-icon-button {
+  padding: 7px !important;
+  min-width: 0;
+  min-height: 0;
+  line-height: normal;
+}

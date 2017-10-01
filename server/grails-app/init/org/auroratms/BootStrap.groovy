@@ -1,10 +1,15 @@
 package org.auroratms
 
+import grails.plugin.springsecurity.SecurityFilterPosition
+import grails.plugin.springsecurity.SpringSecurityUtils
+
 class BootStrap {
 
     def init = { servletContext ->
         def userRole = new Role(authority: 'ROLE_USER').save()
         def tdRole = new Role(authority: 'ROLE_TOURNAMENT_DIRECTOR').save()
+        def facebookRole = new Role(authority: 'ROLE_FACEBOOK').save()
+        SpringSecurityUtils.clientRegisterFilter("corsFilter", SecurityFilterPosition.SECURITY_CONTEXT_FILTER.order - 1)
 
         def swavek = new User(username: 'swaveklorenc@yahoo.com', password: 'swavek').save()
         def yichi = new User(username: 'yzhang2@mc.com', password: 'yichi').save()

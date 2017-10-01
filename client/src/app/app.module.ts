@@ -7,11 +7,8 @@ import { httpFactory } from "./http/http-factory";
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
-
-import { MdTableModule } from "@angular/material";
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdTabsModule } from '@angular/material';
+import { MaterialModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdTabsModule, MdTableModule } from '@angular/material';
 import 'hammerjs';
 import { FlexLayoutModule } from "@angular/flex-layout";
 

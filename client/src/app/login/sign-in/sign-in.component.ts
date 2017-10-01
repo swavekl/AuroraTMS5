@@ -50,9 +50,19 @@ export class SignInComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
+  }
 
-
-
+  loginWithFacebook() {
+    this.authenticationService.loginWithFacebook ()
+    .subscribe(
+      data => {
+         console.log ('facebook login success, now go to this url: ', this.returnUrl);
+         this.router.navigate([this.returnUrl]);
+      },
+      error => {
+        console.log ('facebook error logging in', error);
+        this.loading = false;
+      });
   }
 
 }
