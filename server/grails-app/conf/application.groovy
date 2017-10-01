@@ -1,4 +1,22 @@
-
+grails {
+	plugin {
+		springsecurity {
+			rest {
+				oauth {
+					frontendCallbackUrl = { String tokenValue -> "http://localhost:4200/configuretournament#token=${tokenValue}" }
+					facebook {
+						client = org.pac4j.oauth.client.FacebookClient
+						key = '${FB_APP_ID}'
+						secret = '${FB_APP_SECRET}'
+						scope = 'email,user_location'
+						fields = 'id,name,first_name,middle_name,last_name,username'
+						defaultRoles = ['ROLE_USER', 'ROLE_FACEBOOK']
+					}
+				}
+			}
+		}
+	}
+}
 
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.auroratms.User'
