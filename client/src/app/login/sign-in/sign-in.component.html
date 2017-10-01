@@ -1,3 +1,5 @@
+<md-card-title style="text-align: center">SIGN IN</md-card-title>
+
 <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
   <div fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -14,12 +16,12 @@
         <md-error>This field is required</md-error>
       </md-input-container>
       <button md-mini-fab color="white"><md-icon>remove_red_eye</md-icon></button>
-
     </div>
-    <button md-button>LOGIN</button>
-
+    <button md-raised-button color="primary">LOGIN</button>
   </div>
 </form>
+
+<h3>Don't have an aacount? <a md-button color="primary" routerLink="../register">SIGN UP</a></h3>
 
 
 <!--<div class="col-md-6 col-md-offset-3">-->

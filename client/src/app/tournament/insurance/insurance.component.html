@@ -1,3 +1,23 @@
-<p>
-  insurance works! again
-</p>
+<md-card id="insurancecard">
+  <md-card-header>
+    <md-card-title>Insurance Certificate Requests</md-card-title>
+  </md-card-header>
+  <md-card-content>
+    <div class="insurance-table mat-elevation-z8">
+      <md-table #insurancetable [dataSource]="dataSource">
+        <ng-container mdColumnDef="contactName">
+          <md-header-cell *mdHeaderCellDef>ContactName</md-header-cell>
+          <md-cell *mdCellDef="let contact">{{ contact.contactName }}</md-cell>
+        </ng-container>
+        <ng-container mdColumnDef="contactEmail">
+          <md-header-cell *mdHeaderCellDef>ContactEmail</md-header-cell>
+          <md-cell *mdCellDef="let contact">{{ contact.contactEmail }}</md-cell>
+        </ng-container>
+
+        <md-header-row *mdHeaderRowDef="displayColumns"></md-header-row>
+        <md-row *mdRowDef="let row; columns: displayColumns"></md-row>
+      </md-table>
+    </div>
+  </md-card-content>
+</md-card>
+

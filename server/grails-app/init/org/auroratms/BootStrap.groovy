@@ -20,13 +20,14 @@ class BootStrap {
             it.clear()
         }
 
-        new SanctionRequest(tournamentName: '2018 Aurora Cup').save()
-        new SanctionRequest(tournamentName: '2018 Aurora Spring Open').save()
-        new SanctionRequest(tournamentName: '2018 Aurora Summer Open').save()
-        new SanctionRequest(tournamentName: '2018 Aurora Fall Open').save()
+        new SanctionRequest(tournamentName: '2018 Aurora Cup', startDate: new Date(), endDate: new Date()).save()
+        new SanctionRequest(tournamentName: '2018 Aurora Spring Open', startDate: new Date(), endDate: new Date()).save()
+        new SanctionRequest(tournamentName: '2018 Aurora Summer Open', startDate: new Date(), endDate: new Date()).save()
+        new SanctionRequest(tournamentName: '2018 Aurora Fall Open', startDate: new Date(), endDate: new Date()).save()
 
-        new InsuranceRequest(contactName: 'Swavek Lorenc').save()
-        new InsuranceRequest(contactName: 'Mario Lorenc').save()
+        new InsuranceRequest(contactName: 'Swavek Lorenc', contactEmail: 'swaveklorenc@yahoo.com').save()
+        new InsuranceRequest(contactName: 'Mario Lorenc', contactEmail: 'mariolorenc@yahoo.com').save()
+        new InsuranceRequest(contactName: 'Yichi Zhang', contactEmail: 'zyichi1@gmail.com').save()
 
         5.times {
             new Todo(title: "Todo title + ${it}").save()

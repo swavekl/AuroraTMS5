@@ -1,3 +1,8 @@
 :host {
   height: 500px;
 }
+
+#insurancecard {
+  width: 800px;
+  height: 100%;
+}
