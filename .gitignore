@@ -1,0 +1,5 @@
+.idea/workspace.xml
+.idea/**
+.idea/artifacts/
+.gradle/**
+*.iml

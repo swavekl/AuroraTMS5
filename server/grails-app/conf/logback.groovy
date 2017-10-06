@@ -39,6 +39,6 @@ else {
 }
 
 // for debugging restful api access
-//logger("org.springframework.security", DEBUG, ['STDOUT'], false)
-//logger("grails.plugin.springsecurity", DEBUG, ['STDOUT'], false)
-//logger("org.pac4j", DEBUG, ['STDOUT'], false)
+logger("org.springframework.security", DEBUG, ['STDOUT'], false)
+logger("grails.plugin.springsecurity", DEBUG, ['STDOUT'], false)
+logger("org.pac4j", DEBUG, ['STDOUT'], false)

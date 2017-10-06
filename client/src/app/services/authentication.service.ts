@@ -26,4 +26,43 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         sessionStorage.removeItem('currentUser');
   }
+
+  register (firstName: string, lastName: string, email: string, password: string) {
+    // repeat the email because it is used as unique identifier
+    return this.http.post('/api/register', JSON.stringify({ username: email, email: email, password: password, password2: password }))
+                .map((response: Response) => {
+                    return (response.status == 200);
+                });
+  }
+
+  refreshSession () {
+  /**
+  POST /myApp/oauth/access_token HTTP/1.1
+  Host: server.example.com
+  Content-Type: application/x-www-form-urlencoded
+
+  grant_type=refresh_token&refresh_token=eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZHQ00ifQ....
+  */
+  }
+
+  loginWithFacebook () {
+      var callbackUrl = 'http://localhost:4200/sanction'
+      return this.http.get ('/oauth/authenticate/facebook?callbackUrl=' + callbackUrl)
+                .map((response: Response) => {
+                    let user = response.json();
+                    console.log ('facebook login OK. user is ', user);
+                    //if (user && user.access_token) {
+                        // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    //    sessionStorage.setItem('currentUser', JSON.stringify(user));
+                    //}
+                    return user;
+                });
+
+/*
+      // <YOUR_GRAILS_APP>/oauth/authenticate/<provider>
+      <a href="/oauth/authenticate/facebook">Click here to login with facebook</a>
+       |    *     | /oauth/access_token                   | Action: accessToken           |
+       |    *     | /oauth/${action}/${provider}          | Action: (default action)      |
+*/
+  }
 }

@@ -7,11 +7,8 @@ import { httpFactory } from "./http/http-factory";
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
-
-import { MdTableModule } from "@angular/material";
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdTabsModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatTabsModule, MatTableModule } from '@angular/material';
 import 'hammerjs';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
@@ -25,6 +22,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './login/register/register.component';
+import { WelcomeComponent } from './login/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -32,21 +30,21 @@ import { RegisterComponent } from './login/register/register.component';
     LoginComponent,
     SignInComponent,
     MainMenuComponent,
-    RegisterComponent
+    RegisterComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    MdButtonModule,
-    MdCardModule,
-    MdMenuModule,
-    MdTableModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdTabsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatMenuModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTabsModule,
     FlexLayoutModule,
     TournamentModule,
     RouterModule.forRoot(rootRouterConfig),
