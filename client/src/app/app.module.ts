@@ -22,6 +22,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './login/register/register.component';
+import { WelcomeComponent } from './login/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RegisterComponent } from './login/register/register.component';
     LoginComponent,
     SignInComponent,
     MainMenuComponent,
-    RegisterComponent
+    RegisterComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

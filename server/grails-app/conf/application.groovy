@@ -20,6 +20,7 @@ grails {
 
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.auroratms.User'
+//grails.plugin.springsecurity.userLookup.usernamePropertyName = 'email'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.auroratms.UserRole'
 grails.plugin.springsecurity.authority.className = 'org.auroratms.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
@@ -33,7 +34,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/**/css/**',      access: ['permitAll']],
 	[pattern: '/**/images/**',   access: ['permitAll']],
 	[pattern: '/**/favicon.ico', access: ['permitAll']],
-	[pattern: '/api/login/**', access: ['permitAll']]
+	[pattern: '/api/login/**', access: ['permitAll']],
+	[pattern: '/api/register', access: ['permitAll']]
 //	[pattern: '/todo/**', access: ['permitAll']]
 ]
 
@@ -43,6 +45,7 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/**/css/**',      filters: 'none'],
 	[pattern: '/**/images/**',   filters: 'none'],
 	[pattern: '/**/favicon.ico', filters: 'none'],
+	[pattern: '/api/register', filters: 'none'],
 //	[pattern: '/todo/**', filters: 'none'],
 	//Stateless chain
 	[

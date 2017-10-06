@@ -11,7 +11,8 @@ class UrlMappings {
             }
         }
 
-        '/api/loginfacebook' (resources: 'facebookLogin')
+        '/api/register' (controller: 'restRegister', action:'register', method: 'POST')
+//        '/api/register/verify' (controller: 'restRegister', action:'restVerify', method: 'POST')
 
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')

@@ -30,7 +30,7 @@ export class InterceptedHttp extends Http {
         options.headers.append('Content-Type', 'application/json');
 
         // get the token if it exists, but don't do it for login api cause that's how we request it
-        if (url.indexOf('login') == -1) {
+        if (url.indexOf('login') == -1 && url.indexOf('register') == -1) {
           let currentUser = sessionStorage.getItem('currentUser');
           if (currentUser != null) {
             let currentUserObject = JSON.parse (currentUser);

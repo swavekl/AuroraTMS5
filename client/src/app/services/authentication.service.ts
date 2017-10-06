@@ -27,6 +27,14 @@ export class AuthenticationService {
         sessionStorage.removeItem('currentUser');
   }
 
+  register (firstName: string, lastName: string, email: string, password: string) {
+    // repeat the email because it is used as unique identifier
+    return this.http.post('/api/register', JSON.stringify({ username: email, email: email, password: password, password2: password }))
+                .map((response: Response) => {
+                    return (response.status == 200);
+                });
+  }
+
   refreshSession () {
   /**
   POST /myApp/oauth/access_token HTTP/1.1

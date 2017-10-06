@@ -1,3 +1,28 @@
-<p>
-  register works!
-</p>
+  <md-card-title style="text-align: center">SIGN UP</md-card-title>
+  <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+    <div fxLayout="column">
+      <md-input-container>
+        <input type="text" mdInput placeholder="First Name" name="firstName" [(ngModel)]="firstName" required />
+        <md-error>First Name is required</md-error>
+      </md-input-container>
+      <md-input-container>
+        <input type="text" mdInput placeholder="Last Name" name="lastName" [(ngModel)]="lastName" required />
+        <md-error>Last Name is required</md-error>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput type="email" placeholder="Email" name="email" [(ngModel)]="email" required>
+        <md-error>Email is required</md-error>
+      </md-input-container>
+      <md-input-container>
+        <input type="password" mdInput placeholder="Password" name="password" [(ngModel)]="password" required />
+        <md-error>Password is required</md-error>
+      </md-input-container>
+      <md-input-container>
+        <input type="password" mdInput placeholder="Reenter Password" name="password2" [(ngModel)]="password2" required />
+        <md-error>Passwords don't match</md-error>
+      </md-input-container>
+    </div>
+    <div class="form-group">
+      <button md-raised-button color="primary">REGISTER</button>
+    </div>
+  </form>
