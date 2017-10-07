@@ -8,7 +8,11 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatTabsModule, MatTableModule } from '@angular/material';
+import {
+  MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdTabsModule, MdTableModule,
+  NoConflictStyleCompatibilityMode, MdSidenavModule, MdListModule
+} from '@angular/material';
+import {CdkTableModule} from "@angular/cdk/table";
 import 'hammerjs';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
@@ -38,15 +42,20 @@ import { WelcomeComponent } from './login/welcome/welcome.component';
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatMenuModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatTabsModule,
+    MdButtonModule,
+    MdCardModule,
+    MdMenuModule,
+    MdTableModule,
+    MdToolbarModule,
+    MdIconModule,
+    MdTabsModule,
+    MdTableModule,
+    MdSidenavModule,
+    MdListModule,
+    CdkTableModule,
     FlexLayoutModule,
     TournamentModule,
+    NoConflictStyleCompatibilityMode,
     RouterModule.forRoot(rootRouterConfig),
   ],
   providers: [

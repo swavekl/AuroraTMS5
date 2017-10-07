@@ -1,23 +1,29 @@
 
+<mat-card id="sanctioncard">
+  <mat-card-header>
+    <mat-card-title>Sanction Tournament Requests</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="sanction-table mat-elevation-z8">
+      <mat-table #sanctiontable [dataSource]="dataSource">
+        <ng-container matColumnDef="tournamentName">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let tournament">{{ tournament.tournamentName }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="startDate">
+          <mat-header-cell *matHeaderCellDef> StartDate </mat-header-cell>
+          <mat-cell *matCellDef="let tournament">{{ tournament.startDate  | date}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="endDate">
+          <mat-header-cell *matHeaderCellDef> EndDate </mat-header-cell>
+          <mat-cell *matCellDef="let tournament">{{ tournament.endDate  | date}}</mat-cell>
+        </ng-container>
 
-<div class="sanction-table mat-elevation-z8">
-  <md-table #sanctiontable [dataSource]="dataSource">
-    <ng-container mdColumnDef="tournamentName">
-      <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
-      <md-cell *mdCellDef="let tournament">{{ tournament.tournamentName }}</md-cell>
-    </ng-container>
-    <ng-container mdColumnDef="startDate">
-      <md-header-cell *mdHeaderCellDef> StartDate </md-header-cell>
-      <md-cell *mdCellDef="let tournament">{{ tournament.startDate  | date}}</md-cell>
-    </ng-container>
-    <ng-container mdColumnDef="endDate">
-      <md-header-cell *mdHeaderCellDef> EndDate </md-header-cell>
-      <md-cell *mdCellDef="let tournament">{{ tournament.endDate  | date}}</md-cell>
-    </ng-container>
-
-    <md-header-row *mdHeaderRowDef="displayColumns"></md-header-row>
-    <md-row *mdRowDef="let row; columns: displayColumns;"></md-row>
-  </md-table>
-</div>
+        <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+</mat-card>
 
 

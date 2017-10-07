@@ -1,16 +1,16 @@
 <div fxLayout="column" style="border: 2px solid red" fxFill>
 
 
-  <md-sidenav-container class="example-container">
-    <md-sidenav #sidenav class="example-sidenav" mode="side" opened="{{ !isMobile }}" >
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="{{ !isMobile }}" >
       <app-main-menu></app-main-menu>
-    </md-sidenav>
+    </mat-sidenav>
 
     <div class="example-sidenav-content">
       <router-outlet></router-outlet>
     </div>
 
-  </md-sidenav-container>
+  </mat-sidenav-container>
 
 
   <!--Hello here-->

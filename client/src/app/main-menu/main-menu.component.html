@@ -1,4 +1,7 @@
-<h4 mdSubheader>Tournaments</h4>
-<md-nav-list>
-  <a md-list-item *ngFor="let link of links" routerLink="{{ link.url }}" routerLinkActive="active"> {{ link.label }} </a>
-</md-nav-list>
+<h4 matSubheader>Tournaments</h4>
+<mat-nav-list>
+  <mat-list-item *ngFor="let link of links">
+    <a matLine routerLink="{{ link.url }}" routerLinkActive="active"> {{ link.label }} </a>
+  </mat-list-item>
+  <!--<a mat-list-item *ngFor="let link of links" routerLink="{{ link.url }}" routerLinkActive="active"> {{ link.label }} </a>-->
+</mat-nav-list>
