@@ -1,5 +1,5 @@
 /**
-:host md-nav-list a {
+:host mat-nav-list a {
    border: 1px solid red;
 }
 

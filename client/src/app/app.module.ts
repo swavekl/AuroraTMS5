@@ -9,8 +9,9 @@ import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdTabsModule, MdTableModule,
-  NoConflictStyleCompatibilityMode, MdSidenavModule, MdListModule
+  MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatTabsModule, MatTableModule,
+  MatSidenavModule, MatListModule
+  ,NoConflictStyleCompatibilityMode
 } from '@angular/material';
 import {CdkTableModule} from "@angular/cdk/table";
 import 'hammerjs';
@@ -42,16 +43,16 @@ import { WelcomeComponent } from './login/welcome/welcome.component';
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    MdButtonModule,
-    MdCardModule,
-    MdMenuModule,
-    MdTableModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdTabsModule,
-    MdTableModule,
-    MdSidenavModule,
-    MdListModule,
+    MatButtonModule,
+    MatCardModule,
+    MatMenuModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTabsModule,
+    MatTableModule,
+    MatSidenavModule,
+    MatListModule,
     CdkTableModule,
     FlexLayoutModule,
     TournamentModule,
