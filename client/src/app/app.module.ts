@@ -9,9 +9,17 @@ import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule, MatTabsModule, MatTableModule,
-  MatSidenavModule, MatListModule
-  ,NoConflictStyleCompatibilityMode
+  MatButtonModule,
+  MatCardModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatTabsModule,
+  MatTableModule,
+  MatSidenavModule,
+  MatListModule,
+  MatInputModule,
+  MatFormFieldModule
 } from '@angular/material';
 import {CdkTableModule} from "@angular/cdk/table";
 import 'hammerjs';
@@ -53,10 +61,11 @@ import { WelcomeComponent } from './login/welcome/welcome.component';
     MatTableModule,
     MatSidenavModule,
     MatListModule,
+    MatInputModule,
+    MatFormFieldModule,
     CdkTableModule,
     FlexLayoutModule,
     TournamentModule,
-    NoConflictStyleCompatibilityMode,
     RouterModule.forRoot(rootRouterConfig),
   ],
   providers: [

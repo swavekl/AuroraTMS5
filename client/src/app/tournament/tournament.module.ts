@@ -7,7 +7,13 @@ import { InsuranceService } from './insurance/insurance.service';
 import { SanctionComponent } from './sanction/sanction.component';
 import { SanctionService } from './sanction/sanction.service';
 import { ConfigureTournamentComponent } from './configure-tournament/configure-tournament.component';
-import {MatTableModule, MatCardModule} from "@angular/material";
+import {
+  MatTableModule,
+  MatCardModule,
+  MatInputModule,
+  MatFormFieldModule
+} from "@angular/material";
+
 import {CdkTableModule} from "@angular/cdk/table";
 
 @NgModule({
@@ -15,6 +21,8 @@ import {CdkTableModule} from "@angular/cdk/table";
     CdkTableModule,
     MatTableModule,
     MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
     CommonModule,
     TournamentRoutingModule
   ],
