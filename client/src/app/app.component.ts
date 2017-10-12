@@ -17,6 +17,7 @@ export class AppComponent {
   watcher: Subscription;
   activeMediaQuery = "";
   isMobile : boolean;
+  sideNavMode = "side";
 
   constructor(media: ObservableMedia, private todosService: TodosService) {
     // subscribe to media changes so we can detect if we are on mobile device or not
@@ -25,6 +26,7 @@ export class AppComponent {
       this.isMobile = ( change ? (change.mqAlias == 'xs') : false );
 //      console.log ('this.activeMediaQuery = ', this.activeMediaQuery);
 //      console.log ('this.isMobile ', this.isMobile);
+      this.sideNavMode = (this.isMobile) ? "push" : "side";
     });
   }
 

@@ -1,8 +1,9 @@
+/*
 :host {
   height: 500px;
 }
-
-#insurancecard {
+*/
+.insurancecard {
   width: 800px;
   height: 100%;
 }

@@ -1,0 +1,13 @@
+:host {
+  align-items: center;
+  justify-content: center;
+}
+
+.centered {
+/*  border: 1px solid red; */
+}
+/*
+:host {
+  border: 1px solid green;
+}
+*/

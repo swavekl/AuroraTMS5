@@ -1,18 +1,23 @@
-<div fxLayout="column" style="border: 2px solid red" fxFill>
-
+<div class="example-outer-container">
+  <mat-toolbar class="example-toolbar">
+    <a (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></a>
+    <span>&nbsp;&nbsp;Aurora TMS (R)</span>
+  </mat-toolbar>
 
   <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="{{ !isMobile }}" >
-      <app-main-menu></app-main-menu>
-    </mat-sidenav>
+  <mat-sidenav #sidenav class="example-sidenav" mode="{{ sideNavMode }}" opened="{{ !isMobile }}" >
+  <app-main-menu [sideNav]="sidenav"></app-main-menu>
+  </mat-sidenav>
 
-    <div class="example-sidenav-content">
-      <router-outlet></router-outlet>
-    </div>
+  <div class="example-sidenav-content">
+  <router-outlet></router-outlet>
+  </div>
 
   </mat-sidenav-container>
+</div>
 
 
+<!--<div fxLayout="column" style="border: 2px solid red" fxFill>-->
   <!--Hello here-->
   <!--<div>-->
     <!--<ul>-->
@@ -22,4 +27,4 @@
     <!--</ul>-->
   <!--</div>-->
   <!--End Hello-->
-</div>
+<!--</div>-->

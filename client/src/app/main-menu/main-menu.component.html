@@ -1,7 +1,6 @@
 <h4 matSubheader>Tournaments</h4>
 <mat-nav-list>
   <mat-list-item *ngFor="let link of links">
-    <a matLine routerLink="{{ link.url }}" routerLinkActive="active"> {{ link.label }} </a>
+    <a matLine (click)="closeAndNavigateToRoute(link.url)" routerLinkActive="active"> {{ link.label }} </a>
   </mat-list-item>
-  <!--<a mat-list-item *ngFor="let link of links" routerLink="{{ link.url }}" routerLinkActive="active"> {{ link.label }} </a>-->
 </mat-nav-list>
