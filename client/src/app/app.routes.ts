@@ -6,12 +6,13 @@ import {WelcomeComponent} from "./login/welcome/welcome.component";
 
 export const rootRouterConfig: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
-    {path: 'login', component: LoginComponent, children: [
-      // {path: '', component: SignInComponent},
-      {path: '', redirectTo:'signin', pathMatch: 'full'},
-      {path: 'signin', component: SignInComponent},
-      {path: 'register', component: RegisterComponent}
-    ]},
+    {path: 'login', component: LoginComponent,
+      children: [
+        {path: '', redirectTo:'signin', pathMatch: 'full'},
+        {path: 'signin', component: SignInComponent},
+        {path: 'register', component: RegisterComponent}
+      ]
+    },
     {path: 'welcome', component: WelcomeComponent},
     {path: 'logout', component: LoginComponent}
 ];

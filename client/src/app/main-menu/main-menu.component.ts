@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class MainMenuComponent implements OnInit {
 
   @Input() sideNav: MatDrawer;
+  @Input() isMobile: false;
 
   links: Array<MenuItem> = [
   {label: "Sanction", url: "sanction"},
@@ -27,7 +28,8 @@ export class MainMenuComponent implements OnInit {
   * on mobile devices the menu is opened and when you click on menu item it should close before navigating to this item
   */
   closeAndNavigateToRoute (routerLink) {
-   if (this.sideNav && this.sideNav.opened) {
+  //console.log ('isMobile ', this.isMobile);
+   if (this.sideNav && this.sideNav.opened && this.isMobile) {
     this.sideNav.close();
    }
     this.router.navigate([routerLink]);

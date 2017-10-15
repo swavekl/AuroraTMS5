@@ -1,13 +1,9 @@
-:host {
-  align-items: center;
-  justify-content: center;
+.center {
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+  width:350px;
+  text-align:center;
+  margin: 0 auto;
 }
-
-.centered {
-/*  border: 1px solid red; */
-}
-/*
-:host {
-  border: 1px solid green;
-}
-*/

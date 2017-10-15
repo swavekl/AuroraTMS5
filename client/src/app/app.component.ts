@@ -13,6 +13,7 @@ import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 export class AppComponent {
   title = 'app';
   todos: Todo[];
+  toolbarTitle = "Aurora TMS";
 
   watcher: Subscription;
   activeMediaQuery = "";
@@ -26,8 +27,14 @@ export class AppComponent {
       this.isMobile = ( change ? (change.mqAlias == 'xs') : false );
 //      console.log ('this.activeMediaQuery = ', this.activeMediaQuery);
 //      console.log ('this.isMobile ', this.isMobile);
-      this.sideNavMode = (this.isMobile) ? "push" : "side";
+      this.sideNavMode = (this.isMobile) ? "over" : "side";
     });
+  }
+
+  onMenuClick (sidenav) {
+    if (this.isMobile) {
+      sidenav.toggle();
+    }
   }
 
   ngOnDestroy() {
