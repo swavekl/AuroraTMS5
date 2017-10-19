@@ -10,6 +10,7 @@ export class MainMenuComponent implements OnInit {
   links: Array<MenuItem> = [
   {label: "Sanction", url: "sanction"},
   {label: "Insurance", url: "insurance"},
+  {label: "Add Insurance", url: "insurance-edit"},
   {label: "Configure", url: "configuretournament"},
   {label: "Logout", url: "login"}
   ];
