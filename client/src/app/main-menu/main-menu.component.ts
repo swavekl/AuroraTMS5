@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MatSidenavModule, MatDrawerContainer, MatDrawer } from '@angular/material'
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-main-menu',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent implements OnInit {
+
+  @Input() sideNav: MatDrawer;
+  @Input() isMobile: false;
 
   links: Array<MenuItem> = [
   {label: "Sanction", url: "sanction"},
@@ -15,9 +20,20 @@ export class MainMenuComponent implements OnInit {
   {label: "Logout", url: "login"}
   ];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  /**
+  * on mobile devices the menu is opened and when you click on menu item it should close before navigating to this item
+  */
+  closeAndNavigateToRoute (routerLink) {
+  //console.log ('isMobile ', this.isMobile);
+   if (this.sideNav && this.sideNav.opened && this.isMobile) {
+    this.sideNav.close();
+   }
+    this.router.navigate([routerLink]);
   }
 
 }

@@ -1,25 +1,15 @@
-<div fxLayout="column" style="border: 2px solid red" fxFill>
-
-
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="{{ !isMobile }}" >
-      <app-main-menu></app-main-menu>
-    </mat-sidenav>
-
-    <div class="example-sidenav-content">
-      <router-outlet></router-outlet>
-    </div>
-
-  </mat-sidenav-container>
-
-
-  <!--Hello here-->
-  <!--<div>-->
-    <!--<ul>-->
-      <!--<li *ngFor="let todo of todos; let i = index">-->
-        <!--{{i}} {{todo.title}} MMM-->
-      <!--</li>-->
-    <!--</ul>-->
-  <!--</div>-->
-  <!--End Hello-->
-</div>
+<mat-sidenav-container fullscreen>
+    <mat-toolbar color="primary">
+      <a *ngIf="isMobile" (click)="onMenuClick(sidenav)"><mat-icon style="margin: 8px 15px 0 0">menu</mat-icon></a>
+      <span *ngIf="isMobile" class="color-primary">{{toolbarTitle}}</span>
+    </mat-toolbar>
+    <mat-sidenav class="my-sidenav" #sidenav mode="{{ sideNavMode }}" opened="{{ !isMobile }}">
+        <div *ngIf="!isMobile" class="corner-box">
+          <h3>{{toolbarTitle}}</h3>
+        </div>
+        <app-main-menu [sideNav]="sidenav" [isMobile]="isMobile"></app-main-menu>
+      </mat-sidenav>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+</mat-sidenav-container>
