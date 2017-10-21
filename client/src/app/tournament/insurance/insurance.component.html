@@ -1,7 +1,7 @@
 <mat-card class="insurancecard">
   <mat-card-title>Insurance Certificate Requests</mat-card-title>
+  <mat-progress-bar mode="determinate" color="accent" value="{{ loading$ | async }}"></mat-progress-bar>
   <mat-card-header>
-    <mat-progress-bar mode="determinate" color="accent" value="{{ loading$ | async }}"></mat-progress-bar>
   </mat-card-header>
   <mat-card-content>
     <div class="insurance-table mat-elevation-z8">
@@ -19,7 +19,7 @@
         <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
       </mat-table>
       <mat-paginator #paginator
-                     [length]="length"
+                     [length]="length$ | async"
                      [pageIndex]="0"
                      [pageSize]="pageSize"
                      [pageSizeOptions]="pageSizeOptions"

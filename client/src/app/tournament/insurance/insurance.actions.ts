@@ -17,7 +17,7 @@ export class InsuranceRequestSearchAction implements Action {
 
 export class InsuranceRequestSearchSuccessAction implements Action {
   readonly type = SEARCH_SUCCESS;
-  constructor (public payload: InsuranceRequest []) { }
+  constructor (public payload: InsuranceRequest [], public count: number) { }
 }
 
 export type All

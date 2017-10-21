@@ -47,7 +47,7 @@ export class InsuranceRequestEffects {
       const nextSearch$ = this.actions$.ofType(InsuranceRequestActions.SEARCH).skip(1);
       return this.insuranceService.list(pagingInfo.startIndex, pagingInfo.pageSize)
         .takeUntil(nextSearch$)
-        .map(insuranceRequests => new InsuranceRequestActions.InsuranceRequestSearchSuccessAction(insuranceRequests))
-        .catch(() => of(new InsuranceRequestActions.InsuranceRequestSearchSuccessAction([])));
+        .map(response => new InsuranceRequestActions.InsuranceRequestSearchSuccessAction(response.results, response.count))
+        .catch(() => of(new InsuranceRequestActions.InsuranceRequestSearchSuccessAction([], 0)));
     });
 }

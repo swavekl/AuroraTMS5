@@ -26,7 +26,7 @@ export class InsuranceComponent implements OnInit {
   loading$: Observable<number>;
 
     // MatPaginator Inputs
-    length = 100;
+    length$: Observable<number>;
     pageSize = 10;
     pageSizeOptions = [5, 10, 25, 100];
 
@@ -34,6 +34,7 @@ export class InsuranceComponent implements OnInit {
               private store: Store<fromInsuranceRequest.State>)
   {
     this.loading$ = store.select(fromInsuranceRequest.getLoading);
+    this.length$ = store.select(fromInsuranceRequest.getCount);
     let data$ = store.select(fromInsuranceRequest.getInsuranceRequests);
     this.dataSource = new InsuranceDataSource(data$);
   }

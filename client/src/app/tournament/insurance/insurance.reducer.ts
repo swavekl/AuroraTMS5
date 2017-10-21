@@ -4,11 +4,13 @@ import * as InsuranceRequestActions from './insurance.actions';
 export interface State {
   results: InsuranceRequest [];
   loading: number;
+  count: number;
 }
 
 const initialState : State = {
   results: [],
-  loading: 0
+  loading: 0,
+  count: 0
 }
 
 /**
@@ -19,7 +21,8 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
     case InsuranceRequestActions.SEARCH: {
       return {
         ...state,
-        loading: 0
+        loading: 0,
+        count: 0
       };
     }
 
@@ -27,7 +30,8 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
       return {
         ...state,
         loading: 100,
-        results: <InsuranceRequest[]>action.payload
+        results: <InsuranceRequest[]>action.payload,
+        count: action.count
       };
     }
 
@@ -45,6 +49,10 @@ export const getFeatureState = (state: State) => {
 
 export const getInsuranceRequests = (state: State) => {
   return getFeatureState(state).results;
+};
+
+export const getCount = (state: State) => {
+  return getFeatureState(state).count;
 };
 
 export const getLoading = (state: State) => {
