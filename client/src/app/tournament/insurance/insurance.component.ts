@@ -7,7 +7,7 @@ import 'rxjs/add/observable/of';
 import {Observable} from "rxjs/Observable";
 import { Store } from '@ngrx/store';
 
-import { InsuranceRequestSearchAction } from './insurance.actions';
+import { InsuranceRequestSearchAction, PagingInfo } from './insurance.actions';
 import * as fromInsuranceRequest from './insurance.reducer';
 
 
@@ -30,9 +30,6 @@ export class InsuranceComponent implements OnInit {
     pageSize = 10;
     pageSizeOptions = [5, 10, 25, 100];
 
-    // MatPaginator Output
-    pageEvent: PageEvent;
-
   constructor(private insuranceService: InsuranceService,
               private store: Store<fromInsuranceRequest.State>)
   {
@@ -42,7 +39,13 @@ export class InsuranceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new InsuranceRequestSearchAction());
+    let pagingInfo = new PagingInfo (0, this.pageSize);
+    this.store.dispatch(new InsuranceRequestSearchAction(pagingInfo));
+  }
+
+  onPageEvent(pageEvent: PageEvent) {
+    let pagingInfo = new PagingInfo (pageEvent.pageIndex * pageEvent.pageSize, pageEvent.pageSize);
+    this.store.dispatch(new InsuranceRequestSearchAction(pagingInfo));
   }
 }
 

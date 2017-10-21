@@ -42,9 +42,10 @@ export class InsuranceRequestEffects {
   @Effect()
   search$: Observable<Action> = this.actions$
     .ofType(InsuranceRequestActions.SEARCH)
-    .switchMap(() => {
+    .map(toPayload)
+    .switchMap((pagingInfo) => {
       const nextSearch$ = this.actions$.ofType(InsuranceRequestActions.SEARCH).skip(1);
-      return this.insuranceService.list()
+      return this.insuranceService.list(pagingInfo.startIndex, pagingInfo.pageSize)
         .takeUntil(nextSearch$)
         .map(insuranceRequests => new InsuranceRequestActions.InsuranceRequestSearchSuccessAction(insuranceRequests))
         .catch(() => of(new InsuranceRequestActions.InsuranceRequestSearchSuccessAction([])));
