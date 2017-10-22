@@ -17,7 +17,11 @@ import {
   MatFormFieldModule,
   MatListModule,
   MatProgressBarModule,
+  MatButtonModule,
+  MatIconModule
 } from "@angular/material";
+
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import {CdkTableModule} from "@angular/cdk/table";
 
@@ -55,7 +59,10 @@ export interface TournamentState {
     MatFormFieldModule,
     MatListModule,
     MatProgressBarModule,
+    MatButtonModule,
+    MatIconModule,
     CommonModule,
+    FlexLayoutModule,
     TournamentRoutingModule,
 
     StoreModule.forFeature('featureTournaments', tournamentReducers),

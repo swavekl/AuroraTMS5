@@ -1,9 +1,9 @@
-/*
-:host {
-  height: 500px;
-}
-*/
 .insurancecard {
-  width: 800px;
-  height: 100%;
+  width: 650px;
+//  height: 100%;
+}
+.top-right-fab {
+  position: absolute;
+  right: -30px;
+  top: 10px;
 }

@@ -48,6 +48,10 @@ export class InsuranceComponent implements OnInit {
     let pagingInfo = new PagingInfo (pageEvent.pageIndex * pageEvent.pageSize, pageEvent.pageSize);
     this.store.dispatch(new InsuranceRequestSearchAction(pagingInfo));
   }
+
+  onAddInsurance () {
+  console.log ('adding insurance component');
+  }
 }
 
 /**
