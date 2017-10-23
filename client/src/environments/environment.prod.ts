@@ -2,5 +2,5 @@ export const environment = {
   production: true,
 
     // base url for request from client
-    origin : 'http://gateway-pc:9001'
+    origin: 'http://auroratms-betaenv.eu-west-1.elasticbeanstalk.com'
 };

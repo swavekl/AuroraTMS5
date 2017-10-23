@@ -33,6 +33,10 @@ class BootStrap {
         new InsuranceRequest(contactName: 'Swavek Lorenc', contactEmail: 'swaveklorenc@yahoo.com').save()
         new InsuranceRequest(contactName: 'Mario Lorenc', contactEmail: 'mariolorenc@yahoo.com').save()
         new InsuranceRequest(contactName: 'Yichi Zhang', contactEmail: 'zyichi1@gmail.com').save()
+        // add some more
+        25.times {
+            new InsuranceRequest(contactName: "(${it + 1})nth Tournament Director", contactEmail: "tourdir${it}@gmail.com").save()
+        }
 
         5.times {
             new Todo(title: "Todo title + ${it}").save()

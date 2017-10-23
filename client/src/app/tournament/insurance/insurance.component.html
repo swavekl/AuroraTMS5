@@ -1,23 +1,36 @@
-<mat-card class="insurancecard">
-  <mat-card-header>
+<div fxLayout="row">
+  <div fxFlex></div>
+  <mat-card class="insurancecard">
+    <button mat-fab class="top-right-fab" (click)="onAddInsurance()">
+      <mat-icon aria-label="Add insurance request">add</mat-icon>
+    </button>
     <mat-card-title>Insurance Certificate Requests</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="insurance-table mat-elevation-z8">
-      <mat-table #insurancetable [dataSource]="dataSource">
-        <ng-container matColumnDef="contactName">
-          <mat-header-cell *matHeaderCellDef>ContactName</mat-header-cell>
-          <mat-cell *matCellDef="let contact">{{ contact.contactName }}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="contactEmail">
-          <mat-header-cell *matHeaderCellDef>ContactEmail</mat-header-cell>
-          <mat-cell *matCellDef="let contact">{{ contact.contactEmail }}</mat-cell>
-        </ng-container>
+    <mat-progress-bar mode="determinate" color="accent" value="{{ loading$ | async }}"></mat-progress-bar>
+    <mat-card-content>
+      <div class="insurance-table mat-elevation-z8">
+        <mat-table #insurancetable [dataSource]="dataSource">
+          <ng-container matColumnDef="contactName">
+            <mat-header-cell *matHeaderCellDef>ContactName</mat-header-cell>
+            <mat-cell *matCellDef="let contact">{{ contact.contactName }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="contactEmail">
+            <mat-header-cell *matHeaderCellDef>ContactEmail</mat-header-cell>
+            <mat-cell *matCellDef="let contact">{{ contact.contactEmail }}</mat-cell>
+          </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
-      </mat-table>
-    </div>
-  </mat-card-content>
-</mat-card>
+          <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+        </mat-table>
+        <mat-paginator #paginator
+                       [length]="length$ | async"
+                       [pageIndex]="0"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="onPageEvent($event)">
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div fxFlex></div>
+</div>
 
