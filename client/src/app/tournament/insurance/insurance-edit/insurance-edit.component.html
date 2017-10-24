@@ -6,22 +6,22 @@
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
           <!--<mat-icon class="material-icons md-dark md-inactive">email</mat-icon>-->
           <mat-form-field fxFlex="80%">
-            <input matInput type="text" placeholder="Organization Name" name="orgName" [(ngModel)]="orgName" required>
+            <input matInput type="text" placeholder="Organization Name" name="orgName" [(ngModel)]="insuranceRequest.orgName" required>
             <mat-error>This field is required</mat-error>
           </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
        <!--   <mat-icon>lock_open</mat-icon>-->
           <mat-form-field fxFlex="80%">
-          <input matInput type="text" placeholder="Organization Street Address" name="orgStreetAddress" [(ngModel)]="orgStreetAddress" required>
+          <input matInput type="text" placeholder="Organization Street Address" name="orgStreetAddress" [(ngModel)]="insuranceRequest.orgStreetAddress" required>
           <mat-error>This field is required</mat-error>
         </mat-form-field>
           <mat-form-field>
-            <input matInput type="text" placeholder="City" name="orgCity" [(ngModel)]="orgCity" required>
+            <input matInput type="text" placeholder="City" name="orgCity" [(ngModel)]="insuranceRequest.orgCity" required>
             <mat-error>This field is required</mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput type="number" placeholder="Zipcode" name="orgZip" [(ngModel)]="orgZip" required>
+            <input matInput type="number" placeholder="Zipcode" name="orgZip" [(ngModel)]="insuranceRequest.orgZip" required>
             <mat-error>This field is required</mat-error>
           </mat-form-field>
    <!--      <mat-form-field>
@@ -32,12 +32,14 @@
           </mat-form-field>-->
           <!--<button mat-mini-fab color="white"><mat-icon>remove_red_eye</mat-icon></button>-->
       </div>
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <mat-card>
+          <mat-card-title>Person Details</mat-card-title>
+        <mat-card-content fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
           <mat-form-field>
-            <input matInput type="date" placeholder="Date of Request" name="reqDate" [(ngModel)]="reqDate">
+            <input matInput type="date" placeholder="Date of Request" name="reqDate" [(ngModel)]="insuranceRequest.reqDate">
           </mat-form-field>
           <mat-form-field>
-            <input matInput type="text" placeholder="Name" name="personName" [(ngModel)]="personName">
+            <input matInput type="text" placeholder="Name" name="personName" [(ngModel)]="insuranceRequest.personName">
           </mat-form-field>
         <!--  <mat-form-field>
             <input matInput type="tel" placeholder="Phone Number" name="phoneNumber" [(ngModel)]="phoneNumber" required>
@@ -48,8 +50,10 @@
             <mat-icon mdSuffix>mode_edit</mat-icon>
           </mat-form-field>
           <mat-form-field>
-            <input matInput type="email" placeholder="Email" name="email" [(ngModel)]="email" required>
+            <input matInput type="email" placeholder="Email" name="email" [(ngModel)]="insuranceRequest.email" required>
           </mat-form-field>
+        </mat-card-content>
+      </mat-card>
           <mat-card>
             <mat-card-title>Certificate Holder</mat-card-title>
             <mat-card-content>
@@ -60,24 +64,25 @@
                 <input matInput type="text" placeholder="Holder Name" name="certHolderName" >
               </mat-form-field>
               <mat-form-field fxFlex="80%">
-                <input matInput type="text" placeholder="Street Address" name="certStreetAddress" [(ngModel)]="certStreetAddress" required>
+                <input matInput type="text" placeholder="Street Address" name="certStreetAddress" [(ngModel)]="insuranceRequest.certStreetAddress" required>
               </mat-form-field>
               <mat-form-field>
-                <input matInput type="text" placeholder="City" name="certCity" [(ngModel)]="certCity" required>
+                <input matInput type="text" placeholder="City" name="certCity" [(ngModel)]="insuranceRequest.certCity" required>
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
               <mat-form-field>
-                <input matInput type="number" placeholder="Zipcode" name="certZip" [(ngModel)]="certZip" required>
+                <input matInput type="number" placeholder="Zipcode" name="certZip" [(ngModel)]="insuranceRequest.certZip" required>
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
               <mat-form-field>
-                <input matInput type="text" placeholder="Name" name="personName" [(ngModel)]="personName">
+                <input matInput type="text" placeholder="Name" name="personName" [(ngModel)]="insuranceRequest.personName">
               </mat-form-field>
               <mat-form-field>
-                <input matInput type="tel" placeholder="Phone Number" name="phoneNumber" [(ngModel)]="phoneNumber" >
+
+                <input matInput type="tel" placeholder="Phone Number" name="phoneNumber" [(ngModel)]="insuranceRequest.phoneNumber" >
               </mat-form-field>
               <mat-form-field>
-                <input matInput type="email" placeholder="Email" name="email" [(ngModel)]="email" >
+                <input matInput type="email" placeholder="Email" name="email" [(ngModel)]="insuranceRequest.email" >
               </mat-form-field>
             </mat-card-content>
           </mat-card>
@@ -93,7 +98,6 @@
           </mat-form-field>
           </div>
         </div>
-      </div>
     </form>
   </mat-card-content>
   <mat-card-actions>

@@ -7,18 +7,18 @@ import { InsuranceRequest } from './insurance.model';
 @Injectable()
 export class InsuranceService {
 
-  constructor(private http: Http) { }
-
-  list (startIndex: number, pageSize: number) {
-      let params: URLSearchParams = new URLSearchParams();
-      params.set('offset', startIndex.toString());
-      params.set('max', pageSize.toString());
-      params.set('sort', 'contactName');
-      params.set('order', 'desc');
-
-      return this.http.get ('/api/insurancerequest', {search: params})
-          .map((response:Response) => response.json());
+  constructor(private http: Http) {
   }
 
+  list(startIndex: number, pageSize: number) {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('offset', startIndex.toString());
+    params.set('max', pageSize.toString());
+    params.set('sort', 'contactName');
+    params.set('order', 'desc');
+
+    return this.http.get('/api/insurancerequest', {search: params})
+      .map((response: Response) => response.json());
+  }
 }
 
