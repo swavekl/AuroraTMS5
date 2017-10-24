@@ -37,6 +37,7 @@ export const tournamentReducers: ActionReducerMap<any> = {
 import { EffectsModule } from '@ngrx/effects';
 import { ConfigureTournamentEffects } from './configure-tournament/configure-tournament.effects';
 import { InsuranceRequestEffects } from './insurance/insurance.effects';
+import { InsuranceEditComponent } from './insurance/insurance-edit/insurance-edit.component';
 
 export const tournamentEffects = [ConfigureTournamentEffects, InsuranceRequestEffects];
 
@@ -71,7 +72,8 @@ export interface TournamentState {
   declarations: [
     InsuranceComponent,
     SanctionComponent,
-    ConfigureTournamentComponent
+    ConfigureTournamentComponent,
+    InsuranceEditComponent
   ],
   providers: [
     InsuranceService,

@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 import {PageEvent} from '@angular/material';
 import {InsuranceRequest} from './insurance.model';
 import {InsuranceService} from './insurance.service';
@@ -7,7 +8,7 @@ import 'rxjs/add/observable/of';
 import {Observable} from "rxjs/Observable";
 import { Store } from '@ngrx/store';
 
-import { InsuranceRequestSearchAction, PagingInfo } from './insurance.actions';
+import { InsuranceRequestSearchAction, PagingInfo, InsuranceRequestAddAction, InsuranceRequestEditAction } from './insurance.actions';
 import * as fromInsuranceRequest from './insurance.reducer';
 
 
@@ -23,7 +24,7 @@ export class InsuranceComponent implements OnInit {
 
   displayColumns = ['contactName', 'contactEmail'];
   dataSource: InsuranceDataSource;
-  loading$: Observable<number>;
+  loading$: Observable<boolean>;
 
     // MatPaginator Inputs
     length$: Observable<number>;
@@ -31,8 +32,9 @@ export class InsuranceComponent implements OnInit {
     pageSizeOptions = [5, 10, 25, 100];
 
   constructor(private insuranceService: InsuranceService,
-              private store: Store<fromInsuranceRequest.State>)
-  {
+              private store: Store<fromInsuranceRequest.State>,
+              private router: Router
+              ) {
     this.loading$ = store.select(fromInsuranceRequest.getLoading);
     this.length$ = store.select(fromInsuranceRequest.getCount);
     let data$ = store.select(fromInsuranceRequest.getInsuranceRequests);
@@ -50,7 +52,14 @@ export class InsuranceComponent implements OnInit {
   }
 
   onAddInsurance () {
-  console.log ('adding insurance component');
+    this.store.dispatch(new InsuranceRequestAddAction());
+    this.router.navigate (['/insurance/edit']);
+
+  }
+
+  onRowClick (row) {
+    this.store.dispatch(new InsuranceRequestEditAction(row.id));
+    this.router.navigate (['/insurance/edit']);
   }
 }
 

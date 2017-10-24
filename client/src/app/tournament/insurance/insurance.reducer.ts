@@ -3,14 +3,16 @@ import * as InsuranceRequestActions from './insurance.actions';
 
 export interface State {
   results: InsuranceRequest [];
-  loading: number;
+  loading: boolean;
   count: number;
+  edited: InsuranceRequest;
 }
 
 const initialState : State = {
   results: [],
-  loading: 0,
-  count: 0
+  loading: false,
+  count: 0,
+  edited: null
 }
 
 /**
@@ -21,7 +23,7 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
     case InsuranceRequestActions.SEARCH: {
       return {
         ...state,
-        loading: 0,
+        loading: true,
         count: 0
       };
     }
@@ -29,9 +31,24 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
     case InsuranceRequestActions.SEARCH_SUCCESS: {
       return {
         ...state,
-        loading: 100,
+        loading: false,
         results: <InsuranceRequest[]>action.payload,
         count: action.count
+      };
+    }
+
+    case InsuranceRequestActions.ADD: {
+    case InsuranceRequestActions.EDIT: {
+      return {
+        ...state,
+        edited: new InsuranceRequest()
+      };
+    }
+
+    case InsuranceRequestActions.EDIT_SUCCESS: {
+      return {
+        ...state,
+        edited: <InsuranceRequest>action.payload,
       };
     }
 
@@ -57,4 +74,8 @@ export const getCount = (state: State) => {
 
 export const getLoading = (state: State) => {
    return getFeatureState(state).loading
+};
+
+export const getEdited = (state: State) => {
+   return getFeatureState(state).edited
 };
