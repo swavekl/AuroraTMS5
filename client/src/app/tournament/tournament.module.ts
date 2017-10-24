@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { TournamentRoutingModule } from './tournament-routing.module';
 import { InsuranceComponent } from './insurance/insurance.component';
@@ -7,6 +8,7 @@ import { InsuranceService } from './insurance/insurance.service';
 import { SanctionComponent } from './sanction/sanction.component';
 import { SanctionService } from './sanction/sanction.service';
 import { ConfigureTournamentComponent } from './configure-tournament/configure-tournament.component';
+import {InsuranceEditComponent} from "./insurance/insurance-edit/insurance-edit.component";
 import { ConfigureTournamentService } from './configure-tournament/configure-tournament.service';
 
 import {
@@ -18,7 +20,8 @@ import {
   MatListModule,
   MatProgressBarModule,
   MatButtonModule,
-  MatIconModule
+  MatIconModule,
+  MatSelectModule
 } from "@angular/material";
 
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -37,7 +40,6 @@ export const tournamentReducers: ActionReducerMap<any> = {
 import { EffectsModule } from '@ngrx/effects';
 import { ConfigureTournamentEffects } from './configure-tournament/configure-tournament.effects';
 import { InsuranceRequestEffects } from './insurance/insurance.effects';
-import { InsuranceEditComponent } from './insurance/insurance-edit/insurance-edit.component';
 
 export const tournamentEffects = [ConfigureTournamentEffects, InsuranceRequestEffects];
 
@@ -61,11 +63,12 @@ export interface TournamentState {
     MatListModule,
     MatProgressBarModule,
     MatButtonModule,
+    MatSelectModule,
     MatIconModule,
     CommonModule,
     FlexLayoutModule,
     TournamentRoutingModule,
-
+    FormsModule,
     StoreModule.forFeature('featureTournaments', tournamentReducers),
     EffectsModule.forFeature(tournamentEffects)
   ],

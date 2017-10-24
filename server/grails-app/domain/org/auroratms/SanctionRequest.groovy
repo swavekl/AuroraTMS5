@@ -10,16 +10,16 @@ class SanctionRequest {
 //
 //    String webLinkURL
 //
-//    String venueStreetAddress
-//    String venueCity
-//    String venueState
-//    String venueZipCode
+    String venueStreetAddress
+    String venueCity
+    String venueState
+    String venueZipCode
 //
 //    String clubName
 //    Date clubAffiliationExpiration
 //
-//    String contactPersonName
-//    String contactPersonPhone
+    String contactPersonName
+    String contactPersonPhone
 
     static constraints = {
     }
