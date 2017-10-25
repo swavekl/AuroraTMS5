@@ -5,12 +5,14 @@ export interface State {
   results: InsuranceRequest [];
   loading: number;
   count: number;
+  edited: InsuranceRequest;
 }
 
 const initialState : State = {
   results: [],
   loading: 0,
-  count: 0
+  count: 0,
+  edited: new InsuranceRequest()
 }
 
 /**
@@ -27,11 +29,18 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
     }
 
     case InsuranceRequestActions.SEARCH_SUCCESS: {
+    return {
+      ...state,
+      loading: 100,
+      results: <InsuranceRequest[]>action.payload,
+      count: action.count
+    };
+  }
+
+    case InsuranceRequestActions.ADD: {
       return {
         ...state,
-        loading: 100,
-        results: <InsuranceRequest[]>action.payload,
-        count: action.count
+        edited: new InsuranceRequest()
       };
     }
 
@@ -57,4 +66,8 @@ export const getCount = (state: State) => {
 
 export const getLoading = (state: State) => {
    return getFeatureState(state).loading
+};
+
+export const getEdited = (state: State) => {
+  return getFeatureState(state).edited
 };

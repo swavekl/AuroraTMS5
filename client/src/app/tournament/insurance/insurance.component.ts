@@ -7,8 +7,9 @@ import 'rxjs/add/observable/of';
 import {Observable} from "rxjs/Observable";
 import { Store } from '@ngrx/store';
 
-import { InsuranceRequestSearchAction, PagingInfo } from './insurance.actions';
+import {InsuranceRequestAddAction, InsuranceRequestSearchAction, PagingInfo} from './insurance.actions';
 import * as fromInsuranceRequest from './insurance.reducer';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -31,7 +32,8 @@ export class InsuranceComponent implements OnInit {
     pageSizeOptions = [5, 10, 25, 100];
 
   constructor(private insuranceService: InsuranceService,
-              private store: Store<fromInsuranceRequest.State>)
+              private store: Store<fromInsuranceRequest.State>,
+              private router: Router)
   {
     this.loading$ = store.select(fromInsuranceRequest.getLoading);
     this.length$ = store.select(fromInsuranceRequest.getCount);
@@ -51,6 +53,8 @@ export class InsuranceComponent implements OnInit {
 
   onAddInsurance () {
   console.log ('adding insurance component');
+    this.store.dispatch(new InsuranceRequestAddAction());
+    this.router.navigate(['/insurance-edit']);
   }
 }
 

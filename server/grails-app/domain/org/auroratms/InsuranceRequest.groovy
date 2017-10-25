@@ -3,19 +3,18 @@ package org.auroratms
 class InsuranceRequest {
     String contactName
     String contactEmail
-    String orgName
-    //TODO
-//    orgStreetAddress:string = "1240 E Diehl Rd";
-//    orgCity:string = "Naperville";
-//    orgZip:number = 60540;
-//    orgState:string;
-//    reqDate:Date;
-//    personName:string;
-//    phoneNumber:string;
-//    email:string;
-//    certStreetAddress:string = "1240 E Diehl Rd";
-//    certCity:string = "Naperville";
-//    certZip:number = 60540;
+    String orgName = "Fox Valley"
+    String orgStreetAddress = "1240 E Diehl Rd"
+    String orgCity = "Naperville"
+    String orgZip = 60540
+    String orgState = "IL"
+    Date reqDate
+    String personName = "Ruchi"
+    String phoneNumber = "333333333"
+    String email = "abc@def.com"
+    String certStreetAddress = "1240 E Diehl Rd"
+    String certCity = "Naperville"
+    Number certZip = 60540
 
     static constraints = {
     }
