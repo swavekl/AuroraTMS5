@@ -13,4 +13,8 @@ export class InsuranceRequest {
   certStreetAddress:string = "1240 E Diehl Rd";
   certCity:string = "Naperville";
   certZip:number = 60540;
+
+  constructor () {
+
+  }
 }

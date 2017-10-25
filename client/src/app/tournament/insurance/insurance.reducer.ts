@@ -37,7 +37,7 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
       };
     }
 
-    case InsuranceRequestActions.ADD: {
+    case InsuranceRequestActions.ADD:
     case InsuranceRequestActions.EDIT: {
       return {
         ...state,

@@ -53,13 +53,13 @@ export class InsuranceComponent implements OnInit {
 
   onAddInsurance () {
     this.store.dispatch(new InsuranceRequestAddAction());
-    this.router.navigate (['/insurance/edit']);
+    this.router.navigate (['/insurance/edit/0']);
 
   }
 
   onRowClick (row) {
     this.store.dispatch(new InsuranceRequestEditAction(row.id));
-    this.router.navigate (['/insurance/edit']);
+    this.router.navigate (['/insurance/edit/'+row.id]);
   }
 }
 
