@@ -30,12 +30,14 @@ class BootStrap {
         new SanctionRequest(tournamentName: '2018 Aurora Summer Open', startDate: new Date(), endDate: new Date()).save()
         new SanctionRequest(tournamentName: '2018 Aurora Fall Open', startDate: new Date(), endDate: new Date()).save()
 
-        new InsuranceRequest(contactName: 'Swavek Lorenc', contactEmail: 'swaveklorenc@yahoo.com').save()
-        new InsuranceRequest(contactName: 'Mario Lorenc', contactEmail: 'mariolorenc@yahoo.com').save()
-        new InsuranceRequest(contactName: 'Yichi Zhang', contactEmail: 'zyichi1@gmail.com').save()
+        createInsuranceRequest('Swavek Lorenc', 'swaveklorenc@yahoo.com', 'Fox Valley Table Tennis Club')
+        createInsuranceRequest('Mario Lorenc', 'mariolorenc@yahoo.com',  'Phoenix Table Tennis Club')
+        createInsuranceRequest('Yichi Zhang', 'zyichi1@gmail.com', 'Experior')
         // add some more
         25.times {
-            new InsuranceRequest(contactName: "(${it + 1})nth Tournament Director", contactEmail: "tourdir${it}@gmail.com").save()
+            createInsuranceRequest("(${it + 1})nth Tournament Director",
+                     "tourdir${it}@gmail.com",
+             'Nice Table Tennis Club')
         }
 
         5.times {
@@ -48,5 +50,22 @@ class BootStrap {
         }
     }
     def destroy = {
+    }
+
+    def createInsuranceRequest (String name, String email, String orgName) {
+        new InsuranceRequest(contactName: name, contactEmail: email, orgName: orgName,
+                orgStreetAddress : "1240 E Diehl Rd",
+                orgCity : "Naperville",
+                orgZip : 60540,
+                orgState : "IL",
+                reqDate : new Date(),
+                personName : "Ruchi",
+                phoneNumber : "333333333",
+                email : "abc@def.com",
+                certStreetAddress : "1240 E Diehl Rd",
+                certCity : "Naperville",
+                certZip : 60540
+        ).save()
+
     }
 }

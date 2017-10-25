@@ -12,7 +12,7 @@ const initialState : State = {
   results: [],
   loading: false,
   count: 0,
-  edited: null
+  edited: new InsuranceRequest()
 }
 
 /**

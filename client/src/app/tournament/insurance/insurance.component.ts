@@ -8,7 +8,7 @@ import 'rxjs/add/observable/of';
 import {Observable} from "rxjs/Observable";
 import { Store } from '@ngrx/store';
 
-import { InsuranceRequestSearchAction, PagingInfo, InsuranceRequestAddAction, InsuranceRequestEditAction } from './insurance.actions';
+import {InsuranceRequestAddAction, InsuranceRequestSearchAction, PagingInfo} from './insurance.actions';
 import * as fromInsuranceRequest from './insurance.reducer';
 
 
@@ -33,8 +33,8 @@ export class InsuranceComponent implements OnInit {
 
   constructor(private insuranceService: InsuranceService,
               private store: Store<fromInsuranceRequest.State>,
-              private router: Router
-              ) {
+              private router: Router)
+  {
     this.loading$ = store.select(fromInsuranceRequest.getLoading);
     this.length$ = store.select(fromInsuranceRequest.getCount);
     let data$ = store.select(fromInsuranceRequest.getInsuranceRequests);
