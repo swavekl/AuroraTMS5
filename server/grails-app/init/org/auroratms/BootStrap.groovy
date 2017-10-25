@@ -30,12 +30,14 @@ class BootStrap {
         new SanctionRequest(tournamentName: '2018 Aurora Summer Open', startDate: new Date(), endDate: new Date()).save()
         new SanctionRequest(tournamentName: '2018 Aurora Fall Open', startDate: new Date(), endDate: new Date()).save()
 
-        new InsuranceRequest(contactName: 'Swavek Lorenc', contactEmail: 'swaveklorenc@yahoo.com').save()
-        new InsuranceRequest(contactName: 'Mario Lorenc', contactEmail: 'mariolorenc@yahoo.com').save()
-        new InsuranceRequest(contactName: 'Yichi Zhang', contactEmail: 'zyichi1@gmail.com').save()
+        new InsuranceRequest(contactName: 'Swavek Lorenc', contactEmail: 'swaveklorenc@yahoo.com', orgName: 'Fox Valley Table Tennis Club').save()
+        new InsuranceRequest(contactName: 'Mario Lorenc', contactEmail: 'mariolorenc@yahoo.com', orgName: 'Phoenix Table Tennis Club').save()
+        new InsuranceRequest(contactName: 'Yichi Zhang', contactEmail: 'zyichi1@gmail.com', orgName: 'Experior').save()
         // add some more
         25.times {
-            new InsuranceRequest(contactName: "(${it + 1})nth Tournament Director", contactEmail: "tourdir${it}@gmail.com").save()
+            new InsuranceRequest(contactName: "(${it + 1})nth Tournament Director",
+                    contactEmail: "tourdir${it}@gmail.com",
+            orgName: 'Nice Table Tennis Club').save()
         }
 
         5.times {
