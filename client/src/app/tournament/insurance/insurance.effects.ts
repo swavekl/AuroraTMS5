@@ -58,6 +58,6 @@ export class InsuranceRequestEffects {
     .switchMap((id) => {
       return this.insuranceService.edit(id)
         .map(response => new InsuranceRequestActions.InsuranceRequestEditSuccessAction(response))
-        .catch(() => of(new InsuranceRequestActions.InsuranceRequestEditSuccessAction(null)));
+        .catch(response => of(new InsuranceRequestActions.InsuranceRequestEditFailedAction(response._body)));
     });
 }

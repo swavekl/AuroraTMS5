@@ -6,6 +6,7 @@ export const SEARCH_SUCCESS = '[InsuranceRequest] Search Success';
 export const ADD            = '[InsuranceRequest] Add';
 export const EDIT           = '[InsuranceRequest] Edit';
 export const EDIT_SUCCESS   = '[InsuranceRequest] Edit Success';
+export const EDIT_FAILED    = '[InsuranceRequest] Edit Failed';
 
 export class PagingInfo {
   constructor (public startIndex: number, public pageSize: number) {
@@ -42,6 +43,13 @@ export class InsuranceRequestEditSuccessAction implements Action {
 }
 
 
+export class InsuranceRequestEditFailedAction implements Action {
+  readonly type = EDIT_FAILED;
+
+  constructor (public payload: any) {  }
+}
+
+
 
 export type All
   = InsuranceRequestSearchAction
@@ -49,5 +57,6 @@ export type All
   | InsuranceRequestAddAction
   | InsuranceRequestEditAction
   | InsuranceRequestEditSuccessAction
+  | InsuranceRequestEditFailedAction
   ;
 

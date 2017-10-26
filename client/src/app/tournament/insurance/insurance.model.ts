@@ -1,8 +1,8 @@
 export class InsuranceRequest {
   contactName: string = 'Your name';
   contactEmail: string = 'your email';
-  orgName:string = "Fox Valley Table Tennis Club";
-  orgStreetAddress:string = "1240 E Diehl Rd";
+  orgName:string = "Your organization name";
+  orgStreetAddress:string = "Your organization address";
   orgCity:string = "Naperville";
   orgZip:number = 60540;
   orgState:string = "IL";

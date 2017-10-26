@@ -8,7 +8,7 @@ import 'rxjs/add/observable/of';
 import {Observable} from "rxjs/Observable";
 import { Store } from '@ngrx/store';
 
-import {InsuranceRequestAddAction, InsuranceRequestSearchAction, PagingInfo} from './insurance.actions';
+import {InsuranceRequestSearchAction, PagingInfo} from './insurance.actions';
 import * as fromInsuranceRequest from './insurance.reducer';
 
 
@@ -25,6 +25,7 @@ export class InsuranceComponent implements OnInit {
   displayColumns = ['contactName', 'contactEmail'];
   dataSource: InsuranceDataSource;
   loading$: Observable<boolean>;
+  error$: Observable<any>;
 
     // MatPaginator Inputs
     length$: Observable<number>;
@@ -39,6 +40,7 @@ export class InsuranceComponent implements OnInit {
     this.length$ = store.select(fromInsuranceRequest.getCount);
     let data$ = store.select(fromInsuranceRequest.getInsuranceRequests);
     this.dataSource = new InsuranceDataSource(data$);
+    this.error$ = store.select(fromInsuranceRequest.getError);
   }
 
   ngOnInit() {
@@ -52,13 +54,11 @@ export class InsuranceComponent implements OnInit {
   }
 
   onAddInsurance () {
-    this.store.dispatch(new InsuranceRequestAddAction());
-    this.router.navigate (['/insurance/edit/0']);
+    this.router.navigate (['/insurance/add']);
 
   }
 
   onRowClick (row) {
-    this.store.dispatch(new InsuranceRequestEditAction(row.id));
     this.router.navigate (['/insurance/edit/'+row.id]);
   }
 }

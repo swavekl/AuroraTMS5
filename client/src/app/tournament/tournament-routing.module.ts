@@ -8,9 +8,9 @@ import {InsuranceEditComponent} from "./insurance/insurance-edit/insurance-edit.
 
 const routes: Routes = [
     {path: 'sanction', component: SanctionComponent, canActivate: [AuthGuard] },
+    {path: 'insurance/list', component: InsuranceComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+    {path: 'insurance/add', component: InsuranceEditComponent, canActivate: [AuthGuard] },
     {path: 'insurance/edit/:id', component: InsuranceEditComponent, canActivate: [AuthGuard] },
-//    {path: 'insurance/add', component: InsuranceEditComponent, canActivate: [AuthGuard] },
-    {path: 'insurance', component: InsuranceComponent, canActivate: [AuthGuard], pathMatch: 'full' },
     {path: 'configuretournament', component: ConfigureTournamentComponent}
 ];
 

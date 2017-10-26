@@ -6,13 +6,15 @@ export interface State {
   loading: boolean;
   count: number;
   edited: InsuranceRequest;
+  error: any;
 }
 
 const initialState : State = {
   results: [],
   loading: false,
   count: 0,
-  edited: new InsuranceRequest()
+  edited: new InsuranceRequest(),
+  error: null
 }
 
 /**
@@ -41,7 +43,8 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
     case InsuranceRequestActions.EDIT: {
       return {
         ...state,
-        edited: new InsuranceRequest()
+        edited: new InsuranceRequest(),
+        error: null
       };
     }
 
@@ -49,6 +52,13 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
       return {
         ...state,
         edited: <InsuranceRequest>action.payload,
+      };
+    }
+
+    case InsuranceRequestActions.EDIT_FAILED: {
+      return {
+        ...state,
+        error: action.payload
       };
     }
 
@@ -77,5 +87,10 @@ export const getLoading = (state: State) => {
 };
 
 export const getEdited = (state: State) => {
-   return getFeatureState(state).edited
+   return getFeatureState(state).edited;
 };
+
+export const getError = (state: State) => {
+   return getFeatureState(state).error;
+};
+
