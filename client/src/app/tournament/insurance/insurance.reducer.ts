@@ -3,16 +3,18 @@ import * as InsuranceRequestActions from './insurance.actions';
 
 export interface State {
   results: InsuranceRequest [];
-  loading: number;
+  loading: boolean;
   count: number;
   edited: InsuranceRequest;
+  error: any;
 }
 
 const initialState : State = {
   results: [],
-  loading: 0,
+  loading: false,
   count: 0,
-  edited: new InsuranceRequest()
+  edited: new InsuranceRequest(),
+  error: null
 }
 
 /**
@@ -23,24 +25,40 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
     case InsuranceRequestActions.SEARCH: {
       return {
         ...state,
-        loading: 0,
+        loading: true,
         count: 0
       };
     }
 
     case InsuranceRequestActions.SEARCH_SUCCESS: {
-    return {
-      ...state,
-      loading: 100,
-      results: <InsuranceRequest[]>action.payload,
-      count: action.count
-    };
-  }
-
-    case InsuranceRequestActions.ADD: {
       return {
         ...state,
-        edited: new InsuranceRequest()
+        loading: false,
+        results: <InsuranceRequest[]>action.payload,
+        count: action.count
+      };
+    }
+
+    case InsuranceRequestActions.ADD:
+    case InsuranceRequestActions.EDIT: {
+      return {
+        ...state,
+        edited: new InsuranceRequest(),
+        error: null
+      };
+    }
+
+    case InsuranceRequestActions.EDIT_SUCCESS: {
+      return {
+        ...state,
+        edited: <InsuranceRequest>action.payload,
+      };
+    }
+
+    case InsuranceRequestActions.EDIT_FAILED: {
+      return {
+        ...state,
+        error: action.payload
       };
     }
 
@@ -69,5 +87,10 @@ export const getLoading = (state: State) => {
 };
 
 export const getEdited = (state: State) => {
-  return getFeatureState(state).edited
+   return getFeatureState(state).edited;
 };
+
+export const getError = (state: State) => {
+   return getFeatureState(state).error;
+};
+

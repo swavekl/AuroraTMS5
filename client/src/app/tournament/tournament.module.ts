@@ -75,14 +75,13 @@ export interface TournamentState {
     FormsModule,
     StoreModule.forFeature('featureTournaments', tournamentReducers),
     EffectsModule.forFeature(tournamentEffects)
-
-
   ],
   declarations: [
     InsuranceComponent,
     SanctionComponent,
     ConfigureTournamentComponent,
-    InsuranceEditComponent],
+    InsuranceEditComponent
+  ],
   providers: [
     InsuranceService,
     SanctionService,

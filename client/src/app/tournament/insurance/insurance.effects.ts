@@ -50,4 +50,14 @@ export class InsuranceRequestEffects {
         .map(response => new InsuranceRequestActions.InsuranceRequestSearchSuccessAction(response.results, response.count))
         .catch(() => of(new InsuranceRequestActions.InsuranceRequestSearchSuccessAction([], 0)));
     });
+
+  @Effect()
+  edit$: Observable<Action> = this.actions$
+    .ofType(InsuranceRequestActions.EDIT)
+    .map(toPayload)
+    .switchMap((id) => {
+      return this.insuranceService.edit(id)
+        .map(response => new InsuranceRequestActions.InsuranceRequestEditSuccessAction(response))
+        .catch(response => of(new InsuranceRequestActions.InsuranceRequestEditFailedAction(response._body)));
+    });
 }
