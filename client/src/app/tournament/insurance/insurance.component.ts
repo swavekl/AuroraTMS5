@@ -34,6 +34,7 @@ export class InsuranceComponent implements OnInit {
   constructor(private insuranceService: InsuranceService,
               private store: Store<fromInsuranceRequest.State>,
               private router: Router)
+
   {
     this.loading$ = store.select(fromInsuranceRequest.getLoading);
     this.length$ = store.select(fromInsuranceRequest.getCount);

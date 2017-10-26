@@ -21,7 +21,8 @@ import {
   MatProgressBarModule,
   MatButtonModule,
   MatIconModule,
-  MatSelectModule
+  MatSelectModule,
+  MatRadioModule, MatDatepickerModule, MatNativeDateModule
 } from "@angular/material";
 
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -65,6 +66,9 @@ export interface TournamentState {
     MatButtonModule,
     MatSelectModule,
     MatIconModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     CommonModule,
     FlexLayoutModule,
     TournamentRoutingModule,
