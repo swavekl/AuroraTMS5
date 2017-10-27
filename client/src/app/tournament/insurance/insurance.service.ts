@@ -20,10 +20,9 @@ export class InsuranceService {
           .map((response:Response) => response.json());
   }
 
-  edit (id) {
+  edit (id: number) {
       return this.http.get ('/api/insurancerequest/' + id)
                 .map((response:Response) => response.json());
   }
-
 }
 

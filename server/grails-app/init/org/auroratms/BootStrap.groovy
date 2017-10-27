@@ -52,19 +52,28 @@ class BootStrap {
     def destroy = {
     }
 
-    def createInsuranceRequest (String name, String email, String orgName) {
-        new InsuranceRequest(contactName: name, contactEmail: email, orgName: orgName,
+    def createInsuranceRequest (String contactName, String contactPersonEmail, String orgName) {
+        new InsuranceRequest(
+                orgName: orgName,
                 orgStreetAddress : "1240 E Diehl Rd",
                 orgCity : "Naperville",
                 orgZip : 60540,
                 orgState : "IL",
                 reqDate : new Date(),
-                personName : "Ruchi",
-                phoneNumber : "333333333",
-                email : "abc@def.com",
-                certStreetAddress : "1240 E Diehl Rd",
-                certCity : "Naperville",
-                certZip : 60540
+                contactName: contactName,
+                contactPhoneNumber: "773-878-9090",
+                contactEmail: contactPersonEmail,
+                certFacilityName: 'Eola Community Center',
+                certPersonName : "Mike Owald",
+                certPersonPhoneNumber : "630-555-4545",
+                certPersonEmail : "mowald@fvpd.org",
+                certStreetAddress : "555 S. Eola Rd",
+                certCity : "Aurora",
+                certState : "IL",
+                certZip : 60504,
+                eventName: "2018 Aurora Spring Open",
+                eventStartDate: new Date(),
+                eventEndDate: new Date ()
         ).save()
 
     }

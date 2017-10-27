@@ -22,7 +22,7 @@ import * as fromInsuranceRequest from './insurance.reducer';
 
 export class InsuranceComponent implements OnInit {
 
-  displayColumns = ['contactName', 'contactEmail'];
+  displayColumns = ['contactName', 'contactEmail', 'edit', 'duplicate'];
   dataSource: InsuranceDataSource;
   loading$: Observable<boolean>;
   error$: Observable<any>;
@@ -56,11 +56,14 @@ export class InsuranceComponent implements OnInit {
 
   onAddInsurance () {
     this.router.navigate (['/insurance/add']);
-
   }
 
-  onRowClick (row) {
-    this.router.navigate (['/insurance/edit/'+row.id]);
+  onEditInsurance (requestId: number) {
+    this.router.navigate (['/insurance/edit/'+requestId]);
+  }
+
+  onDuplicateInsurance (requestId: number) {
+    this.router.navigate (['/insurance/duplicate/'+requestId]);
   }
 }
 

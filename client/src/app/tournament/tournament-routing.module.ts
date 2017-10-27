@@ -11,6 +11,7 @@ const routes: Routes = [
     {path: 'insurance/list', component: InsuranceComponent, canActivate: [AuthGuard], pathMatch: 'full' },
     {path: 'insurance/add', component: InsuranceEditComponent, canActivate: [AuthGuard] },
     {path: 'insurance/edit/:id', component: InsuranceEditComponent, canActivate: [AuthGuard] },
+    {path: 'insurance/duplicate/:id', component: InsuranceEditComponent, canActivate: [AuthGuard] },
     {path: 'configuretournament', component: ConfigureTournamentComponent}
 ];
 

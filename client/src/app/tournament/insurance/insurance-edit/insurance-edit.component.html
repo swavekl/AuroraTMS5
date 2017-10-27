@@ -38,7 +38,7 @@
           <mat-card-title>Person Details</mat-card-title>
         <mat-card-content fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
           <mat-form-field>
-            <input matInput type="text" placeholder="Name" name="personName" value="{{(insuranceRequest$ | async).personName}}">
+            <input matInput type="text" placeholder="Contact Name" name="contactName" value="{{(insuranceRequest$ | async).contactName}}">
           </mat-form-field>
           <!--<mat-form-field>-->
             <!--<input matInput type="date" placeholder="Date of Request" name="reqDate" value="{{(insuranceRequest$ | async).reqDate}}">-->
@@ -50,11 +50,11 @@
           </mat-form-field>
           <mat-form-field>
             <span matPrefix>+1 &nbsp;</span>
-            <input matInput type="tel" placeholder="Telephone">
+            <input matInput type="tel" placeholder="Telephone" value="{{(insuranceRequest$ | async).contactPhoneNumber}}">
          <!--   <mat-icon mdSuffix>mode_edit</mat-icon> -->
           </mat-form-field>
           <mat-form-field>
-            <input matInput type="email" placeholder="Email" name="email" value="{{(insuranceRequest$ | async).email}} " required>
+            <input matInput type="email" placeholder="Email" name="contactEmail" value="{{(insuranceRequest$ | async).contactEmail}} " required>
           </mat-form-field>
         </mat-card-content>
       </mat-card>
@@ -64,10 +64,10 @@
             <mat-card-content>
               <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="80%">
-                <input matInput type="text" placeholder="Facility Name" name="certFacility">
+                <input matInput type="text" placeholder="Facility Name" name="certFacilityName" value="{{(insuranceRequest$ | async).certFacilityName}} " required>
               </mat-form-field>
               <mat-form-field fxFlex="80%">
-                <input matInput type="text" placeholder="Contact Person" name="certContactPerson" >
+                <input matInput type="text" placeholder="Contact Person" name="certContactPerson" value="{{(insuranceRequest$ | async).certPersonName}} " required>
               </mat-form-field>
               </div>
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -83,7 +83,7 @@
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
                   <mat-form-field>
-                    <mat-select matInput type="text" placeholder="State">
+                    <mat-select matInput type="text" placeholder="State" name="certState" value="{{(insuranceRequest$ | async).certState}} ">
                       <mat-option value="option">IL</mat-option>
                       <mat-option value="option">OH</mat-option>
                     </mat-select>
@@ -91,23 +91,23 @@
                 </div>
               <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field>
-                <input matInput type="tel" placeholder="Phone Number" name="phoneNumber" value="{{(insuranceRequest$ | async).phoneNumber}}" >
+                <input matInput type="tel" placeholder="Phone Number" name="certPersonPhoneNumber" value="{{(insuranceRequest$ | async).certPersonPhoneNumber}}" >
               </mat-form-field>
               <mat-form-field>
-                <input matInput type="email" placeholder="Email" name="email" value="{{(insuranceRequest$ | async).email}}" >
+                <input matInput type="email" placeholder="Email" name="certPersonEmail" value="{{(insuranceRequest$ | async).certPersonEmail}}" >
               </mat-form-field>
               </div>
             </mat-card-content>
           </mat-card>
           <mat-form-field>
-            <input matInput type="text" placeholder="Name of Event" name="eventName">
+            <input matInput type="text" placeholder="Name of Event" name="eventName" value="{{(insuranceRequest$ | async).eventName}}" >
           </mat-form-field>
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
           <mat-form-field>
-            <input matInput type="date" placeholder="Date From" name="fromDate">
+            <input matInput type="date" placeholder="Date From" name="fromDate" value="{{(insuranceRequest$ | async).eventStartDate}}">
           </mat-form-field>
           <mat-form-field>
-            <input matInput type="date" placeholder="Date To" name="toDate">
+            <input matInput type="date" placeholder="Date To" name="toDate" value="{{(insuranceRequest$ | async).eventEndDate}}">
           </mat-form-field>
             <!--<mat-form-field>-->
               <!--<input matInput [matDatepicker]="picker" placeholder="Date From">-->

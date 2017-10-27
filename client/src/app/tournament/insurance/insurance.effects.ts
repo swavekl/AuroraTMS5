@@ -60,4 +60,15 @@ export class InsuranceRequestEffects {
         .map(response => new InsuranceRequestActions.InsuranceRequestEditSuccessAction(response))
         .catch(response => of(new InsuranceRequestActions.InsuranceRequestEditFailedAction(response._body)));
     });
+
+  @Effect()
+  duplicate$: Observable<Action> = this.actions$
+    .ofType(InsuranceRequestActions.DUPLICATE)
+    .map(toPayload)
+    .switchMap((id) => {
+      return this.insuranceService.edit(id)
+        .map(response => new InsuranceRequestActions.InsuranceRequestEditSuccessAction(response))
+        .catch(response => of(new InsuranceRequestActions.InsuranceRequestEditFailedAction(response._body)));
+    });
+
 }

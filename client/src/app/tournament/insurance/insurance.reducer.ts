@@ -7,6 +7,7 @@ export interface State {
   count: number;
   edited: InsuranceRequest;
   error: any;
+  duplicating: boolean;
 }
 
 const initialState : State = {
@@ -14,7 +15,8 @@ const initialState : State = {
   loading: false,
   count: 0,
   edited: new InsuranceRequest(),
-  error: null
+  error: null,
+  duplicating: false
 }
 
 /**
@@ -39,19 +41,34 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
       };
     }
 
+    case InsuranceRequestActions.DUPLICATE: {
+      return {
+        ...state,
+        edited: new InsuranceRequest(),
+        error: null,
+        duplicating: true
+      };
+    }
+
     case InsuranceRequestActions.ADD:
     case InsuranceRequestActions.EDIT: {
       return {
         ...state,
         edited: new InsuranceRequest(),
-        error: null
+        error: null,
+        duplicating: false
       };
     }
 
     case InsuranceRequestActions.EDIT_SUCCESS: {
+      let editedTemp: InsuranceRequest = <InsuranceRequest>action.payload;
+      if (state.duplicating) {
+        editedTemp.id = 0;
+      }
       return {
         ...state,
-        edited: <InsuranceRequest>action.payload,
+        edited: editedTemp,
+        duplicating: false
       };
     }
 

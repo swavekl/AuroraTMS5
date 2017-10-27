@@ -1,18 +1,30 @@
 export class InsuranceRequest {
-  contactName: string = 'Your name';
-  contactEmail: string = 'your email';
-  orgName:string = "Your organization name";
-  orgStreetAddress:string = "Your organization address";
-  orgCity:string = "Naperville";
-  orgZip:number = 60540;
-  orgState:string = "IL";
+  id: number = 0;
+  orgName:string = "";
+  orgStreetAddress:string = "";
+  orgCity:string = "";
+  orgZip:number;
+  orgState:string = "";
+
   reqDate:Date;
-  personName:string = "ds";
-  phoneNumber:string ="445";
-  email:string = "rtr"
-  certStreetAddress:string = "1240 E Diehl Rd";
-  certCity:string = "Naperville";
-  certZip:number = 60540;
+
+  contactName: string = '';
+  contactPhoneNumber: string = '';
+  contactEmail: string = '';
+
+  certFacilityName:string = "";
+  certPersonName:string = "";
+  certPersonPhoneNumber:string ="";
+  certPersonEmail:string = ""
+
+  certStreetAddress:string = "";
+  certCity:string = "";
+  certState:string;
+  certZip:number;
+
+  eventName: string = "";
+  eventStartDate: Date;
+  eventEndDate: Date;
 
   constructor () {
 

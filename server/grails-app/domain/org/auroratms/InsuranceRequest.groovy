@@ -1,20 +1,31 @@
 package org.auroratms
 
 class InsuranceRequest {
-    String contactName
-    String contactEmail
-    String orgName = "Fox Valley"
-    String orgStreetAddress = "1240 E Diehl Rd"
-    String orgCity = "Naperville"
-    String orgZip = 60540
-    String orgState = "IL"
+    String orgName;
+    String orgStreetAddress
+    String orgCity
+    Integer orgZip
+    String orgState
+
     Date reqDate
-    String personName = "Ruchi"
-    String phoneNumber = "333333333"
-    String email = "abc@def.com"
-    String certStreetAddress = "1240 E Diehl Rd"
-    String certCity = "Naperville"
-    Number certZip = 60540
+    // person filling out the request
+    String contactName
+    String contactPhoneNumber
+    String contactEmail
+
+    // certificate holder data
+    String certFacilityName
+    String certPersonName
+    String certPersonPhoneNumber
+    String certPersonEmail
+    String certStreetAddress
+    String certCity
+    String certState
+    Integer certZip
+
+    String eventName
+    Date eventStartDate
+    Date eventEndDate
 
     static constraints = {
     }

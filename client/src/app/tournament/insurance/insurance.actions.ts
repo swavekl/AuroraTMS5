@@ -5,6 +5,7 @@ export const SEARCH         = '[InsuranceRequest] Search';
 export const SEARCH_SUCCESS = '[InsuranceRequest] Search Success';
 export const ADD            = '[InsuranceRequest] Add';
 export const EDIT           = '[InsuranceRequest] Edit';
+export const DUPLICATE      = '[InsuranceRequest] Duplicate';
 export const EDIT_SUCCESS   = '[InsuranceRequest] Edit Success';
 export const EDIT_FAILED    = '[InsuranceRequest] Edit Failed';
 
@@ -33,15 +34,23 @@ export class InsuranceRequestAddAction implements Action {
 export class InsuranceRequestEditAction implements Action {
   readonly type = EDIT;
 
-  constructor (public payload: number) { }
+  constructor (public payload: number) {
+  }
+}
+
+export class InsuranceRequestDuplicateAction implements Action {
+  readonly type = DUPLICATE;
+
+  constructor (public payload: number) {
+  }
 }
 
 export class InsuranceRequestEditSuccessAction implements Action {
   readonly type = EDIT_SUCCESS;
 
-  constructor (public payload: InsuranceRequest) { }
+  constructor (public payload: InsuranceRequest) {
+  }
 }
-
 
 export class InsuranceRequestEditFailedAction implements Action {
   readonly type = EDIT_FAILED;
@@ -49,13 +58,12 @@ export class InsuranceRequestEditFailedAction implements Action {
   constructor (public payload: any) {  }
 }
 
-
-
 export type All
   = InsuranceRequestSearchAction
   | InsuranceRequestSearchSuccessAction
   | InsuranceRequestAddAction
   | InsuranceRequestEditAction
+  | InsuranceRequestDuplicateAction
   | InsuranceRequestEditSuccessAction
   | InsuranceRequestEditFailedAction
   ;
