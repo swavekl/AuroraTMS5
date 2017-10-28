@@ -22,7 +22,7 @@ import * as fromInsuranceRequest from './insurance.reducer';
 
 export class InsuranceComponent implements OnInit {
 
-  displayColumns = ['contactName', 'contactEmail', 'edit', 'duplicate'];
+  displayColumns = ['eventName', 'eventStartDate', 'status', 'edit', 'duplicate'];
   dataSource: InsuranceDataSource;
   loading$: Observable<boolean>;
   error$: Observable<any>;

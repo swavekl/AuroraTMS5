@@ -10,26 +10,32 @@
     <mat-card-content>
       <div class="insurance-table mat-elevation-z8">
         <mat-table #insurancetable [dataSource]="dataSource">
-          <ng-container matColumnDef="contactName">
-            <mat-header-cell *matHeaderCellDef>ContactName</mat-header-cell>
-            <mat-cell *matCellDef="let contact">{{ contact.contactName }}</mat-cell>
+          <ng-container matColumnDef="eventName">
+            <mat-header-cell *matHeaderCellDef>Event Name</mat-header-cell>
+            <mat-cell *matCellDef="let insuranceRequest">{{ insuranceRequest.eventName }}</mat-cell>
           </ng-container>
-          <ng-container matColumnDef="contactEmail">
-            <mat-header-cell *matHeaderCellDef>ContactEmail</mat-header-cell>
-            <mat-cell *matCellDef="let contact">{{ contact.contactEmail }}</mat-cell>
+
+          <ng-container matColumnDef="eventStartDate">
+            <mat-header-cell *matHeaderCellDef>Event Start Date</mat-header-cell>
+            <mat-cell *matCellDef="let insuranceRequest">{{ insuranceRequest.eventStartDate | date }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+            <mat-cell *matCellDef="let insuranceRequest">{{ insuranceRequest.status }}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="edit">
             <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
-            <mat-cell *matCellDef="let contact">
-              <button mat-icon-button (click)="onEditInsurance(contact.id)"><mat-icon aria-label="Edit">edit</mat-icon></button>
+            <mat-cell *matCellDef="let insuranceRequest">
+              <button mat-icon-button (click)="onEditInsurance(insuranceRequest.id)"><mat-icon aria-label="Edit">edit</mat-icon></button>
             </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="duplicate">
             <mat-header-cell *matHeaderCellDef>Copy</mat-header-cell>
-            <mat-cell *matCellDef="let contact">
-              <button mat-icon-button (click)="onDuplicateInsurance(contact.id)"><mat-icon aria-label="Copy">content_copy</mat-icon></button>
+            <mat-cell *matCellDef="let insuranceRequest">
+              <button mat-icon-button (click)="onDuplicateInsurance(insuranceRequest.id)"><mat-icon aria-label="Copy">content_copy</mat-icon></button>
             </mat-cell>
           </ng-container>
 

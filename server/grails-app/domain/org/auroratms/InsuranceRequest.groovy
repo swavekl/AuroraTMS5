@@ -1,5 +1,7 @@
 package org.auroratms
 
+import tournament.insurance.InsuranceRequestStatus
+
 class InsuranceRequest {
     String orgName;
     String orgStreetAddress
@@ -26,6 +28,9 @@ class InsuranceRequest {
     String eventName
     Date eventStartDate
     Date eventEndDate
+
+    // request status - started, submitted, approved, rejected
+    InsuranceRequestStatus status;
 
     static constraints = {
     }

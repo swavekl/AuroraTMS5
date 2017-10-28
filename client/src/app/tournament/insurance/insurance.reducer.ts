@@ -1,4 +1,4 @@
-import { InsuranceRequest } from './insurance.model'
+import { InsuranceRequest, InsuranceRequestStatus } from './insurance.model'
 import * as InsuranceRequestActions from './insurance.actions';
 
 export interface State {
@@ -64,6 +64,7 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
       let editedTemp: InsuranceRequest = <InsuranceRequest>action.payload;
       if (state.duplicating) {
         editedTemp.id = 0;
+        editedTemp.status = InsuranceRequestStatus.Started;
       }
       return {
         ...state,

@@ -11,6 +11,9 @@
             <input matInput type="text" placeholder="Organization Name" name="orgName"  value="{{(insuranceRequest$ | async).orgName}} " required>
             <mat-error>This field is required</mat-error>
           </mat-form-field>
+          <mat-form-field fxFlex="20%">
+            <input matInput type="text" placeholder="Status" name="status"  value="{{(insuranceRequest$ | async).status}} " readonly>
+          </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
        <!--   <mat-icon>lock_open</mat-icon>-->

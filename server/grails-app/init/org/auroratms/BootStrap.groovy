@@ -2,6 +2,7 @@ package org.auroratms
 
 import grails.plugin.springsecurity.SecurityFilterPosition
 import grails.plugin.springsecurity.SpringSecurityUtils
+import tournament.insurance.InsuranceRequestStatus
 
 class BootStrap {
 
@@ -30,14 +31,16 @@ class BootStrap {
         new SanctionRequest(tournamentName: '2018 Aurora Summer Open', startDate: new Date(), endDate: new Date()).save()
         new SanctionRequest(tournamentName: '2018 Aurora Fall Open', startDate: new Date(), endDate: new Date()).save()
 
-        createInsuranceRequest('Swavek Lorenc', 'swaveklorenc@yahoo.com', 'Fox Valley Table Tennis Club')
-        createInsuranceRequest('Mario Lorenc', 'mariolorenc@yahoo.com',  'Phoenix Table Tennis Club')
-        createInsuranceRequest('Yichi Zhang', 'zyichi1@gmail.com', 'Experior')
+        createInsuranceRequest('Swavek Lorenc', 'swaveklorenc@yahoo.com', 'Fox Valley Table Tennis Club', '2018 Aurora Spring Open', InsuranceRequestStatus.Submitted)
+        createInsuranceRequest('Mario Lorenc', 'mariolorenc@yahoo.com',  'Phoenix Table Tennis Club', '2018 Phoenix Sizzler Open ', InsuranceRequestStatus.Approved)
+        createInsuranceRequest('Yichi Zhang', 'zyichi1@gmail.com', 'Experior', 'Spring Experior Giant Round Robin', InsuranceRequestStatus.Rejected)
         // add some more
         25.times {
             createInsuranceRequest("(${it + 1})nth Tournament Director",
                      "tourdir${it}@gmail.com",
-             'Nice Table Tennis Club')
+                    'Nice Table Tennis Club',
+                    '2018 Giant Round Robin',
+                    InsuranceRequestStatus.Started)
         }
 
         5.times {
@@ -52,7 +55,7 @@ class BootStrap {
     def destroy = {
     }
 
-    def createInsuranceRequest (String contactName, String contactPersonEmail, String orgName) {
+    def createInsuranceRequest (String contactName, String contactPersonEmail, String orgName, String eventName, InsuranceRequestStatus status) {
         new InsuranceRequest(
                 orgName: orgName,
                 orgStreetAddress : "1240 E Diehl Rd",
@@ -71,9 +74,10 @@ class BootStrap {
                 certCity : "Aurora",
                 certState : "IL",
                 certZip : 60504,
-                eventName: "2018 Aurora Spring Open",
+                eventName: eventName,
                 eventStartDate: new Date(),
-                eventEndDate: new Date ()
+                eventEndDate: new Date (),
+                status: status
         ).save()
 
     }

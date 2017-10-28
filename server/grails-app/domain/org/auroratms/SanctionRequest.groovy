@@ -1,10 +1,14 @@
 package org.auroratms
 
+import tournament.insurance.SanctionRequestStatus
+
 class SanctionRequest {
 
     String tournamentName
     Date startDate
     Date endDate
+    SanctionRequestStatus status
+
 //    Date alternateStartDate
 //    Date alternateEndDate
 //
