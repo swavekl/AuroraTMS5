@@ -18,4 +18,12 @@ class SanctionRequestController extends RestfulController {
     def search (String searchTerms, Integer max) {
         respond sanctionRequestService.search(searchTerms, max)
     }
+
+    def index(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        int count = countResources()
+        List<SanctionRequest> results = listAllResources(params)
+        def responseMap = ['count': count, 'results': results]
+        respond responseMap
+    }
 }

@@ -1,8 +1,9 @@
-/*
-:host {
-  height: 500px;
+.sanctioncard {
+  width: 950px;
+//  height: 100%;
 }
-*/
-.sanction-table {
-  width: 600px;
+.top-right-fab {
+  position: absolute;
+  right: -30px;
+  top: 10px;
 }

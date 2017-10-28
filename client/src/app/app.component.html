@@ -4,10 +4,10 @@
       <span *ngIf="isMobile" class="color-primary">{{toolbarTitle}}</span>
     </mat-toolbar>
     <mat-sidenav class="my-sidenav" #sidenav mode="{{ sideNavMode }}" opened="{{ !isMobile }}">
-        <div *ngIf="!isMobile" class="corner-box">
-          <h3>{{toolbarTitle}}</h3>
-        </div>
-        <app-main-menu [sideNav]="sidenav" [isMobile]="isMobile"></app-main-menu>
+      <div *ngIf="!isMobile" class="corner-box">
+        <h3>{{toolbarTitle}}</h3>
+      </div>
+      <app-main-menu [sideNav]="sidenav" [isMobile]="isMobile"></app-main-menu>
       </mat-sidenav>
       <div>
         <router-outlet></router-outlet>

@@ -32,21 +32,24 @@ import {CdkTableModule} from "@angular/cdk/table";
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import * as fromConfigureTournament from './configure-tournament/configure-tournament.reducer';
 import * as fromInsuranceRequest from './insurance/insurance.reducer';
+import * as fromSanctionRequest from './sanction/sanction.reducer';
 
 export const tournamentReducers: ActionReducerMap<any> = {
   subFeature1: fromConfigureTournament.configureTournamentReducer,
-  subFeatureInsurance: fromInsuranceRequest.insuranceRequestReducer
+  subFeatureInsurance: fromInsuranceRequest.insuranceRequestReducer,
+  subFeatureSanction: fromSanctionRequest.sanctionRequestReducer
 };
 
 import { EffectsModule } from '@ngrx/effects';
 import { ConfigureTournamentEffects } from './configure-tournament/configure-tournament.effects';
 import { InsuranceRequestEffects } from './insurance/insurance.effects';
+import {SanctionRequestEffects} from "./sanction/sanction.effects";
 
-export const tournamentEffects = [ConfigureTournamentEffects, InsuranceRequestEffects];
+export const tournamentEffects = [ConfigureTournamentEffects, InsuranceRequestEffects, SanctionRequestEffects];
 
 
 export interface TournamentState {
-//  sanction: fromSanction.State;
+  sanction: fromSanctionRequest.State;
   insurance: fromInsuranceRequest.State;
   configureTournament: fromConfigureTournament.State;
 //  router: fromRouter.RouterState;
