@@ -1,6 +1,6 @@
 package org.auroratms
 
-import tournament.insurance.SanctionRequestStatus
+import tournament.sanction.SanctionRequestStatus
 
 class SanctionRequest {
 

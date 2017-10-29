@@ -3,6 +3,7 @@ package org.auroratms
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
+import tournament.sanction.SanctionRequestStatus
 
 class SanctionRequestServiceSpec extends Specification implements ServiceUnitTest<SanctionRequestService>, DataTest {
 
@@ -18,10 +19,10 @@ class SanctionRequestServiceSpec extends Specification implements ServiceUnitTes
 
     void "test something"() {
         setup: 'create tournament request'
-            service.create(new SanctionRequest(tournamentName: "Teams tournament"))
-            service.create(new SanctionRequest(tournamentName: "Fox Valley Open"))
-            service.create(new SanctionRequest(tournamentName: "Aurora Cup"))
-            service.create(new SanctionRequest(tournamentName: "Aurora Fall Open"))
+            service.create(new SanctionRequest(tournamentName: "Teams tournament", startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Started))
+            service.create(new SanctionRequest(tournamentName: "Fox Valley Open", startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Started))
+            service.create(new SanctionRequest(tournamentName: "Aurora Cup", startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Started))
+            service.create(new SanctionRequest(tournamentName: "Aurora Fall Open", startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Started))
 
         when: "we search "
             def results = service.search ('Aurora', 5)

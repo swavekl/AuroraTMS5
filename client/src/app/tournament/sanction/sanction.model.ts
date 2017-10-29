@@ -1,9 +1,9 @@
 enum SanctionRequestStatus {
-  Started,
-  Submitted,
-  Approved,
-  Rejected,
-  Withdrawn
+  Started = 'Started',
+  Submitted = 'Submitted',
+  Approved = 'Approved',
+  Rejected = 'Rejected',
+  Withdrawn = 'Withdrawn'
 }
 
 export class SanctionRequest {
