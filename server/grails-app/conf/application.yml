@@ -24,8 +24,6 @@ endpoints:
     jmx:
         enabled: true
 
-server:
-  port: 9001
 ---
 grails:
     mime:
@@ -85,6 +83,8 @@ dataSource:
 
 environments:
     development:
+        server:
+            port: 9001
         dataSource:
             dbCreate: create-drop
             url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
@@ -93,8 +93,10 @@ environments:
             dbCreate: update
             url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     production:
+        server:
+            port: 8080
         dataSource:
-            dbCreate: update
+            dbCreate: create-drop
             url: jdbc:mysql://${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DB_NAME}
             driverClassName: com.mysql.jdbc.Driver
             dialect: org.hibernate.dialect.MySQL5InnoDBDialect
