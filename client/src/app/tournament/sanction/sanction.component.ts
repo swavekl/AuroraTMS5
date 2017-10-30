@@ -19,7 +19,7 @@ import {SanctionRequest} from "./sanction.model";
 })
 export class SanctionComponent implements OnInit {
 
-  displayColumns = ['tournamentName', 'startDate', 'endDate'];
+  displayColumns = ['tournamentName', 'startDate', 'status', 'edit', 'duplicate'];
   dataSource: SanctionDataSource;
   loading$: Observable<boolean>;
   // error$: Observable<any>;
@@ -39,15 +39,6 @@ export class SanctionComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.sanctionService.list().subscribe(
-    //   data => {
-    //     this.dataSource = new SanctionDataSource(data);
-    //   },
-    //   err => {
-    //     // Log errors if any
-    //     console.log(err);
-    //   }
-    // );
     let pagingInfo = new PagingInfo (0, this.pageSize);
     this.store.dispatch(new SanctionRequestSearchAction(pagingInfo));
   }
@@ -57,17 +48,20 @@ export class SanctionComponent implements OnInit {
     this.store.dispatch(new SanctionRequestSearchAction(pagingInfo));
   }
 
-  // onAddSanction () {
+  onAddSanction () {
+  console.log ('in add');
   //   this.router.navigate (['/sanction/add']);
-  // }
-  //
-  // onEditSanction (requestId: number) {
+  }
+
+  onEditSanction (requestId: number) {
+  console.log ('in edit for requestId ', requestId);
   //   this.router.navigate (['/sanction/edit/'+requestId]);
-  // }
-  //
-  // onDuplicateSanction (requestId: number) {
+  }
+
+  onDuplicateSanction (requestId: number) {
+  console.log ('in duplicate for requestId ', requestId);
   //   this.router.navigate (['/sanction/duplicate/'+requestId]);
-  // }
+  }
 }
 
 

@@ -7,6 +7,7 @@ enum SanctionRequestStatus {
 }
 
 export class SanctionRequest {
+  id: number;
   tournamentName: string;
   startDate: Date;
   endDate: Date;

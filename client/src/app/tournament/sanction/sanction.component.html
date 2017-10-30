@@ -11,16 +11,31 @@
       <div class="sanction-table mat-elevation-z8">
         <mat-table #sanctiontable [dataSource]="dataSource">
           <ng-container matColumnDef="tournamentName">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let tournament">{{ tournament.tournamentName }}</mat-cell>
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let sanctionRequest">{{ sanctionRequest.tournamentName }}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="startDate">
-            <mat-header-cell *matHeaderCellDef> StartDate </mat-header-cell>
-            <mat-cell *matCellDef="let tournament">{{ tournament.startDate  | date}}</mat-cell>
+            <mat-header-cell *matHeaderCellDef>Start Date</mat-header-cell>
+            <mat-cell *matCellDef="let sanctionRequest">{{ sanctionRequest.startDate  | date}}</mat-cell>
           </ng-container>
-          <ng-container matColumnDef="endDate">
-            <mat-header-cell *matHeaderCellDef> EndDate </mat-header-cell>
-            <mat-cell *matCellDef="let tournament">{{ tournament.endDate  | date}}</mat-cell>
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+            <mat-cell *matCellDef="let sanctionRequest">{{ sanctionRequest.status }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+            <mat-cell *matCellDef="let sanctionRequest">
+              <button mat-icon-button (click)="onEditSanction(sanctionRequest.id)"><mat-icon aria-label="Edit">edit</mat-icon></button>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="duplicate">
+            <mat-header-cell *matHeaderCellDef>Copy</mat-header-cell>
+            <mat-cell *matCellDef="let sanctionRequest">
+              <button mat-icon-button (click)="onDuplicateSanction(sanctionRequest.id)"><mat-icon aria-label="Copy">content_copy</mat-icon></button>
+            </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>

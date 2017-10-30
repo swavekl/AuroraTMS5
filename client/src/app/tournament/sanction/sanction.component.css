@@ -7,3 +7,27 @@
   right: -30px;
   top: 10px;
 }
+
+.cdk-column-tournamentName {
+  flex: 4;
+}
+
+.cdk-column-startDate {
+  flex: 2;
+}
+
+.cdk-column-endDate {
+  flex: 2;
+}
+
+.cdk-column-status {
+  flex: 2;
+}
+
+.cdk-column-edit {
+  flex: 1;
+}
+
+.cdk-column-duplicate {
+  flex: 1;
+}

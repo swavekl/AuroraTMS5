@@ -7,3 +7,23 @@
   right: -30px;
   top: 10px;
 }
+
+.cdk-column-eventName {
+  flex: 4;
+}
+
+.cdk-column-eventStartDate {
+  flex: 2;
+}
+
+.cdk-column-status {
+  flex: 2;
+}
+
+.cdk-column-edit {
+  flex: 1;
+}
+
+.cdk-column-duplicate {
+  flex: 1;
+}

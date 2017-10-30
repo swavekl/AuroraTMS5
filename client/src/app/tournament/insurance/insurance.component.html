@@ -22,7 +22,7 @@
 
           <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-            <mat-cell *matCellDef="let insuranceRequest">{{ insuranceRequest.status }}</mat-cell>
+            <mat-cell *matCellDef="let insuranceRequest" [style.color]="red">{{ insuranceRequest.status }}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="edit">
