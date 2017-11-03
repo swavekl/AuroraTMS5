@@ -8,6 +8,7 @@ export interface State {
   edited: InsuranceRequest;
   error: any;
   duplicating: boolean;
+  saving: boolean;
 }
 
 const initialState : State = {
@@ -16,7 +17,8 @@ const initialState : State = {
   count: 0,
   edited: new InsuranceRequest(),
   error: null,
-  duplicating: false
+  duplicating: false,
+  saving: false
 }
 
 /**
@@ -76,6 +78,30 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
     case InsuranceRequestActions.EDIT_FAILED: {
       return {
         ...state,
+        error: action.payload
+      };
+    }
+
+    case InsuranceRequestActions.SAVE: {
+      return {
+        ...state,
+        saving: true,
+        error: null
+      };
+    }
+
+    case InsuranceRequestActions.SAVE_SUCCESS: {
+      return {
+        ...state,
+        saving: false,
+        error: null
+      };
+    }
+
+    case InsuranceRequestActions.SAVE_FAILURE: {
+      return {
+        ...state,
+        saving: false,
         error: action.payload
       };
     }

@@ -1,12 +1,18 @@
 import { Component, OnInit, ChangeDetectionStrategy  } from '@angular/core';
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import { Observable } from "rxjs/Observable";
+import {last} from "rxjs/operator/last";
+import {withLatestFrom} from "rxjs/operator/withLatestFrom";
 import { Store } from '@ngrx/store';
 
 import {InsuranceService} from "../../insurance/insurance.service";
 import {InsuranceRequest} from "../insurance.model";
-import { InsuranceRequestAddAction, InsuranceRequestEditAction, InsuranceRequestDuplicateAction } from '../insurance.actions';
+import {
+  InsuranceRequestAddAction, InsuranceRequestEditAction, InsuranceRequestDuplicateAction,
+  InsuranceRequestSaveAction
+} from '../insurance.actions';
 import * as fromInsuranceRequest from '../insurance.reducer';
+
 
 @Component({
   selector: 'app-insurance-edit',
@@ -52,6 +58,12 @@ export class InsuranceEditComponent implements OnInit {
 
   save(){
     console.log("Saving....");
+    //TODO unwrap observable
+    let insuranceRequest:InsuranceRequest = new InsuranceRequest();
+    insuranceRequest.certFacilityName = "aaaa";
+    insuranceRequest.certCity="Naperville";
+    //let insuranceRequest:InsuranceRequest = withLatestFrom(this.insuranceRequest$);
+    this.store.dispatch(new InsuranceRequestSaveAction(insuranceRequest));
   }
 
 }

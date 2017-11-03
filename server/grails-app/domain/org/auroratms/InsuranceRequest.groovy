@@ -33,5 +33,6 @@ class InsuranceRequest {
     InsuranceRequestStatus status;
 
     static constraints = {
+        eventEndDate nullable:true
     }
 }

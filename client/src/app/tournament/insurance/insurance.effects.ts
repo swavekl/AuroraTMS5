@@ -14,6 +14,7 @@ import { of } from 'rxjs/observable/of';
 import { InsuranceRequest } from './insurance.model'
 import { InsuranceService } from './insurance.service';
 import * as InsuranceRequestActions from './insurance.actions';
+import {insuranceRequestReducer} from "./insurance.reducer";
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your
@@ -69,6 +70,16 @@ export class InsuranceRequestEffects {
       return this.insuranceService.edit(id)
         .map(response => new InsuranceRequestActions.InsuranceRequestEditSuccessAction(response))
         .catch(response => of(new InsuranceRequestActions.InsuranceRequestEditFailedAction(response._body)));
+    });
+
+  @Effect()
+  save$: Observable<Action> = this.actions$
+    .ofType(InsuranceRequestActions.SAVE)
+    .map(toPayload)
+    .switchMap((insuranceRequest) => {
+      return this.insuranceService.save(insuranceRequest)
+        .map(response => new InsuranceRequestActions.InsuranceRequestSaveSuccessAction())
+        .catch(response => of(new InsuranceRequestActions.InsuranceRequestSaveFailedAction(response._body)));
     });
 
 }
