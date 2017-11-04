@@ -8,6 +8,10 @@ export const EDIT           = '[InsuranceRequest] Edit';
 export const DUPLICATE      = '[InsuranceRequest] Duplicate';
 export const EDIT_SUCCESS   = '[InsuranceRequest] Edit Success';
 export const EDIT_FAILED    = '[InsuranceRequest] Edit Failed';
+export const SAVE           = '[InsuranceRequest] Save';
+export const SAVE_SUCCESS           = '[InsuranceRequest] Save Success';
+export const SAVE_FAILURE           = '[InsuranceRequest] Save Failure';
+
 
 export class PagingInfo {
   constructor (public startIndex: number, public pageSize: number) {
@@ -58,11 +62,34 @@ export class InsuranceRequestEditFailedAction implements Action {
   constructor (public payload: any) {  }
 }
 
+export class InsuranceRequestSaveAction implements Action {
+  readonly type = SAVE;
+
+  constructor (public payload: InsuranceRequest) {  }
+}
+
+export class InsuranceRequestSaveSuccessAction implements Action {
+  readonly type = SAVE_SUCCESS;
+
+  constructor () { }
+}
+
+export class InsuranceRequestSaveFailedAction implements Action {
+  readonly type = SAVE_FAILURE;
+
+  constructor (public payload: any) {  }
+}
+
+
+
 export type All
   = InsuranceRequestSearchAction
   | InsuranceRequestSearchSuccessAction
   | InsuranceRequestAddAction
   | InsuranceRequestEditAction
+  | InsuranceRequestSaveAction
+  | InsuranceRequestSaveFailedAction
+  | InsuranceRequestSaveSuccessAction
   | InsuranceRequestDuplicateAction
   | InsuranceRequestEditSuccessAction
   | InsuranceRequestEditFailedAction

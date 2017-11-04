@@ -1,9 +1,9 @@
 <div fxLayout="row">
   <div fxFlex></div>
+  <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
 <mat-card>
   <mat-card-title>Insurance Request</mat-card-title>
   <mat-card-content>
-    <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
       <div fxLayout="column">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
           <!--<mat-icon class="material-icons md-dark md-inactive">email</mat-icon>-->
@@ -144,12 +144,13 @@
         </mat-radio-group>
 
       </div>
-    </form>
+
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button>Save</button>
+    <button mat-raised-button type="submit">Save</button>
   </mat-card-actions>
 </mat-card>
+  </form>
   <div fxFlex></div>
 </div>

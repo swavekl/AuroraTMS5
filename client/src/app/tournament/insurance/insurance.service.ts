@@ -1,3 +1,4 @@
+///<reference path="../../../../node_modules/@angular/http/src/http.d.ts"/>
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptionsArgs, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -23,6 +24,16 @@ export class InsuranceService {
   edit (id: number) {
       return this.http.get ('/api/insurancerequest/' + id)
                 .map((response:Response) => response.json());
+  }
+
+  save (insuranceRequest: InsuranceRequest) {
+    let isNew: boolean = insuranceRequest.id!=null;
+    if(isNew)
+    return this.http.post('/api/insurancerequest', insuranceRequest, null)
+      .map((response:Response) => response.json());
+    else
+      return this.http.put('/api/insurancerequest/'+ insuranceRequest.id, insuranceRequest,null)
+        .map((response:Response) => response.json());
   }
 }
 
