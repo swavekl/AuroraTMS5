@@ -40,14 +40,24 @@ import { WelcomeComponent } from './login/welcome/welcome.component';
 // ngrx related stuff
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterReducerState, routerReducer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { RouterEffects } from './router.effects';
 
 // now compose the app state from module's states
 export interface AppState {
- tournamentState: TournamentState
+ routerReducer: RouterReducerState;
+ tournamentState: TournamentState;
  // other module states?
 }
+
+export const AppReducers = {
+  routerReducer: routerReducer
+};
+
+export const AppEffects = [
+  RouterEffects
+];
 
 @NgModule({
   declarations: [
@@ -78,24 +88,17 @@ export interface AppState {
     CdkTableModule,
     FlexLayoutModule,
     TournamentModule,
+
     RouterModule.forRoot(rootRouterConfig),
 
     // ngrx stuff
-    /**
-     * StoreModule.provideStore is imported once in the root module, accepting a reducer
-     * function or object map of reducer functions. If passed an object of
-     * reducers, combineReducers will be run creating your application
-     * meta-reducer. This returns all providers for an @ngrx/store
-     * based application.
-     */
-    StoreModule.forRoot([]),
+    StoreModule.forRoot(AppReducers),
 
     /**
      * @ngrx/router-store keeps router state up-to-date in the store and uses
      * the store as the single source of truth for the router's state.
      */
     StoreRouterConnectingModule,
-    //RouterStoreModule.connectRouter(),
 
     /**
      * Store devtools instrument the store retaining past versions of state
@@ -109,13 +112,7 @@ export interface AppState {
      */
 //    StoreDevtoolsModule.instrumentOnlyWithExtension(),
 
-    /**
-     * EffectsModule.run() sets up the effects class to be initialized
-     * immediately when the application starts.
-     *
-     * See: https://github.com/ngrx/effects/blob/master/docs/api.md#run
-     */
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot(AppEffects)
   ],
   providers: [
     TodosService,
