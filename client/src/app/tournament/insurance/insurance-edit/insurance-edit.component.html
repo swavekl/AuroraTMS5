@@ -1,156 +1,178 @@
 <div fxLayout="row">
   <div fxFlex></div>
+
+  <div class="insurance-form">
   <form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
-<mat-card>
-  <mat-card-title>Insurance Request</mat-card-title>
-  <mat-card-content>
+    <mat-card>
+      <mat-card-title>Certificate of Insurance Request</mat-card-title>
+      <mat-card-content>
+
       <div fxLayout="column">
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <!--<mat-icon class="material-icons md-dark md-inactive">email</mat-icon>-->
-          <mat-form-field fxFlex="80%">
-            <input matInput type="text" placeholder="Organization Name" name="orgName"  value="{{(insuranceRequest$ | async).orgName}} " required>
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
-          <mat-form-field fxFlex="20%">
-            <input matInput type="text" placeholder="Status" name="status"  value="{{(insuranceRequest$ | async).status}} " readonly>
-          </mat-form-field>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-       <!--   <mat-icon>lock_open</mat-icon>-->
-          <mat-form-field fxFlex="80%">
-          <input matInput type="text" placeholder="Organization Street Address" name="orgStreetAddress" value="{{(insuranceRequest$ | async).orgStreetAddress }} " required>
-          <mat-error>This field is required</mat-error>
-        </mat-form-field>
-          <mat-form-field>
-           <input matInput type="text" placeholder="City" name="orgCity" value="{{(insuranceRequest$ | async).orgCity}} " required>
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput type="number" placeholder="Zipcode" name="orgZip" value="{{(insuranceRequest$ | async).orgZip}} " required>
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
-         <mat-form-field>
-            <mat-select matInput type="text" placeholder="State">
-              <mat-option value="option">IL</mat-option>
-              <mat-option value="option">OH</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <!--<button mat-mini-fab color="white"><mat-icon>remove_red_eye</mat-icon></button>-->
-      </div>
-        <mat-card>
-          <mat-card-title>Person Details</mat-card-title>
-        <mat-card-content fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <mat-form-field>
-            <input matInput type="text" placeholder="Contact Name" name="contactName" value="{{(insuranceRequest$ | async).contactName}}">
-          </mat-form-field>
-          <!--<mat-form-field>-->
-            <!--<input matInput type="date" placeholder="Date of Request" name="reqDate" value="{{(insuranceRequest$ | async).reqDate}}">-->
-          <!--</mat-form-field>-->
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Date of Request">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field>
-            <span matPrefix>+1 &nbsp;</span>
-            <input matInput type="tel" placeholder="Telephone" value="{{(insuranceRequest$ | async).contactPhoneNumber}}">
-         <!--   <mat-icon mdSuffix>mode_edit</mat-icon> -->
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput type="email" placeholder="Email" name="contactEmail" value="{{(insuranceRequest$ | async).contactEmail}} " required>
-          </mat-form-field>
-        </mat-card-content>
-      </mat-card>
-        <br>
-          <mat-card>
-            <mat-card-title>Certificate Holder</mat-card-title>
-            <mat-card-content>
-              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-              <mat-form-field fxFlex="80%">
+        <div fxLayout="row" fxLayoutGap="10px">
+          <div fxFlex="50%" fxLayout="column">
+            <mat-card-subtitle class="mat-title">Requesting Organization</mat-card-subtitle>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="100%">
+                <input matInput type="text" placeholder="Organization Name" name="orgName"  value="{{(insuranceRequest$ | async).orgName}} " required>
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="100%">
+                <input matInput type="text" placeholder="Organization Street Address" name="orgStreetAddress" value="{{(insuranceRequest$ | async).orgStreetAddress }} " required>
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="60%">
+                <input matInput type="text" placeholder="City" name="orgCity" value="{{(insuranceRequest$ | async).orgCity}} " required>
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+              <mat-form-field fxFlex="20%">
+                <input matInput type="number" placeholder="Zipcode" name="orgZip" value="{{(insuranceRequest$ | async).orgZip}} " required>
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+              <mat-form-field fxFlex="20%">
+                <mat-select matInput type="text" placeholder="State">
+                  <mat-option value="option">IL</mat-option>
+                  <mat-option value="option">OH</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="40%">
+                <input matInput type="text" placeholder="Contact Name" name="contactName" value="{{(insuranceRequest$ | async).contactName}}">
+              </mat-form-field>
+              <mat-form-field fxFlex="20%">
+                <input matInput type="tel" placeholder="Contact Phone" value="{{(insuranceRequest$ | async).contactPhoneNumber}}">
+              </mat-form-field>
+              <mat-form-field fxFlex="40%">
+                <input matInput type="email" placeholder="Contact Email" name="contactEmail" value="{{(insuranceRequest$ | async).contactEmail}} " required>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Certificate holder information block -->
+          <div fxFlex="50%" fxLayout="column">
+            <mat-card-subtitle class="mat-title">Certificate Holder</mat-card-subtitle>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="100%">
                 <input matInput type="text" placeholder="Facility Name" name="certFacilityName" value="{{(insuranceRequest$ | async).certFacilityName}} " required>
               </mat-form-field>
-              <mat-form-field fxFlex="80%">
-                <input matInput type="text" placeholder="Contact Person" name="certContactPerson" value="{{(insuranceRequest$ | async).certPersonName}} " required>
-              </mat-form-field>
-              </div>
-                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-              <mat-form-field fxFlex="80%">
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="100%">
                 <input matInput type="text" placeholder="Street Address" name="certStreetAddress" value="{{(insuranceRequest$ | async).certStreetAddress}} " required>
               </mat-form-field>
-              <mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="60%">
                 <input matInput type="text" placeholder="City" name="certCity" value="{{(insuranceRequest$ | async).certCity}} " required>
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
-              <mat-form-field>
+              <mat-form-field fxFlex="20%">
                 <input matInput type="number" placeholder="Zipcode" name="certZip" value="{{(insuranceRequest$ | async).certZip}} " required>
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
-                  <mat-form-field>
-                    <mat-select matInput type="text" placeholder="State" name="certState" value="{{(insuranceRequest$ | async).certState}} ">
-                      <mat-option value="option">IL</mat-option>
-                      <mat-option value="option">OH</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-              <mat-form-field>
-                <input matInput type="tel" placeholder="Phone Number" name="certPersonPhoneNumber" value="{{(insuranceRequest$ | async).certPersonPhoneNumber}}" >
+              <mat-form-field fxFlex="20%">
+                <mat-select matInput type="text" placeholder="State" name="certState" value="{{(insuranceRequest$ | async).certState}} ">
+                  <mat-option value="option">IL</mat-option>
+                  <mat-option value="option">OH</mat-option>
+                </mat-select>
               </mat-form-field>
-              <mat-form-field>
-                <input matInput type="email" placeholder="Email" name="certPersonEmail" value="{{(insuranceRequest$ | async).certPersonEmail}}" >
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="40%">
+                <input matInput type="text" placeholder="Contact Person Name" name="certContactPerson" value="{{(insuranceRequest$ | async).certPersonName}} " required>
               </mat-form-field>
-              </div>
-            </mat-card-content>
-          </mat-card>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Name of Event" name="eventName" value="{{(insuranceRequest$ | async).eventName}}" >
-          </mat-form-field>
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <mat-form-field>
-            <input matInput type="date" placeholder="Date From" name="fromDate" value="{{(insuranceRequest$ | async).eventStartDate}}">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput type="date" placeholder="Date To" name="toDate" value="{{(insuranceRequest$ | async).eventEndDate}}">
-          </mat-form-field>
-            <!--<mat-form-field>-->
-              <!--<input matInput [matDatepicker]="picker" placeholder="Date From">-->
-              <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-              <!--<mat-datepicker #picker></mat-datepicker>-->
-            <!--</mat-form-field>-->
-            <!--<mat-form-field>-->
-              <!--<input matInput [matDatepicker]="picker" placeholder="Date To">-->
-              <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-              <!--<mat-datepicker #picker></mat-datepicker>-->
-            <!--</mat-form-field>-->
+              <mat-form-field fxFlex="20%">
+                <input matInput type="tel" placeholder="Contact Person Phone" name="certPersonPhoneNumber" value="{{(insuranceRequest$ | async).certPersonPhoneNumber}}" >
+              </mat-form-field>
+              <mat-form-field fxFlex="40%">
+                <input matInput type="email" placeholder="Contact Person Email" name="certPersonEmail" value="{{(insuranceRequest$ | async).certPersonEmail}}" >
+              </mat-form-field>
+            </div>
           </div>
-        <p class=mat-caption>Have you entered into any agreement, contract or permit that contains assumption of liability, indemnification, or hold harmless language? If
-          "yes" please forward a copy of the document with this certificate request form.
-        </p>
-        <mat-radio-group>
-          <mat-radio-button value="1">Yes</mat-radio-button>
-          <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group>
-        <mat-form-field>
-          <input matInput type="text" placeholder="Additional Insured" name="addtnlInsured" >
-        </mat-form-field>
-        <p class=mat-caption>If requesting additional insured status, please indicate the role of the additional insured : </p>
-        <mat-radio-group>
-          <mat-radio-button value="1">Owner Of Premises</mat-radio-button>
-          <mat-radio-button value="2">Sponsor</mat-radio-button>
-          <mat-radio-button value="3">Other</mat-radio-button>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Please Specify" name="otherInsuredRole">
-          </mat-form-field>
-        </mat-radio-group>
+        </div>
 
+        <div fxLayout="row" fxLayoutGap="10px">
+          <div fxLayout="column" fxFlex="50%">
+            <mat-card-subtitle class="mat-title">Event Information</mat-card-subtitle>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="60%">
+                <input matInput type="text" placeholder="Name of Event" name="eventName" value="{{(insuranceRequest$ | async).eventName}}" >
+              </mat-form-field>
+
+              <mat-form-field fxFlex="20%">
+                <input matInput [matDatepicker]="pickerESD" placeholder="Date From">
+                <mat-datepicker-toggle matSuffix [for]="pickerESD"></mat-datepicker-toggle>
+                <mat-datepicker #pickerESD></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field fxFlex="20%">
+                <input matInput [matDatepicker]="pickerEED" placeholder="Date From">
+                <mat-datepicker-toggle matSuffix [for]="pickerEED"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEED></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="20%">
+              <input matInput [matDatepicker]="picker" placeholder="Date of Request" readonly>
+              <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+              <!--<mat-datepicker #picker></mat-datepicker>-->
+              </mat-form-field>
+              <mat-form-field fxFlex="20%">
+                <input matInput type="text" placeholder="Status" name="status"  value="{{(insuranceRequest$ | async).status}} " readonly>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div fxLayout="column" fxFlex="50%">
+            <div>
+              <P class=mat-caption>Have you entered into any agreement, contract or permit that contains assumption of liability, indemnification, or hold harmless language? If
+                "yes" please forward a copy of the document with this certificate request form.
+              </P>
+              <mat-radio-group>
+                <mat-radio-button value="1">Yes</mat-radio-button>&nbsp;&nbsp;
+                <mat-radio-button value="2">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <div flexLayout="row">
+              <mat-form-field fxFlex="100%">
+                <input matInput type="text" placeholder="Additional Insured" name="addtnlInsured" >
+              </mat-form-field>
+            </div>
+            <div flexLayout="row">
+              <p class=mat-caption>If requesting additional insured status, please indicate the role of the additional insured : </p>
+              <mat-radio-group>
+                <mat-radio-button value="1">Owner Of Premises</mat-radio-button>&nbsp;
+                <mat-radio-button value="2">Sponsor</mat-radio-button>&nbsp;
+                <mat-radio-button value="3">Other</mat-radio-button>&nbsp;
+              </mat-radio-group>
+              <mat-form-field fxFlexFill>
+                <input matInput type="text" placeholder="Please Specify" name="otherInsuredRole">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
       </div>
+      </mat-card-content>
 
-  </mat-card-content>
-
-  <mat-card-actions>
-    <button mat-raised-button type="submit">Save</button>
-  </mat-card-actions>
-</mat-card>
+      <mat-card-actions>
+        <button mat-raised-button type="submit">Save</button>
+      </mat-card-actions>
+    </mat-card>
   </form>
+  </div>
+
   <div fxFlex></div>
 </div>
