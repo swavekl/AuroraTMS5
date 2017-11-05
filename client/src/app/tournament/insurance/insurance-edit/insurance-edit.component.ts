@@ -1,9 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy  } from '@angular/core';
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import { Observable } from "rxjs/Observable";
-import {last} from "rxjs/operator/last";
-import {withLatestFrom} from "rxjs/operator/withLatestFrom";
 import { Store } from '@ngrx/store';
+import { FormsModule } from '@angular/forms';
 
 import {InsuranceService} from "../../insurance/insurance.service";
 import {InsuranceRequest} from "../insurance.model";
@@ -12,6 +11,7 @@ import {
   InsuranceRequestSaveAction
 } from '../insurance.actions';
 import * as fromInsuranceRequest from '../insurance.reducer';
+import { StatesList } from '../../states'
 
 
 @Component({
@@ -22,6 +22,9 @@ import * as fromInsuranceRequest from '../insurance.reducer';
 })
 export class InsuranceEditComponent implements OnInit {
   insuranceRequest$: Observable<InsuranceRequest>;
+  // list of states in USA
+  statesList: any [];
+  editedId: number;
 
   constructor(private insuranceService: InsuranceService,
               private store: Store<fromInsuranceRequest.State>,
@@ -29,6 +32,7 @@ export class InsuranceEditComponent implements OnInit {
               private router: Router
               ) {
     this.insuranceRequest$ = store.select(fromInsuranceRequest.getEdited);
+    this.statesList = new StatesList().getList();
   }
 
   ngOnInit() {
@@ -45,25 +49,25 @@ export class InsuranceEditComponent implements OnInit {
            isDuplicate = true;
           }
         }
+        this.editedId = this.activatedRoute.snapshot.params['id'] || -1;
         if (isAdd) {
           this.store.dispatch(new InsuranceRequestAddAction());
         } else if (isDuplicate) {
-          let editedId = this.activatedRoute.snapshot.params['id'] || 0;
-          this.store.dispatch(new InsuranceRequestDuplicateAction(editedId));
+          this.store.dispatch(new InsuranceRequestDuplicateAction(this.editedId));
         } else {
-          let editedId = this.activatedRoute.snapshot.params['id'] || 0;
-          this.store.dispatch(new InsuranceRequestEditAction(editedId));
+          this.store.dispatch(new InsuranceRequestEditAction(this.editedId));
         }
   }
 
-  save(){
-    console.log("Saving....");
-    //TODO unwrap observable
-    let insuranceRequest:InsuranceRequest = new InsuranceRequest();
-    insuranceRequest.certFacilityName = "aaaa";
-    insuranceRequest.certCity="Naperville";
-    //let insuranceRequest:InsuranceRequest = withLatestFrom(this.insuranceRequest$);
-    this.store.dispatch(new InsuranceRequestSaveAction(insuranceRequest));
+  save(formValues){
+    // copy changed values into this new object
+    let insuranceRequestToSave = new InsuranceRequest();
+    insuranceRequestToSave = Object.assign (insuranceRequestToSave, formValues);
+    insuranceRequestToSave.id = (this.editedId != -1) ? this.editedId : null;
+    insuranceRequestToSave.reqDate = (insuranceRequestToSave.reqDate != null) ? insuranceRequestToSave.reqDate : new Date();
+    console.log("Saving....", insuranceRequestToSave);
+    // now send it
+    this.store.dispatch(new InsuranceRequestSaveAction(insuranceRequestToSave));
   }
 
 }

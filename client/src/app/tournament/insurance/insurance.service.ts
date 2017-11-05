@@ -27,7 +27,7 @@ export class InsuranceService {
   }
 
   save (insuranceRequest: InsuranceRequest) {
-    let isNew: boolean = insuranceRequest.id!=null;
+    let isNew: boolean = insuranceRequest.id == null;
     if(isNew)
     return this.http.post('/api/insurancerequest', insuranceRequest, null)
       .map((response:Response) => response.json());
