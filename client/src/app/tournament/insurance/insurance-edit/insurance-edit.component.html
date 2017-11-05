@@ -32,12 +32,12 @@
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <input matInput type="text" placeholder="Zipcode" name="orgZip" [ngModel]="(insuranceRequest$ | async).orgZip" required>
+                <input matInput type="text" placeholder="Zip Code" name="orgZip" [ngModel]="(insuranceRequest$ | async).orgZip" required>
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <mat-select matInput type="text" placeholder="State">
-                  <mat-option *ngFor="let state of statesList" value="state.abbreviation">{{state.abbreviation}}</mat-option>
+                <mat-select matInput type="text" placeholder="State" name="orgState" [ngModel]="(insuranceRequest$ | async).orgState" required>
+                  <mat-option *ngFor="let state of statesList" value="{{state.abbreviation}}">{{state.abbreviation}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -81,14 +81,14 @@
               </mat-form-field>
               <mat-form-field fxFlex="20%">
                 <mat-select matInput type="text" placeholder="State" name="certState" [ngModel]="(insuranceRequest$ | async).certState">
-                  <mat-option *ngFor="let state of statesList" value="state.abbreviation">{{state.abbreviation}}</mat-option>
+                  <mat-option *ngFor="let state of statesList" value="{{state.abbreviation}}">{{state.abbreviation}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="40%">
-                <input matInput type="text" placeholder="Contact Person Name" name="certContactPerson" [ngModel]="(insuranceRequest$ | async).certPersonName" required>
+                <input matInput type="text" placeholder="Contact Person Name" name="certPersonName" [ngModel]="(insuranceRequest$ | async).certPersonName" required>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
                 <input matInput type="tel" placeholder="Contact Person Phone" name="certPersonPhoneNumber" [ngModel]="(insuranceRequest$ | async).certPersonPhoneNumber" >
@@ -123,7 +123,7 @@
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="20%">
-              <input matInput [matDatepicker]="picker" placeholder="Date of Request" name="reqDate" [ngModel]="(insuranceRequest$ | async).reqDate | date:'yyyy-MM-dd'" readonly>
+              <input matInput type="date" [matDatepicker]="picker" placeholder="Date of Request" name="requestDate" [ngModel]="(insuranceRequest$ | async).requestDate | date:'yyyy-MM-dd'" readonly>
               <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
               <!--<mat-datepicker #picker></mat-datepicker>-->
               </mat-form-field>

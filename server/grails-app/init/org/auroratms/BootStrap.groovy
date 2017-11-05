@@ -63,7 +63,7 @@ class BootStrap {
                 orgCity : "Naperville",
                 orgZip : 60540,
                 orgState : "IL",
-                reqDate : new Date(),
+                requestDate : new Date(),
                 contactName: contactName,
                 contactPhoneNumber: "773-878-9090",
                 contactEmail: contactPersonEmail,

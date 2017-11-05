@@ -14,7 +14,7 @@ export class InsuranceRequest {
   orgZip:number;
   orgState:string = "";
 
-  reqDate:Date;
+  requestDate:Date;
 
   contactName: string = '';
   contactPhoneNumber: string = '';
@@ -27,7 +27,7 @@ export class InsuranceRequest {
 
   certStreetAddress:string = "";
   certCity:string = "";
-  certState:string;
+  certState:string = "";
   certZip:number;
 
   eventName: string = "";

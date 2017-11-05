@@ -9,7 +9,7 @@ class InsuranceRequest {
     Integer orgZip
     String orgState
 
-    Date reqDate
+    Date requestDate
     // person filling out the request
     String contactName
     String contactPhoneNumber

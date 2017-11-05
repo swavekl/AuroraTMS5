@@ -63,8 +63,17 @@ export class InsuranceEditComponent implements OnInit {
     // copy changed values into this new object
     let insuranceRequestToSave = new InsuranceRequest();
     insuranceRequestToSave = Object.assign (insuranceRequestToSave, formValues);
+
     insuranceRequestToSave.id = (this.editedId != -1) ? this.editedId : null;
-    insuranceRequestToSave.reqDate = (insuranceRequestToSave.reqDate != null) ? insuranceRequestToSave.reqDate : new Date();
+    // convert dates from strings to Date objects
+//    let eventStartDate: Date = (formValues.eventStartDate != "") ? new Date (formValues.eventStartDate) : null;
+//    let eventEndDate: Date = (formValues.eventEndDate != "") ? new Date (formValues.eventEndDate) : null;
+    let requestDate: Date = (formValues.requestDate != "") ? new Date (formValues.requestDate) : new Date();
+
+//    insuranceRequestToSave.eventStartDate = eventStartDate;
+//    insuranceRequestToSave.eventEndDate = eventEndDate;
+    insuranceRequestToSave.requestDate = requestDate;
+
     console.log("Saving....", insuranceRequestToSave);
     // now send it
     this.store.dispatch(new InsuranceRequestSaveAction(insuranceRequestToSave));
