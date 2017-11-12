@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import { Observable } from "rxjs/Observable";
 import { Store } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
+import { DateUtils } from '../../../utils/date-utils';
 
 import {InsuranceService} from "../../insurance/insurance.service";
 import {InsuranceRequest} from "../insurance.model";
@@ -65,18 +66,15 @@ export class InsuranceEditComponent implements OnInit {
     insuranceRequestToSave = Object.assign (insuranceRequestToSave, formValues);
 
     insuranceRequestToSave.id = (this.editedId != -1) ? this.editedId : null;
-    // convert dates from strings to Date objects
-//    let eventStartDate: Date = (formValues.eventStartDate != "") ? new Date (formValues.eventStartDate) : null;
-//    let eventEndDate: Date = (formValues.eventEndDate != "") ? new Date (formValues.eventEndDate) : null;
     let requestDate: Date = (formValues.requestDate != "") ? new Date (formValues.requestDate) : new Date();
 
-//    insuranceRequestToSave.eventStartDate = eventStartDate;
-//    insuranceRequestToSave.eventEndDate = eventEndDate;
-    insuranceRequestToSave.requestDate = requestDate;
+    let dateUtils = new DateUtils();
+    insuranceRequestToSave.eventStartDate = dateUtils.convertFromLocalToUTCDate (formValues.eventStartDate);
+    insuranceRequestToSave.eventEndDate = dateUtils.convertFromLocalToUTCDate(formValues.eventEndDate);
+    insuranceRequestToSave.requestDate = dateUtils.convertFromLocalToUTCDate (requestDate);
 
     console.log("Saving....", insuranceRequestToSave);
     // now send it
     this.store.dispatch(new InsuranceRequestSaveAction(insuranceRequestToSave));
   }
-
 }

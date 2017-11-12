@@ -22,7 +22,11 @@ import {
   MatButtonModule,
   MatIconModule,
   MatSelectModule,
-  MatRadioModule, MatDatepickerModule, MatNativeDateModule
+  MatRadioModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  DateAdapter,
+  NativeDateAdapter
 } from "@angular/material";
 
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -88,7 +92,8 @@ export interface TournamentState {
   providers: [
     InsuranceService,
     SanctionService,
-    ConfigureTournamentService
+    ConfigureTournamentService,
+   {provide: DateAdapter, useClass: NativeDateAdapter}
   ]
 })
 export class TournamentModule { }

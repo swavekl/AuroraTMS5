@@ -8,6 +8,9 @@ import tournament.sanction.SanctionRequestStatus
 class BootStrap {
 
     def init = { servletContext ->
+        // make all dates saved in this timezone
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
+
         def userRole = new Role(authority: 'ROLE_USER').save()
         def tdRole = new Role(authority: 'ROLE_TOURNAMENT_DIRECTOR').save()
         //def facebookRole = new Role(authority: 'ROLE_FACEBOOK').save()

@@ -1,5 +1,6 @@
 import { InsuranceRequest, InsuranceRequestStatus } from './insurance.model'
 import * as InsuranceRequestActions from './insurance.actions';
+import { DateUtils } from '../../utils/date-utils';
 
 export interface State {
   results: InsuranceRequest [];
@@ -68,6 +69,13 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
         editedTemp.id = 0;
         editedTemp.status = InsuranceRequestStatus.Started;
       }
+
+      let dateUtils = new DateUtils();
+      editedTemp.eventStartDate = dateUtils.convertFromUTCToLocalDate (editedTemp.eventStartDate);
+      editedTemp.eventEndDate = dateUtils.convertFromUTCToLocalDate (editedTemp.eventEndDate);
+      editedTemp.requestDate = dateUtils.convertFromUTCToLocalDate (editedTemp.requestDate);
+
+//      console.log ('got I.R. to edited ', editedTemp);
       return {
         ...state,
         edited: editedTemp,
@@ -99,6 +107,7 @@ export function insuranceRequestReducer(state = initialState, action: InsuranceR
     }
 
     case InsuranceRequestActions.SAVE_FAILURE: {
+//    console.log ('errors ', action.payload);
       return {
         ...state,
         saving: false,
