@@ -1,6 +1,7 @@
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
 import 'rxjs/add/operator/takeUntil';
@@ -15,6 +16,7 @@ import { InsuranceRequest } from './insurance.model'
 import { InsuranceService } from './insurance.service';
 import * as InsuranceRequestActions from './insurance.actions';
 import {insuranceRequestReducer} from "./insurance.reducer";
+import * as RouterActions from './../../router.actions';
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your
@@ -77,8 +79,12 @@ export class InsuranceRequestEffects {
     .ofType(InsuranceRequestActions.SAVE)
     .map(toPayload)
     .switchMap((insuranceRequest) => {
+      let mappedActions = [
+          new InsuranceRequestActions.InsuranceRequestSaveSuccessAction(),
+          new RouterActions.Go({path: ['/insurance/list']})
+      ];
       return this.insuranceService.save(insuranceRequest)
-        .map(response => new InsuranceRequestActions.InsuranceRequestSaveSuccessAction())
+        .mergeMap(result => mappedActions)
         .catch(response => of(new InsuranceRequestActions.InsuranceRequestSaveFailedAction(response._body)));
     });
 
