@@ -13,6 +13,7 @@ import {
 } from '../insurance.actions';
 import * as fromInsuranceRequest from '../insurance.reducer';
 import { StatesList } from '../../states'
+import * as RouterActions from './../../../router.actions';
 
 
 @Component({
@@ -76,5 +77,9 @@ export class InsuranceEditComponent implements OnInit {
     console.log("Saving....", insuranceRequestToSave);
     // now send it
     this.store.dispatch(new InsuranceRequestSaveAction(insuranceRequestToSave));
+  }
+
+  onCancel () {
+    this.store.dispatch (new RouterActions.Back());
   }
 }
