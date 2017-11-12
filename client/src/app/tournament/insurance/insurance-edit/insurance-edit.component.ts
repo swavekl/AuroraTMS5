@@ -66,7 +66,7 @@ export class InsuranceEditComponent implements OnInit {
     insuranceRequestToSave = Object.assign (insuranceRequestToSave, formValues);
 
     insuranceRequestToSave.id = (this.editedId != -1) ? this.editedId : null;
-    let requestDate: Date = (formValues.requestDate != "") ? new Date (formValues.requestDate) : new Date();
+    let requestDate: Date = (formValues.requestDate != null) ? new Date (formValues.requestDate) : new Date();
 
     let dateUtils = new DateUtils();
     insuranceRequestToSave.eventStartDate = dateUtils.convertFromLocalToUTCDate (formValues.eventStartDate);
