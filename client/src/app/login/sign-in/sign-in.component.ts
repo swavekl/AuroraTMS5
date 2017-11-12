@@ -27,12 +27,12 @@ export class SignInComponent implements OnInit {
         this.authenticationService.logout();
 
         // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/landing';
   }
 
   login() {
     // when we are redirected to login page we may have the url to which we need to return afterwards, save it here
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/landing';
 
     this.loading = true;
     this.authenticationService.login (this.email, this.password)

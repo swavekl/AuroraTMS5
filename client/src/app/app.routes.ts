@@ -3,6 +3,7 @@ import { LoginComponent } from './login/login.component';
 import {SignInComponent} from "./login/sign-in/sign-in.component";
 import {RegisterComponent} from "./login/register/register.component";
 import {WelcomeComponent} from "./login/welcome/welcome.component";
+import { LandingComponent } from './login/landing/landing.component';
 
 export const rootRouterConfig: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -14,6 +15,7 @@ export const rootRouterConfig: Routes = [
       ]
     },
     {path: 'welcome', component: WelcomeComponent},
+    {path: 'landing', component: LandingComponent},
     {path: 'logout', component: LoginComponent}
 ];
 
