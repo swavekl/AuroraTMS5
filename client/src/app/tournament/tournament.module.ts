@@ -48,7 +48,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { ConfigureTournamentEffects } from './configure-tournament/configure-tournament.effects';
 import { InsuranceRequestEffects } from './insurance/insurance.effects';
 import {SanctionRequestEffects} from "./sanction/sanction.effects";
-import { SanctionEditComponent } from './sanction/sanction-edit/sanction-edit.component';
 
 export const tournamentEffects = [ConfigureTournamentEffects, InsuranceRequestEffects, SanctionRequestEffects];
 
@@ -88,8 +87,7 @@ export interface TournamentState {
     InsuranceComponent,
     SanctionComponent,
     ConfigureTournamentComponent,
-    InsuranceEditComponent,
-    SanctionEditComponent
+    InsuranceEditComponent
   ],
   providers: [
     InsuranceService,
