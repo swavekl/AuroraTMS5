@@ -13,7 +13,7 @@ export class MainMenuComponent implements OnInit {
   @Input() isMobile: false;
 
   links: Array<MenuItem> = [
-  {label: "Sanction", url: "sanction"},
+  {label: "Sanction", url: "sanction/list"},
   {label: "Insurance", url: "insurance/list"},
   {label: "Configure", url: "configuretournament"},
   {label: "Logout", url: "login"}

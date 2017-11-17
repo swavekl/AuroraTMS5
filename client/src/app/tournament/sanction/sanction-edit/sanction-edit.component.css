@@ -1,0 +1,19 @@
+.sanction-form {
+  width: 95%;
+}
+
+.criteria-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+/*  width: 300px; */
+  border: 0px solid green;
+}
+
+.criteria-radio-button {
+  margin: 5px;
+}
+
+.criteria-checkbox-row {
+  border: 0px solid green;
+  margin: 10px 0;
+}

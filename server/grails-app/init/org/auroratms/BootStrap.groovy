@@ -30,10 +30,10 @@ class BootStrap {
             it.clear()
         }
 
-        new SanctionRequest(tournamentName: '2018 Aurora Cup', startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Started).save(flush: true, failOnError: true)
-        new SanctionRequest(tournamentName: '2018 Aurora Spring Open', startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Submitted).save(flush: true, failOnError: true)
-        new SanctionRequest(tournamentName: '2018 Aurora Summer Open', startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Rejected).save(flush: true, failOnError: true)
-        new SanctionRequest(tournamentName: '2018 Aurora Fall Open', startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Approved).save(flush: true, failOnError: true)
+        createSanctionRequest( '2018 Aurora Cup',  new Date(), new Date(), SanctionRequestStatus.Started, new Date())
+        createSanctionRequest( '2018 Aurora Spring Open',  new Date(), new Date(), SanctionRequestStatus.Submitted, new Date())
+        createSanctionRequest( '2018 Aurora Summer Open',  new Date(), new Date(), SanctionRequestStatus.Rejected, new Date())
+        createSanctionRequest( '2018 Aurora Fall Open',  new Date(), new Date(), SanctionRequestStatus.Approved, new Date())
 
         createInsuranceRequest('Swavek Lorenc', 'swaveklorenc@yahoo.com', 'Fox Valley Table Tennis Club', '2018 Aurora Spring Open', InsuranceRequestStatus.Submitted)
         createInsuranceRequest('Mario Lorenc', 'mariolorenc@yahoo.com',  'Phoenix Table Tennis Club', '2018 Phoenix Sizzler Open ', InsuranceRequestStatus.Approved)
@@ -56,7 +56,15 @@ class BootStrap {
             it.clear()
         }
     }
-    def destroy = {
+
+    def createSanctionRequest(String tournamentName, Date startDate, Date endDate, SanctionRequestStatus status, Date requestDate) {
+        new SanctionRequest(tournamentName: tournamentName,
+                startDate: startDate,
+                endDate: endDate,
+                status: status,
+                requestDate: requestDate,
+                requestContentsJSON: "{}")
+                .save(flush: true, failOnError: true)
     }
 
     def createInsuranceRequest (String contactName, String contactPersonEmail, String orgName, String eventName, InsuranceRequestStatus status) {
@@ -85,4 +93,8 @@ class BootStrap {
         ).save(flush: true, failOnError: true)
 
     }
+
+    def destroy = {
+    }
+
 }

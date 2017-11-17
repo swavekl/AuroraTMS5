@@ -11,6 +11,7 @@ import {PagingInfo} from "../insurance/insurance.actions";
 import {SanctionRequestSearchAction} from "./sanction.actions";
 import {Router} from "@angular/router";
 import {SanctionRequest} from "./sanction.model";
+import * as RouterActions from './../../router.actions';
 
 @Component({
   selector: 'app-sanction',
@@ -49,18 +50,15 @@ export class SanctionComponent implements OnInit {
   }
 
   onAddSanction () {
-  console.log ('in add');
-  //   this.router.navigate (['/sanction/add']);
+      this.store.dispatch ( new RouterActions.Go({path: ['/sanction/add']}));
   }
 
   onEditSanction (requestId: number) {
-  console.log ('in edit for requestId ', requestId);
-  //   this.router.navigate (['/sanction/edit/'+requestId]);
+      this.store.dispatch ( new RouterActions.Go({path: ['/sanction/edit/'+requestId]}));
   }
 
   onDuplicateSanction (requestId: number) {
-  console.log ('in duplicate for requestId ', requestId);
-  //   this.router.navigate (['/sanction/duplicate/'+requestId]);
+      this.store.dispatch ( new RouterActions.Go({path: ['/sanction/duplicate/'+requestId]}));
   }
 }
 

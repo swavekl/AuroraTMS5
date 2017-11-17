@@ -46,7 +46,7 @@ export class AuthenticationService {
   }
 
   loginWithFacebook () {
-      var callbackUrl = 'http://localhost:4200/sanction'
+      var callbackUrl = 'http://localhost:4200/sanction/list'
       return this.http.get ('/oauth/authenticate/facebook?callbackUrl=' + callbackUrl)
                 .map((response: Response) => {
                     let user = response.json();

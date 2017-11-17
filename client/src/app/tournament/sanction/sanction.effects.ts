@@ -1,15 +1,15 @@
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/skip';
-import 'rxjs/add/operator/takeUntil';
-import { Injectable } from '@angular/core';
+import { of } from 'rxjs/observable/of';
+
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { empty } from 'rxjs/observable/empty';
-import { of } from 'rxjs/observable/of';
+import * as RouterActions from './../../router.actions';
 
 import { SanctionRequest } from './sanction.model'
 import { SanctionService } from './sanction.service';
@@ -41,34 +41,49 @@ export class SanctionRequestEffects {
 
   @Effect()
   search$: Observable<Action> = this.actions$
-    .ofType(SanctionRequestActions.SANCTION_SEARCH)
+    .ofType(SanctionRequestActions.SEARCH)
     .map(toPayload)
     .switchMap((pagingInfo) => {
-      const nextSearch$ = this.actions$.ofType(SanctionRequestActions.SANCTION_SEARCH).skip(1);
+      const nextSearch$ = this.actions$.ofType(SanctionRequestActions.SEARCH).skip(1);
       return this.sanctionService.list(pagingInfo.startIndex, pagingInfo.pageSize)
         .takeUntil(nextSearch$)
         .map(response => new SanctionRequestActions.SanctionRequestSearchSuccessAction(response.results, response.count))
-        .catch(() => of(new SanctionRequestActions.SanctionRequestSearchSuccessAction([], 0)));
+        .catch(response => of(new SanctionRequestActions.SanctionRequestSearchSuccessAction([], 0)));
     });
 
-  // @Effect()
-  // edit$: Observable<Action> = this.actions$
-  //   .ofType(SanctionRequestActions.SANCTION_EDIT)
-  //   .map(toPayload)
-  //   .switchMap((id) => {
-  //     return this.sanctionService.edit(id)
-  //       .map(response => new SanctionRequestActions.SanctionRequestEditSuccessAction(response))
-  //       .catch(response => of(new SanctionRequestActions.SanctionRequestEditFailedAction(response._body)));
-  //   });
-  //
-  // @Effect()
-  // duplicate$: Observable<Action> = this.actions$
-  //   .ofType(SanctionRequestActions.SANCTION_DUPLICATE)
-  //   .map(toPayload)
-  //   .switchMap((id) => {
-  //     return this.sanctionService.edit(id)
-  //       .map(response => new SanctionRequestActions.SanctionRequestEditSuccessAction(response))
-  //       .catch(response => of(new SanctionRequestActions.SanctionRequestEditFailedAction(response._body)));
-  //   });
+  @Effect()
+  edit$: Observable<Action> = this.actions$
+    .ofType(SanctionRequestActions.EDIT)
+    .map(toPayload)
+    .switchMap((id) => {
+      return this.sanctionService.edit(id)
+        .map(response => new SanctionRequestActions.SanctionRequestEditSuccessAction(response))
+        .catch(response => of(new SanctionRequestActions.SanctionRequestEditFailedAction(response._body)));
+    });
+
+  @Effect()
+  duplicate$: Observable<Action> = this.actions$
+    .ofType(SanctionRequestActions.DUPLICATE)
+    .map(toPayload)
+    .switchMap((id) => {
+      return this.sanctionService.edit(id)
+        .map(response => new SanctionRequestActions.SanctionRequestEditSuccessAction(response))
+        .catch(response => of(new SanctionRequestActions.SanctionRequestEditFailedAction(response._body)));
+    });
+
+  @Effect()
+  save$: Observable<Action> = this.actions$
+    .ofType(SanctionRequestActions.SAVE)
+    .map(toPayload)
+    .switchMap((sanctionRequest) => {
+    console.log ('in save effect');
+      let mappedActions = [
+          new SanctionRequestActions.SanctionRequestSaveSuccessAction(),
+          new RouterActions.Go({path: ['/sanction/list']})
+      ];
+      return this.sanctionService.save(sanctionRequest)
+        .mergeMap(result => mappedActions)
+        .catch(response => of(new SanctionRequestActions.SanctionRequestSaveFailedAction(response._body)));
+    });
 
 }

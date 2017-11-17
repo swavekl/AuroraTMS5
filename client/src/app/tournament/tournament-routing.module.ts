@@ -5,13 +5,19 @@ import { SanctionComponent } from './sanction/sanction.component';
 import { ConfigureTournamentComponent } from './configure-tournament/configure-tournament.component';
 import { AuthGuard } from '../guards/auth.guard';
 import {InsuranceEditComponent} from "./insurance/insurance-edit/insurance-edit.component";
+import {SanctionEditComponent} from "./sanction/sanction-edit/sanction-edit.component";
 
 const routes: Routes = [
-    {path: 'sanction', component: SanctionComponent, canActivate: [AuthGuard] },
-    {path: 'insurance/list', component: InsuranceComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+    {path: 'insurance/list', component: InsuranceComponent, canActivate: [AuthGuard] },
     {path: 'insurance/add', component: InsuranceEditComponent, canActivate: [AuthGuard] },
     {path: 'insurance/edit/:id', component: InsuranceEditComponent, canActivate: [AuthGuard] },
     {path: 'insurance/duplicate/:id', component: InsuranceEditComponent, canActivate: [AuthGuard] },
+
+    {path: 'sanction/list', component: SanctionComponent, canActivate: [AuthGuard] },
+    {path: 'sanction/add', component: SanctionEditComponent, canActivate: [AuthGuard] },
+    {path: 'sanction/edit/:id', component: SanctionEditComponent, canActivate: [AuthGuard] },
+    {path: 'sanction/duplicate/:id', component: SanctionEditComponent, canActivate: [AuthGuard] },
+
     {path: 'configuretournament', component: ConfigureTournamentComponent}
 ];
 

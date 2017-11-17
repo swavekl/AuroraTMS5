@@ -1,0 +1,76 @@
+<div fxLayout="row">
+  <div fxFlex></div>
+<div class="sanction-form">
+  <form name="form" (ngSubmit)="save(f.value)" #f="ngForm" novalidate>
+<mat-card>
+    <mat-card-title>Sanction Request</mat-card-title>
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="Request Information">
+
+          <div fxLayout="column">
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <mat-card-subtitle>Tournament Information</mat-card-subtitle>
+
+                <mat-form-field fxFlex="100%">
+                  <input matInput type="text" placeholder="Tournament Name" name="tournamentName" [ngModel]="(sanctionRequest$ | async).tournamentName" required>
+                  <mat-error>This field is required</mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+
+            <div>
+              <mat-form-field fxFlex="100%">
+                <input matInput type="text" placeholder="Web link URL" name="webLinkURL" [ngModel]="(sanctionRequest$ | async).requestContents.webLinkURL" required>
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </mat-tab>
+        <mat-tab label="Star Rating Criteria">
+          <div>
+          <mat-list>
+            <div *ngFor="let category of (sanctionRequest$ | async).requestContents.categories">
+              <h4>{{category.title}}</h4>
+              <div fxLayout="column">
+                <div *ngIf="category.selectOne; else multiSelection">
+                  <mat-radio-group class="criteria-radio-group" name="{{ category.name }}" [ngModel]="category.selectedValue" fxFlex="70%">
+                    <div fxLayout="row" *ngFor="let criteria of category.criteria; index as i">
+                      <div fxFlex="80%">
+                          <mat-radio-button class="criteria-radio-button" name="category.name + i" [value]="criteria.points" [checked]="criteria.selected">{{ criteria.name }}</mat-radio-button>
+                      </div>
+                    <div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>
+                    </div>
+                  </mat-radio-group>
+                </div>
+                <ng-template #multiSelection>
+                  <div fxFlex="70%">
+                    <div fxLayout="row" *ngFor="let criteria of category.criteria; index as i" class="criteria-checkbox-row">
+                      <div fxFlex="80%">
+                        <mat-checkbox [ngModel]="criteria.selected" name="{{ category.name + i}}" value="{{ criteria.points }}">{{ criteria.name }}</mat-checkbox>
+                      </div>
+                      <div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </mat-list>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+      <!--{{ sanctionRequest$ | async | json   }}-->
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="submit">Save</button>
+      <button mat-raised-button (click)="onCancel()">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+  </form>
+</div>
+
+  <div fxFlex></div>
+</div>

@@ -63,7 +63,7 @@ export class InsuranceEditComponent implements OnInit {
 
   save(formValues){
     // copy changed values into this new object
-    let insuranceRequestToSave = new InsuranceRequest();
+    let insuranceRequestToSave: InsuranceRequest = new InsuranceRequest();
     insuranceRequestToSave = Object.assign (insuranceRequestToSave, formValues);
 
     insuranceRequestToSave.id = (this.editedId != -1) ? this.editedId : null;

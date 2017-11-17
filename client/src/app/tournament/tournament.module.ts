@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormGroupName } from '@angular/forms';
 
 import { TournamentRoutingModule } from './tournament-routing.module';
 import { InsuranceComponent } from './insurance/insurance.component';
@@ -23,6 +23,8 @@ import {
   MatIconModule,
   MatSelectModule,
   MatRadioModule,
+  MatTabsModule,
+  MatCheckboxModule,
   MatDatepickerModule,
   MatNativeDateModule,
   DateAdapter,
@@ -75,6 +77,8 @@ export interface TournamentState {
     MatSelectModule,
     MatIconModule,
     MatRadioModule,
+    MatTabsModule,
+    MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
     CommonModule,
