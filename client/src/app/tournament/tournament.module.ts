@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, FormGroupName } from '@angular/forms';
 
 import { TournamentRoutingModule } from './tournament-routing.module';
+
 import { InsuranceComponent } from './insurance/insurance.component';
 import { InsuranceService } from './insurance/insurance.service';
+import { InsuranceEditComponent } from "./insurance/insurance-edit/insurance-edit.component";
+
 import { SanctionComponent } from './sanction/sanction.component';
+import { SanctionEditComponent } from "./sanction/sanction-edit/sanction-edit.component";
 import { SanctionService } from './sanction/sanction.service';
+
 import { ConfigureTournamentComponent } from './configure-tournament/configure-tournament.component';
-import {InsuranceEditComponent} from "./insurance/insurance-edit/insurance-edit.component";
 import { ConfigureTournamentService } from './configure-tournament/configure-tournament.service';
 
 import {
@@ -89,9 +93,10 @@ export interface TournamentState {
   ],
   declarations: [
     InsuranceComponent,
+    InsuranceEditComponent,
     SanctionComponent,
-    ConfigureTournamentComponent,
-    InsuranceEditComponent
+    SanctionEditComponent,
+    ConfigureTournamentComponent
   ],
   providers: [
     InsuranceService,
