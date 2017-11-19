@@ -117,7 +117,7 @@ export class SanctionRequestContents {
     makeCategories () {
       let lighting: SanctionCategory = new SanctionCategory ("Light Strength as measured on table playing surface", "lighting", true);
       let lightCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ('300 Lux with fixtures at least 8 ft above the floor', 0, ''),
+        new SanctionCategoryCriteria ('300 Lux with fixtures at least 8 ft above the floor', 0, 'Minimum standard', true),
         new SanctionCategoryCriteria ('400 Lux', 1, ''),
         new SanctionCategoryCriteria ('600 Lux for feature matches', 2, '3 and up'),
         new SanctionCategoryCriteria ('600 Lux', 3, ''),
@@ -137,7 +137,7 @@ export class SanctionRequestContents {
 
       let ceiling: SanctionCategory = new SanctionCategory ("Ceiling Height", "ceiling", true);
       let ceilingCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("8 ft ceiling height", 0, ''),
+        new SanctionCategoryCriteria ("8 ft ceiling height", 0, 'Minimum standard', true),
         new SanctionCategoryCriteria ("10 ft ceiling height", 0, '1'),
         new SanctionCategoryCriteria ("12 ft ceiling height", 1, ''),
         new SanctionCategoryCriteria ("16 ft ceiling height", 2, '3 and up')
@@ -146,7 +146,7 @@ export class SanctionRequestContents {
 
       let courtSize: SanctionCategory = new SanctionCategory ("Court Size", "courtSize", true);
       let courtSizeCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("30 ft length, 10 ft between tables", 0, ''),
+        new SanctionCategoryCriteria ("30 ft length, 10 ft between tables", 0, 'Minimum standard', true),
         new SanctionCategoryCriteria ("12 feet between tables", 2, '3 and up'),
         new SanctionCategoryCriteria ("14 feet between tables", 4, ''),
         new SanctionCategoryCriteria ("19x38 courts for feature matches", 5, '3 and up'),
@@ -182,7 +182,7 @@ export class SanctionRequestContents {
 
       let timeScheduling: SanctionCategory = new SanctionCategory ("Time Scheduling", "timeScheduling", true);
       let timeSchedulingCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("Event start times", 0, ''),
+        new SanctionCategoryCriteria ("Event start times", 0, 'Minimum Standard', true),
         new SanctionCategoryCriteria ("All events, all rounds", 2, '3, 4'),
         new SanctionCategoryCriteria ("Published schedule for each player, all rounds", 4, '5')
       ];
@@ -197,16 +197,56 @@ export class SanctionRequestContents {
       ];
       officials.setCriteria (officialsCriteria);
 
-      let amenities: SanctionCategory = new SanctionCategory ("Player Amenities", "amenities", false);
+      let eventVariety: SanctionCategory = new SanctionCategory ("Event Variety", "eventVariety", false);
+      let eventVarietyCriteria: SanctionCategoryCriteria [] = [
+        new SanctionCategoryCriteria ("Novice event", 1, ''),
+        new SanctionCategoryCriteria ("Women's event", 1, ''),
+        new SanctionCategoryCriteria ("Junior event", 1, ''),
+        new SanctionCategoryCriteria ("Para event", 1, ''),
+        new SanctionCategoryCriteria ("Team event", 1, ''),
+        new SanctionCategoryCriteria ("Doubles event", 1, '')
+      ];
+      eventVariety.setCriteria (eventVarietyCriteria);
+
+      let prizeMoney: SanctionCategory = new SanctionCategory ("Prize Money", "prizeMoney", true);
+      let prizeMoneyCriteria: SanctionCategoryCriteria [] = [
+        new SanctionCategoryCriteria ("$100-$400", 1, ''),
+        new SanctionCategoryCriteria ("$401-$1000", 3, ''),
+        new SanctionCategoryCriteria ("$1001-$3000", 5, ''),
+        new SanctionCategoryCriteria ("$3001-$6000", 7, ''),
+        new SanctionCategoryCriteria ("$6001-$10000", 10, ''),
+        new SanctionCategoryCriteria ("$10001 and up", 15, '')
+      ];
+      prizeMoney.setCriteria (prizeMoneyCriteria);
+
+      let amenities: SanctionCategory = new SanctionCategory ("Amenities", "amenities", false);
       let amenitiesCriteria: SanctionCategoryCriteria [] = [
         new SanctionCategoryCriteria ("Food & drink available inside venue", 1, ''),
-        new SanctionCategoryCriteria ("Player's lounge Available", 1, '', true),
-        new SanctionCategoryCriteria ("Officials Lounge Available", 1, '')
+        new SanctionCategoryCriteria ("Player's lounge available", 1, ''),
+        new SanctionCategoryCriteria ("Officials Lounge available", 1, '')
       ];
       amenities.setCriteria (amenitiesCriteria);
 
+      let spectatorSeating: SanctionCategory = new SanctionCategory ("Spectator Seating", "spectatorSeating", true);
+      let spectatorSeatingCriteria: SanctionCategoryCriteria [] = [
+        new SanctionCategoryCriteria ("100 seats available", 1, '3'),
+        new SanctionCategoryCriteria ("250 seats available", 2, '4'),
+        new SanctionCategoryCriteria ("500 seats available", 3, '5')
+      ];
+      spectatorSeating.setCriteria (spectatorSeatingCriteria);
+
+      let mediaCoverage: SanctionCategory = new SanctionCategory ("Media Coverage", "mediaCoverage", false);
+      let mediaCoverageCriteria: SanctionCategoryCriteria [] = [
+        new SanctionCategoryCriteria ("Print", 2, ''),
+        new SanctionCategoryCriteria ("TV", 2, ''),
+        new SanctionCategoryCriteria ("Live streaming", 3, ''),
+        new SanctionCategoryCriteria ("Live streaming - USATT equipment and commentator", 3, '')
+      ];
+      mediaCoverage.setCriteria (mediaCoverageCriteria);
+
       this.categories = [
-        lighting, flooring, ceiling, courtSize, tables, paraTables, barriers, timeScheduling, officials, amenities
+        lighting, flooring, ceiling, courtSize, tables, paraTables, barriers, timeScheduling, officials,
+        eventVariety, prizeMoney, amenities, spectatorSeating, mediaCoverage
       ];
     }
 

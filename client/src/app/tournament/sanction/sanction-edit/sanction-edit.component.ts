@@ -83,7 +83,7 @@ export class SanctionEditComponent implements OnInit {
       }
 
       notLast(index: number) {
-        let totalSteps = 10; // this.sanctionRequest$.requestContents.categories.length;
+        let totalSteps = 14; // this.sanctionRequest$.requestContents.categories.length;
         return (index != (totalSteps - 1));
       }
 
