@@ -2,131 +2,200 @@
   <div fxFlex></div>
 <div class="sanction-form">
   <form name="form" (ngSubmit)="save(f.value)" #f="ngForm" novalidate>
-<mat-card>
-    <mat-card-title>Sanction Request</mat-card-title>
+  <mat-card>
+    <mat-card-title>Tournament Sanction Request</mat-card-title>
     <mat-card-content>
-      <mat-tab-group>
-        <mat-tab label="Request Information">
+        <mat-horizontal-stepper linear>
+          <mat-step label="Tournament Information">
+            <mat-card-subtitle class="mat-title">Tournament Information</mat-card-subtitle>
+            <div fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
 
-          <mat-card-subtitle class="mat-title">Tournament Information</mat-card-subtitle>
-          <div fxLayout="column">
-            <div fxLayout="row" fxLayoutGap="10px">
+                  <mat-form-field fxFlex="50%">
+                    <input matInput type="text" placeholder="Tournament Name" name="tournamentName" [ngModel]="(sanctionRequest$ | async).tournamentName" required>
+                    <mat-error>This field is required</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlex="50%">
+                    <input matInput type="text" placeholder="Web link URL" name="webLinkURL" [ngModel]="(sanctionRequest$ | async).requestContents.webLinkURL">
+                  </mat-form-field>
+                </div>
+
+              <!-- Dates -->
+                <div fxLayout="row" fxLayoutGap="10px">
+                  <mat-form-field fxFlex="25%">
+                    <input matInput [matDatepicker]="pickerESD" placeholder="Start Date" name="startDate" [ngModel]="(sanctionRequest$ | async).startDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerESD"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerESD></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlex="25%">
+                    <input matInput [matDatepicker]="pickerEED" placeholder="End Date" name="endDate" [ngModel]="(sanctionRequest$ | async).endDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerEED"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEED></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlex="25%">
+                    <input matInput [matDatepicker]="pickerAltSD" placeholder="Alternate Start Date" name="startDate" [ngModel]="(sanctionRequest$ | async).alternateStartDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerAltSD"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerAltSD></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlex="25%">
+                    <input matInput [matDatepicker]="pickerAltED" placeholder="Alternate End Date" name="endDate" [ngModel]="(sanctionRequest$ | async).alternateEndDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerAltED"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerAltED></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+              <mat-card-subtitle class="mat-title">Venue Address</mat-card-subtitle>
               <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-
-                <mat-form-field fxFlex="100%">
-                  <input matInput type="text" placeholder="Tournament Name" name="tournamentName" [ngModel]="(sanctionRequest$ | async).tournamentName" required>
+                <mat-form-field fxFlex="50%">
+                  <input matInput type="text" placeholder="Street Address" name="venueStreetAddress" [ngModel]="(sanctionRequest$ | async).requestContents.venueStreetAddress" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="30%">
+                  <input matInput type="text" placeholder="City" name="venueCity" [ngModel]="(sanctionRequest$ | async).requestContents.venueCity" required>
                   <mat-error>This field is required</mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex="10%">
+                  <mat-select matInput type="text" placeholder="State" name="venueState" [ngModel]="(sanctionRequest$ | async).requestContents.venueState">
+                    <mat-option *ngFor="let state of statesList" value="{{state.abbreviation}}">{{state.abbreviation}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="10%">
+                  <input matInput type="text" placeholder="Zip Code" name="venueZip" [ngModel]="(sanctionRequest$ | async).requestContents.venueZip" required  pattern="^[1-9][0-9]{4}" maxlength="6">
+                  <mat-error>This field is required</mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- Club information -->
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <mat-form-field fxFlex="40%">
+                  <input matInput type="text" placeholder="Club Name" name="clubName" [ngModel]="(sanctionRequest$ | async).requestContents.clubName" required>
+                  <mat-error>This field is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="60%">
+                  <input matInput type="text" placeholder="Club's USATT Affiliation Expiration Date" name="clubAffiliationExpiration" [ngModel]="(sanctionRequest$ | async).requestContents.clubAffiliationExpiration">
                 </mat-form-field>
               </div>
 
             </div>
 
-            <div>
-              <mat-form-field fxFlex="100%">
-                <input matInput type="text" placeholder="Web link URL" name="webLinkURL" [ngModel]="(sanctionRequest$ | async).requestContents.webLinkURL">
+            <mat-card-subtitle class="mat-title">Contact Person</mat-card-subtitle>
+            <!-- Contact person -->
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="40%">
+                <input matInput type="text" placeholder="Contact Person Name" name="contactPersonName" [ngModel]="(sanctionRequest$ | async).requestContents.contactPersonName">
+              </mat-form-field>
+              <mat-form-field fxFlex="20%">
+                <input matInput type="tel" placeholder="Contact Phone" name="contactPersonPhone" [ngModel]="(sanctionRequest$ | async).requestContents.contactPersonPhone">
+              </mat-form-field>
+              <mat-form-field fxFlex="40%">
+                <input matInput type="email" placeholder="Contact Email" name="contactPersonEmail" [ngModel]="(sanctionRequest$ | async).requestContents.contactPersonEmail" required>
               </mat-form-field>
             </div>
-          </div>
+            <!-- Contact person address -->
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="50%">
+                <input matInput type="text" placeholder="Street Address" name="contactPersonStreetAddress" [ngModel]="(sanctionRequest$ | async).requestContents.contactPersonStreetAddress" required>
+              </mat-form-field>
+              <mat-form-field fxFlex="30%">
+                <input matInput type="text" placeholder="City" name="contactPersonCity" [ngModel]="(sanctionRequest$ | async).requestContents.contactPersonCity" required>
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+              <mat-form-field fxFlex="10%">
+                <mat-select matInput type="text" placeholder="State" name="contactPersonState" [ngModel]="(sanctionRequest$ | async).requestContents.contactPersonState">
+                  <mat-option *ngFor="let state of statesList" value="{{state.abbreviation}}">{{state.abbreviation}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field fxFlex="10%">
+                <input matInput type="text" placeholder="Zip Code" name="contactPersonZip" [ngModel]="(sanctionRequest$ | async).requestContents.contactPersonZip" required  pattern="^[1-9][0-9]{4}" maxlength="6">
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+            </div>
 
-          <mat-card-subtitle class="mat-title">Venue Address</mat-card-subtitle>
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-            <mat-form-field fxFlex="100%">
-              <input matInput type="text" placeholder="Street Address" name="venueStreetAddress" [ngModel]="(sanctionRequest$ | async).requestContents.venueStreetAddress" required>
-            </mat-form-field>
-          </div>
+            <!-- Tournament Referee and Director -->
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-form-field fxFlex="30%">
+                <input matInput type="text" placeholder="Tournament Referee Name" name="tournamentRefereeName" [ngModel]="(sanctionRequest$ | async).requestContents.tournamentRefereeName">
+              </mat-form-field>
+              <mat-form-field fxFlex="20%">
+                <input matInput type="tel" placeholder="Referee/Umpire Rank" name="tournamentRefereeRank" [ngModel]="(sanctionRequest$ | async).requestContents.tournamentRefereeRank">
+              </mat-form-field>
+              <mat-form-field fxFlex="20%">
+                <input matInput type="email" placeholder="Referee USATT Membership Expires" name="tournamentRefereeMembershipExpires" [ngModel]="(sanctionRequest$ | async).requestContents.tournamentRefereeMembershipExpires" required>
+              </mat-form-field>
+              <mat-form-field fxFlex="30%">
+                <input matInput type="text" placeholder="Tournament Director" name="tournamentDirectorName" [ngModel]="(sanctionRequest$ | async).requestContents.tournamentDirectorName">
+              </mat-form-field>
+            </div>
 
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-            <mat-form-field fxFlex="60%">
-              <input matInput type="text" placeholder="City" name="venueCity" [ngModel]="(sanctionRequest$ | async).requestContents.venueCity" required>
-              <mat-error>This field is required</mat-error>
-            </mat-form-field>
-            <mat-form-field fxFlex="20%">
-              <mat-select matInput type="text" placeholder="State" name="venueState" [ngModel]="(sanctionRequest$ | async).requestContents.venueState">
-                <mat-option *ngFor="let state of statesList" value="{{state.abbreviation}}">{{state.abbreviation}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field fxFlex="20%">
-              <input matInput type="text" placeholder="Zip Code" name="venueZip" [ngModel]="(sanctionRequest$ | async).requestContents.venueZip" required  pattern="^[1-9][0-9]{4}" maxlength="6">
-              <mat-error>This field is required</mat-error>
-            </mat-form-field>
-          </div>
-        </mat-tab>
-        <mat-tab label="Star Rating Criteria">
-          <div>
-          <!--<mat-list>-->
-            <!--<div *ngFor="let category of (sanctionRequest$ | async).requestContents.categories">-->
-              <!--<h4>{{category.title}}</h4>-->
-              <!--<div fxLayout="column">-->
-                <!--<div *ngIf="category.selectOne; else multiSelection">-->
-                  <!--<mat-radio-group class="criteria-radio-group" name="{{ category.name }}" [ngModel]="category.selectedValue" fxFlex="70%">-->
-                    <!--<div fxLayout="row" *ngFor="let criteria of category.criteria; index as i">-->
-                      <!--<div fxFlex="80%">-->
-                          <!--<mat-radio-button class="criteria-radio-button" name="category.name + i" [value]="criteria.points" [checked]="criteria.selected">{{ criteria.name }}</mat-radio-button>-->
-                      <!--</div>-->
-                    <!--<div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>-->
-                    <!--</div>-->
-                  <!--</mat-radio-group>-->
-                <!--</div>-->
-                <!--<ng-template #multiSelection>-->
-                  <!--<div fxFlex="70%">-->
-                    <!--<div fxLayout="row" *ngFor="let criteria of category.criteria; index as i" class="criteria-checkbox-row">-->
-                      <!--<div fxFlex="80%">-->
-                        <!--<mat-checkbox [ngModel]="criteria.selected" name="{{ category.name + i}}" value="{{ criteria.points }}">{{ criteria.name }}</mat-checkbox>-->
-                      <!--</div>-->
-                      <!--<div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                <!--</ng-template>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</mat-list>-->
-
-
+            <div>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </mat-step>
+          <mat-step label="Star Rating Criteria">
             <mat-accordion class="example-headers-align">
               <div *ngFor="let category of (sanctionRequest$ | async).requestContents.categories; index as catIndex">
-              <mat-expansion-panel [expanded]="isCurrentStep(catIndex)" (opened)="setStep(catIndex)" hideToggle="true">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    <h4>{{category.title}}</h4>
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
+                <mat-expansion-panel [expanded]="isCurrentStep(catIndex)" (opened)="setStep(catIndex)" hideToggle="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <h4>{{category.title}}</h4>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
 
-                <div *ngIf="category.selectOne; else multiSelection">
-                  <mat-radio-group class="criteria-radio-group" name="{{ category.name }}" [ngModel]="category.selectedValue" fxFlex="70%">
-                    <div fxLayout="row" *ngFor="let criteria of category.criteria; index as i">
-                      <div fxFlex="80%">
-                        <mat-radio-button class="criteria-radio-button" name="category.name + i"
-                                          [value]="criteria.points" [checked]="criteria.selected">{{ criteria.name }}
-                        </mat-radio-button>
+                  <div *ngIf="category.selectOne; else multiSelection">
+                    <mat-radio-group class="criteria-radio-group" name="{{ category.name }}" [ngModel]="category.selectedValue" fxFlex="70%">
+                      <div fxLayout="row" *ngFor="let criteria of category.criteria; index as i">
+                        <div fxFlex="80%">
+                          <mat-radio-button class="criteria-radio-button" name="category.name + i"
+                                            [value]="criteria.points" [checked]="criteria.selected">{{ criteria.name }}
+                          </mat-radio-button>
+                        </div>
+                        <div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>
                       </div>
-                      <div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>
-                    </div>
-                  </mat-radio-group>
-                </div>
-                <ng-template #multiSelection>
-                  <div fxFlex="70%">
-                    <div fxLayout="row" *ngFor="let criteria of category.criteria; index as i" class="criteria-checkbox-row">
-                      <div fxFlex="80%">
-                        <mat-checkbox [ngModel]="criteria.selected" name="{{ category.name + i}}"
-                                      value="{{ criteria.points }}">{{ criteria.name }}
-                        </mat-checkbox>
-                      </div>
-                      <div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>
-                    </div>
+                    </mat-radio-group>
                   </div>
-                </ng-template>
+                  <ng-template #multiSelection>
+                    <div fxFlex="70%">
+                      <div fxLayout="row" *ngFor="let criteria of category.criteria; index as i" class="criteria-checkbox-row">
+                        <div fxFlex="80%">
+                          <mat-checkbox [ngModel]="criteria.selected" name="{{ category.name + i}}"
+                                        value="{{ criteria.points }}">{{ criteria.name }}
+                          </mat-checkbox>
+                        </div>
+                        <div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>
+                      </div>
+                    </div>
+                  </ng-template>
 
-                <mat-action-row>
-                  <button mat-button type="button" *ngIf="notFirst(catIndex)" color="primary" (click)="prevStep()">Previous</button>
-                  <button mat-button type="button" *ngIf="notLast(catIndex)" color="primary" (click)="nextStep()">Next</button>
-                </mat-action-row>
-              </mat-expansion-panel>
+                  <mat-action-row>
+                    <button mat-button type="button" *ngIf="notFirst(catIndex)" color="primary" (click)="prevStep()">Previous</button>
+                    <button mat-button type="button" *ngIf="notLast(catIndex)" color="primary" (click)="nextStep()">Next</button>
+                  </mat-action-row>
+                </mat-expansion-panel>
               </div>
             </mat-accordion>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-      <!--{{ sanctionRequest$ | async | json   }}-->
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </mat-step>
+          <mat-step label="Pay and Submit">
+            Payment controls
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </mat-step>
+          <mat-step label="Approve/Reject" *ngIf="isApprovingCoordinator()">
+            Approval / Rejection notes
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button type="submit">Save</button>

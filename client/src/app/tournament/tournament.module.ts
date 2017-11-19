@@ -33,7 +33,8 @@ import {
   MatNativeDateModule,
   DateAdapter,
   NativeDateAdapter,
-  MatExpansionModule
+  MatExpansionModule,
+  MatStepperModule
 } from "@angular/material";
 
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -89,6 +90,7 @@ export interface TournamentState {
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
+    MatStepperModule,
     CommonModule,
     FlexLayoutModule,
     TournamentRoutingModule,

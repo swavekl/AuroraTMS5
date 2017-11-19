@@ -76,7 +76,6 @@ export class SanctionRequestEffects {
     .ofType(SanctionRequestActions.SAVE)
     .map(toPayload)
     .switchMap((sanctionRequest) => {
-    console.log ('in save effect');
       let mappedActions = [
           new SanctionRequestActions.SanctionRequestSaveSuccessAction(),
           new RouterActions.Go({path: ['/sanction/list']})

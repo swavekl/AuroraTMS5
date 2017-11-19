@@ -68,7 +68,7 @@ export function sanctionRequestReducer(state = initialState, action: SanctionReq
        let editedTemp: SanctionRequest = Object.assign(new SanctionRequest(), action.payload);
        editedTemp.fillScreenDef();
        if (state.duplicating) {
-         editedTemp.id = 0;
+         editedTemp.id = -1;
          editedTemp.status = SanctionRequestStatus.Started;
        }
 

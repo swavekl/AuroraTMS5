@@ -56,6 +56,7 @@ export class SanctionEditComponent implements OnInit {
           this.store.dispatch(new SanctionRequestAddAction());
         } else if (isDuplicate) {
           this.store.dispatch(new SanctionRequestDuplicateAction(this.editedId));
+          this.editedId = -1;
         } else {
           this.store.dispatch(new SanctionRequestEditAction(this.editedId));
         }
@@ -74,7 +75,6 @@ export class SanctionEditComponent implements OnInit {
       }
 
       isCurrentStep(index: number) {
-          console.log ('isCurrentStep = ', (this.step == index));
           return this.step == index;
       }
 
@@ -102,9 +102,9 @@ export class SanctionEditComponent implements OnInit {
   * Save the sanction request
   */
   save(formValues: any){
-    console.log ('formValues ', formValues);
+//    console.log ('formValues ', formValues);
     let sanctionRequestToSave: SanctionRequest = this.makeSanctionRequest (formValues);
-    console.log("Saving sanction request....", sanctionRequestToSave);
+//    console.log("Saving sanction request....", sanctionRequestToSave);
     this.store.dispatch(new SanctionRequestSaveAction(sanctionRequestToSave));
   }
 
@@ -203,7 +203,13 @@ export class SanctionEditComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed with result ', result);
+//        console.log('The dialog was closed with result ', result);
       });
+    }
+
+    isApprovingCoordinator () {
+      // check if the current user is a sanction coordinator
+      // if not don't show the approve/reject step
+      return false;
     }
 }

@@ -40,7 +40,9 @@ export class SanctionRequest {
   // apply changes from form and perform various conversions
   applyChanges (formValues: any) {
     // apply new values to this object
-    Object.assign(this, formValues);
+//    Object.assign(this, formValues);
+    this.id = formValues.id;
+    this.tournamentName = formValues.tournamentName;
 
     // convert dates from local to UTC
     let requestDate: Date = (formValues.requestDate != null) ? new Date (formValues.requestDate) : new Date();
@@ -56,7 +58,7 @@ export class SanctionRequest {
     // apply rating criteria
     this.requestContents.applyChanges(formValues);
     this.requestContentsJSON = JSON.stringify (this.requestContents);
-    console.log ('JSON length ', this.requestContentsJSON.length);
+//    console.log ('JSON length ', this.requestContentsJSON.length);
     this.requestContents = null;
   }
 
@@ -323,7 +325,7 @@ export class SanctionCategoryCriteria {
     }
 
     applyChanges (criteriaValue: any, selectOne: boolean) {
-      console.log ('criteriaValue = ', criteriaValue);
+//      console.log ('criteriaValue = ', criteriaValue);
       if (selectOne) {
         this.selected = (this.points == criteriaValue);
       } else {

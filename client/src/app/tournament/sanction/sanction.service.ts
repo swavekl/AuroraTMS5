@@ -23,9 +23,7 @@ export class SanctionService {
 
   edit (id: number) {
     return this.http.get ('/api/sanctionrequest/' + id)
-      .map((response:Response) => {
-      console.log ('edit response ', response);
-      return response.json()});
+      .map((response:Response) => response.json());
   }
 
   save (sanctionRequest: SanctionRequest) {

@@ -30,6 +30,6 @@ class SanctionRequest {
         coordinatorFirstName nullable: true
         coordinatorLastName nullable: true
         coordinatorEmail nullable: true
-        requestContentsJSON maxSize: 8000
+        requestContentsJSON maxSize: 9000
     }
 }
