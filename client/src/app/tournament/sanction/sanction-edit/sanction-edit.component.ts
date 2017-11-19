@@ -28,6 +28,8 @@ export class SanctionEditComponent implements OnInit {
 
   statesList: any [];
 
+  step:number = 0;
+
   constructor(private store: Store<fromSanctionRequest.State>,
               private activatedRoute: ActivatedRoute,
               private messageDialog: MatDialog) {
@@ -58,6 +60,32 @@ export class SanctionEditComponent implements OnInit {
           this.store.dispatch(new SanctionRequestEditAction(this.editedId));
         }
   }
+
+      setStep(index: number) {
+        this.step = index;
+      }
+
+      nextStep() {
+        this.step++;
+      }
+
+      prevStep() {
+        this.step--;
+      }
+
+      isCurrentStep(index: number) {
+          console.log ('isCurrentStep = ', (this.step == index));
+          return this.step == index;
+      }
+
+      notFirst(index: number) {
+        return this.step > 0;
+      }
+
+      notLast(index: number) {
+        let totalSteps = 10; // this.sanctionRequest$.requestContents.categories.length;
+        return (index != (totalSteps - 1));
+      }
 
   /**
   * transfers values from form object to SanctionRequest object
@@ -178,5 +206,4 @@ export class SanctionEditComponent implements OnInit {
         console.log('The dialog was closed with result ', result);
       });
     }
-
 }

@@ -135,6 +135,68 @@ export class SanctionRequestContents {
       ];
       flooring.setCriteria (floorCriteria);
 
+      let ceiling: SanctionCategory = new SanctionCategory ("Ceiling Height", "ceiling", true);
+      let ceilingCriteria: SanctionCategoryCriteria [] = [
+        new SanctionCategoryCriteria ("8 ft ceiling height", 0, ''),
+        new SanctionCategoryCriteria ("10 ft ceiling height", 0, '1'),
+        new SanctionCategoryCriteria ("12 ft ceiling height", 1, ''),
+        new SanctionCategoryCriteria ("16 ft ceiling height", 2, '3 and up')
+      ];
+      ceiling.setCriteria (ceilingCriteria);
+
+      let courtSize: SanctionCategory = new SanctionCategory ("Court Size", "courtSize", true);
+      let courtSizeCriteria: SanctionCategoryCriteria [] = [
+        new SanctionCategoryCriteria ("30 ft length, 10 ft between tables", 0, ''),
+        new SanctionCategoryCriteria ("12 feet between tables", 2, '3 and up'),
+        new SanctionCategoryCriteria ("14 feet between tables", 4, ''),
+        new SanctionCategoryCriteria ("19x38 courts for feature matches", 5, '3 and up'),
+        new SanctionCategoryCriteria ("19x38 courts", 6, ''),
+        new SanctionCategoryCriteria ("23x46 courts for feature matches", 7, ''),
+        new SanctionCategoryCriteria ("23x46 courts", 8, '')
+      ];
+      courtSize.setCriteria (courtSizeCriteria);
+
+      let tables: SanctionCategory = new SanctionCategory ("Tables", "tables", true);
+      let tablesCriteria: SanctionCategoryCriteria [] = [
+        new SanctionCategoryCriteria ("Minimum standard USATT or ITTF Approved", 1, ''),
+        new SanctionCategoryCriteria ("No more than two models in use", 2, '3'),
+        new SanctionCategoryCriteria ("All models alike", 3, '4 and up'),
+        new SanctionCategoryCriteria ("All alike, but show table for feature matches", 4, ''),
+      ];
+      tables.setCriteria (tablesCriteria);
+
+      let paraTables: SanctionCategory = new SanctionCategory ("Para Tables", "paraTables", false);
+      let paraTablesCriteria: SanctionCategoryCriteria [] = [
+        new SanctionCategoryCriteria ("Para table if wheelchair players entered", 1, '')
+      ];
+      paraTables.setCriteria (paraTablesCriteria);
+
+      let barriers: SanctionCategory = new SanctionCategory ("Barriers", "barriers", true);
+      let barriersCriteria: SanctionCategoryCriteria [] = [
+        new SanctionCategoryCriteria ("Barrier at net between tables or at both ends of court", 2, ''),
+        new SanctionCategoryCriteria ("Barrier at net  between tables and at both ends of court", 3, ''),
+        new SanctionCategoryCriteria ("Individually barriered court for feature matches", 4, '3 and up'),
+        new SanctionCategoryCriteria ("All courts fully barriered", 6, '')
+      ];
+      barriers.setCriteria (barriersCriteria);
+
+      let timeScheduling: SanctionCategory = new SanctionCategory ("Time Scheduling", "timeScheduling", true);
+      let timeSchedulingCriteria: SanctionCategoryCriteria [] = [
+        new SanctionCategoryCriteria ("Event start times", 0, ''),
+        new SanctionCategoryCriteria ("All events, all rounds", 2, '3, 4'),
+        new SanctionCategoryCriteria ("Published schedule for each player, all rounds", 4, '5')
+      ];
+      timeScheduling.setCriteria (timeSchedulingCriteria);
+
+      let officials: SanctionCategory = new SanctionCategory ("Officials", "officials", true);
+      let officialsCriteria: SanctionCategoryCriteria [] = [
+        new SanctionCategoryCriteria ("Scorekeepers for featured matches", 1, ''),
+        new SanctionCategoryCriteria ("Umpires for featured matches", 2, '2'),
+        new SanctionCategoryCriteria ("Umpires and scorekeepers for featured matches", 4, '3, 4'),
+        new SanctionCategoryCriteria ("Uniformed Umpires and scorekeepers for all matches", 6, '5')
+      ];
+      officials.setCriteria (officialsCriteria);
+
       let amenities: SanctionCategory = new SanctionCategory ("Player Amenities", "amenities", false);
       let amenitiesCriteria: SanctionCategoryCriteria [] = [
         new SanctionCategoryCriteria ("Food & drink available inside venue", 1, ''),
@@ -144,7 +206,7 @@ export class SanctionRequestContents {
       amenities.setCriteria (amenitiesCriteria);
 
       this.categories = [
-        lighting, flooring, amenities
+        lighting, flooring, ceiling, courtSize, tables, paraTables, barriers, timeScheduling, officials, amenities
       ];
     }
 

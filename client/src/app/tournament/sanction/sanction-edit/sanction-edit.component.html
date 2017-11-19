@@ -53,17 +53,53 @@
         </mat-tab>
         <mat-tab label="Star Rating Criteria">
           <div>
-          <mat-list>
-            <div *ngFor="let category of (sanctionRequest$ | async).requestContents.categories">
-              <h4>{{category.title}}</h4>
-              <div fxLayout="column">
+          <!--<mat-list>-->
+            <!--<div *ngFor="let category of (sanctionRequest$ | async).requestContents.categories">-->
+              <!--<h4>{{category.title}}</h4>-->
+              <!--<div fxLayout="column">-->
+                <!--<div *ngIf="category.selectOne; else multiSelection">-->
+                  <!--<mat-radio-group class="criteria-radio-group" name="{{ category.name }}" [ngModel]="category.selectedValue" fxFlex="70%">-->
+                    <!--<div fxLayout="row" *ngFor="let criteria of category.criteria; index as i">-->
+                      <!--<div fxFlex="80%">-->
+                          <!--<mat-radio-button class="criteria-radio-button" name="category.name + i" [value]="criteria.points" [checked]="criteria.selected">{{ criteria.name }}</mat-radio-button>-->
+                      <!--</div>-->
+                    <!--<div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>-->
+                    <!--</div>-->
+                  <!--</mat-radio-group>-->
+                <!--</div>-->
+                <!--<ng-template #multiSelection>-->
+                  <!--<div fxFlex="70%">-->
+                    <!--<div fxLayout="row" *ngFor="let criteria of category.criteria; index as i" class="criteria-checkbox-row">-->
+                      <!--<div fxFlex="80%">-->
+                        <!--<mat-checkbox [ngModel]="criteria.selected" name="{{ category.name + i}}" value="{{ criteria.points }}">{{ criteria.name }}</mat-checkbox>-->
+                      <!--</div>-->
+                      <!--<div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</ng-template>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</mat-list>-->
+
+
+            <mat-accordion class="example-headers-align">
+              <div *ngFor="let category of (sanctionRequest$ | async).requestContents.categories; index as catIndex">
+              <mat-expansion-panel [expanded]="isCurrentStep(catIndex)" (opened)="setStep(catIndex)" hideToggle="true">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <h4>{{category.title}}</h4>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
                 <div *ngIf="category.selectOne; else multiSelection">
                   <mat-radio-group class="criteria-radio-group" name="{{ category.name }}" [ngModel]="category.selectedValue" fxFlex="70%">
                     <div fxLayout="row" *ngFor="let criteria of category.criteria; index as i">
                       <div fxFlex="80%">
-                          <mat-radio-button class="criteria-radio-button" name="category.name + i" [value]="criteria.points" [checked]="criteria.selected">{{ criteria.name }}</mat-radio-button>
+                        <mat-radio-button class="criteria-radio-button" name="category.name + i"
+                                          [value]="criteria.points" [checked]="criteria.selected">{{ criteria.name }}
+                        </mat-radio-button>
                       </div>
-                    <div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>
+                      <div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>
                     </div>
                   </mat-radio-group>
                 </div>
@@ -71,15 +107,22 @@
                   <div fxFlex="70%">
                     <div fxLayout="row" *ngFor="let criteria of category.criteria; index as i" class="criteria-checkbox-row">
                       <div fxFlex="80%">
-                        <mat-checkbox [ngModel]="criteria.selected" name="{{ category.name + i}}" value="{{ criteria.points }}">{{ criteria.name }}</mat-checkbox>
+                        <mat-checkbox [ngModel]="criteria.selected" name="{{ category.name + i}}"
+                                      value="{{ criteria.points }}">{{ criteria.name }}
+                        </mat-checkbox>
                       </div>
                       <div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>
                     </div>
                   </div>
                 </ng-template>
+
+                <mat-action-row>
+                  <button mat-button type="button" *ngIf="notFirst(catIndex)" color="primary" (click)="prevStep()">Previous</button>
+                  <button mat-button type="button" *ngIf="notLast(catIndex)" color="primary" (click)="nextStep()">Next</button>
+                </mat-action-row>
+              </mat-expansion-panel>
               </div>
-            </div>
-          </mat-list>
+            </mat-accordion>
           </div>
         </mat-tab>
       </mat-tab-group>
