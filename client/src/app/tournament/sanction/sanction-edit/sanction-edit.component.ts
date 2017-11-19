@@ -26,10 +26,13 @@ export class SanctionEditComponent implements OnInit {
   // this is its id
   editedId: number;
 
+  statesList: any [];
+
   constructor(private store: Store<fromSanctionRequest.State>,
               private activatedRoute: ActivatedRoute,
               private messageDialog: MatDialog) {
     this.sanctionRequest$ = store.select (fromSanctionRequest.getEdited);
+    this.statesList = new StatesList().getList();
   }
 
   ngOnInit() {
@@ -71,8 +74,9 @@ export class SanctionEditComponent implements OnInit {
   * Save the sanction request
   */
   save(formValues: any){
+    console.log ('formValues ', formValues);
     let sanctionRequestToSave: SanctionRequest = this.makeSanctionRequest (formValues);
-    // console.log("Saving sanction request....", sanctionRequestToSave);
+    console.log("Saving sanction request....", sanctionRequestToSave);
     this.store.dispatch(new SanctionRequestSaveAction(sanctionRequestToSave));
   }
 
@@ -86,9 +90,9 @@ export class SanctionEditComponent implements OnInit {
 
     // find coordinator who will receive this request and set it in the request.
     // translate long name to short state name
-    let stateAbbreviation = this.translateStateName(formValues.venueState);
-    let starLevel = 4;
-    let coordinatorInfo: CoordinatorInfo = this.findCoordinator(stateAbbreviation, starLevel);
+    let stateName = this.translateStateName(formValues.venueState);
+    let starLevel = 2;
+    let coordinatorInfo: CoordinatorInfo = this.findCoordinator(stateName, starLevel);
 
     // notify user about who will be getting this request
     let message: string = "";
@@ -99,6 +103,9 @@ export class SanctionEditComponent implements OnInit {
       sanctionRequestToSave.coordinatorEmail = coordinatorInfo.email;
       message += "Your request has been submitted to ";
       message += coordinatorInfo.firstName + " " + coordinatorInfo.lastName;
+      message += " who is the " + coordinatorInfo.region + " region Sanction Coordinator.";
+      message += " You may follow up with him by phone " + coordinatorInfo.phone;
+      message += " or email " + coordinatorInfo.email;
     }
 
     // mark it a submitted
@@ -144,7 +151,7 @@ export class SanctionEditComponent implements OnInit {
       for (var i = 0; i < coordinatorList.length; i++) {
         let cinfo:CoordinatorInfo = coordinatorList[i];
         let found: boolean = false;
-        let states = coordinatorInfo.states;
+        let states = cinfo.states;
         for (var k = 0; k < states.length; k++) {
           if (states[k] == state) {
             found = true;

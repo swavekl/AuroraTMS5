@@ -8,10 +8,10 @@
       <mat-tab-group>
         <mat-tab label="Request Information">
 
+          <mat-card-subtitle class="mat-title">Tournament Information</mat-card-subtitle>
           <div fxLayout="column">
             <div fxLayout="row" fxLayoutGap="10px">
               <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                <mat-card-subtitle>Tournament Information</mat-card-subtitle>
 
                 <mat-form-field fxFlex="100%">
                   <input matInput type="text" placeholder="Tournament Name" name="tournamentName" [ngModel]="(sanctionRequest$ | async).tournamentName" required>
@@ -23,12 +23,33 @@
 
             <div>
               <mat-form-field fxFlex="100%">
-                <input matInput type="text" placeholder="Web link URL" name="webLinkURL" [ngModel]="(sanctionRequest$ | async).requestContents.webLinkURL" required>
-                <mat-error>This field is required</mat-error>
+                <input matInput type="text" placeholder="Web link URL" name="webLinkURL" [ngModel]="(sanctionRequest$ | async).requestContents.webLinkURL">
               </mat-form-field>
             </div>
           </div>
 
+          <mat-card-subtitle class="mat-title">Venue Address</mat-card-subtitle>
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <mat-form-field fxFlex="100%">
+              <input matInput type="text" placeholder="Street Address" name="venueStreetAddress" [ngModel]="(sanctionRequest$ | async).requestContents.venueStreetAddress" required>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <mat-form-field fxFlex="60%">
+              <input matInput type="text" placeholder="City" name="venueCity" [ngModel]="(sanctionRequest$ | async).requestContents.venueCity" required>
+              <mat-error>This field is required</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="20%">
+              <mat-select matInput type="text" placeholder="State" name="venueState" [ngModel]="(sanctionRequest$ | async).requestContents.venueState">
+                <mat-option *ngFor="let state of statesList" value="{{state.abbreviation}}">{{state.abbreviation}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="20%">
+              <input matInput type="text" placeholder="Zip Code" name="venueZip" [ngModel]="(sanctionRequest$ | async).requestContents.venueZip" required  pattern="^[1-9][0-9]{4}" maxlength="6">
+              <mat-error>This field is required</mat-error>
+            </mat-form-field>
+          </div>
         </mat-tab>
         <mat-tab label="Star Rating Criteria">
           <div>
