@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p>{{ data.message }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" tabindex="2">Ok</button>
+  <button mat-button *ngIf="data.showCancelButton" [mat-dialog-close]="false" tabindex="-1">Cancel</button>
+</div>

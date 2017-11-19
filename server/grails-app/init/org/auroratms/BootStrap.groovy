@@ -30,10 +30,10 @@ class BootStrap {
             it.clear()
         }
 
-        createSanctionRequest( '2018 Aurora Cup',  new Date(), new Date(), SanctionRequestStatus.Started, new Date())
-        createSanctionRequest( '2018 Aurora Spring Open',  new Date(), new Date(), SanctionRequestStatus.Submitted, new Date())
-        createSanctionRequest( '2018 Aurora Summer Open',  new Date(), new Date(), SanctionRequestStatus.Rejected, new Date())
-        createSanctionRequest( '2018 Aurora Fall Open',  new Date(), new Date(), SanctionRequestStatus.Approved, new Date())
+        createSanctionRequest( '2018 Aurora Cup',  new Date(), new Date(), SanctionRequestStatus.Started, new Date(), 4)
+        createSanctionRequest( '2018 Aurora Spring Open',  new Date(), new Date(), SanctionRequestStatus.Submitted, new Date(), 2)
+        createSanctionRequest( '2018 Aurora Summer Open',  new Date(), new Date(), SanctionRequestStatus.Rejected, new Date(), 2)
+        createSanctionRequest( '2018 Aurora Fall Open',  new Date(), new Date(), SanctionRequestStatus.Approved, new Date(), 2)
 
         createInsuranceRequest('Swavek Lorenc', 'swaveklorenc@yahoo.com', 'Fox Valley Table Tennis Club', '2018 Aurora Spring Open', InsuranceRequestStatus.Submitted)
         createInsuranceRequest('Mario Lorenc', 'mariolorenc@yahoo.com',  'Phoenix Table Tennis Club', '2018 Phoenix Sizzler Open ', InsuranceRequestStatus.Approved)
@@ -57,12 +57,13 @@ class BootStrap {
         }
     }
 
-    def createSanctionRequest(String tournamentName, Date startDate, Date endDate, SanctionRequestStatus status, Date requestDate) {
+    def createSanctionRequest(String tournamentName, Date startDate, Date endDate, SanctionRequestStatus status, Date requestDate, int starLevel) {
         new SanctionRequest(tournamentName: tournamentName,
                 startDate: startDate,
                 endDate: endDate,
                 status: status,
                 requestDate: requestDate,
+                starLevel: starLevel,
                 requestContentsJSON: "{}")
                 .save(flush: true, failOnError: true)
     }

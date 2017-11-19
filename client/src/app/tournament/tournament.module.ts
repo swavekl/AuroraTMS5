@@ -55,6 +55,9 @@ import { ConfigureTournamentEffects } from './configure-tournament/configure-tou
 import { InsuranceRequestEffects } from './insurance/insurance.effects';
 import {SanctionRequestEffects} from "./sanction/sanction.effects";
 
+import { SharedModule } from './../shared/shared.module';
+import { MessageDialogComponent } from './../shared/message-dialog/message-dialog.component';
+
 export const tournamentEffects = [ConfigureTournamentEffects, InsuranceRequestEffects, SanctionRequestEffects];
 
 
@@ -88,6 +91,7 @@ export interface TournamentState {
     FlexLayoutModule,
     TournamentRoutingModule,
     FormsModule,
+    SharedModule,
     StoreModule.forFeature('featureTournaments', tournamentReducers),
     EffectsModule.forFeature(tournamentEffects)
   ],
@@ -103,6 +107,10 @@ export interface TournamentState {
     SanctionService,
     ConfigureTournamentService,
    {provide: DateAdapter, useClass: NativeDateAdapter}
+  ],
+  entryComponents: [
+    MessageDialogComponent
   ]
+
 })
 export class TournamentModule { }

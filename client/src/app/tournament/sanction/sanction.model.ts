@@ -15,7 +15,21 @@ export class SanctionRequest {
   endDate: Date;
   requestDate: Date;
   status: SanctionRequestStatus;
+
+  // 0 - 5 stars
+  starLevel: number;
+
+  // regional or national coordinator
+  coordinatorFirstName: string;
+  coordinatorLastName: string
+
+  // email retrieved from frontend table
+  coordinatorEmail: string;
+
+  // contents of the request as JSON string
   requestContentsJSON: string;
+
+  // contents of the request as object
   requestContents: SanctionRequestContents;
 
   constructor () {
