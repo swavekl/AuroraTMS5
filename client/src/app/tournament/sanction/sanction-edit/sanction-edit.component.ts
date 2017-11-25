@@ -36,6 +36,9 @@ export class SanctionEditComponent implements OnInit, OnDestroy {
   // total rating points
   totalPoints: number = 0;
 
+  // updated in case it changes
+  venueState: string;
+
   // keep categories around so we can quickly recalculate total
   categories: SanctionCategory[] = [];
 
@@ -47,6 +50,7 @@ export class SanctionEditComponent implements OnInit, OnDestroy {
     this.sanctionRequestSubscription = this.sanctionRequest$.subscribe(sanctionRequest => {
       this.categories = sanctionRequest.requestContents.categories;
       this.totalPoints = this.calculateTotal();
+      this.venueState = sanctionRequest.requestContents.venueState;
     });
     this.statesList = new StatesList().getList();
   }
@@ -136,9 +140,9 @@ export class SanctionEditComponent implements OnInit, OnDestroy {
 
     // find coordinator who will receive this request and set it in the request.
     // translate long name to short state name
-    let stateName = this.translateStateName(formValues.venueState);
-    let starLevel = 2;
-    let coordinatorInfo: CoordinatorInfo = this.findCoordinator(stateName, starLevel);
+    let longStateName = this.translateStateName(formValues.venueState);
+    let starLevel = sanctionRequestToSave.starLevel;
+    let coordinatorInfo: CoordinatorInfo = this.findCoordinator(longStateName, starLevel);
 
     // notify user about who will be getting this request
     let message: string = "";
@@ -249,5 +253,45 @@ export class SanctionEditComponent implements OnInit, OnDestroy {
         total += category.getSubTotal();
       }
       return total;
+    }
+
+    // calculates which star level user qualifies for based on the rating points total
+    getQualifiedStarLevel () {
+
+      let qualifiedStarLevel : number = 0;
+
+      if (this.totalPoints <= 10) {
+       qualifiedStarLevel = 0;
+      } else if (this.totalPoints > 10 && this.totalPoints <= 20) {
+       qualifiedStarLevel = 1;
+      } else if (this.totalPoints > 20 && this.totalPoints <= 30) {
+       qualifiedStarLevel = 2;
+      } else if (this.totalPoints > 30 && this.totalPoints <= 40) {
+       qualifiedStarLevel = 3;
+      } else if (this.totalPoints > 40 && this.totalPoints <= 50) {
+       qualifiedStarLevel = 4;
+      } else {
+       qualifiedStarLevel = 5;
+      }
+      return qualifiedStarLevel;
+    }
+
+    onVenueStateChange (event) {
+   //   console.log ('in onVenueStateChange ', event);
+      this.venueState = event.value;
+    }
+
+    starLevelChanged(event) {
+     // console.log ('in starLevelChanged ', event);
+      let starLevel = event.srcElement.value;
+      let stateName = this.venueState;
+//      console.log ('starLevel ', starLevel);
+ //     console.log ('stateName ', stateName);
+
+      // find coordinator who will receive this request and set it in the request.
+      let longStateName = this.translateStateName(stateName);
+      let coordinatorInfo: CoordinatorInfo = this.findCoordinator(longStateName, starLevel);
+//      console.log ('coordinatorInfo ', coordinatorInfo);
+
     }
 }

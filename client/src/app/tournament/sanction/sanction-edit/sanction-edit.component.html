@@ -58,7 +58,7 @@
                   <mat-error>This field is required</mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex="10%">
-                  <mat-select matInput type="text" placeholder="State" name="venueState" [ngModel]="(sanctionRequest$ | async).requestContents.venueState">
+                  <mat-select matInput type="text" placeholder="State" name="venueState" [ngModel]="(sanctionRequest$ | async).requestContents.venueState" (selectionChange)="onVenueStateChange($event)">
                     <mat-option *ngFor="let state of statesList" value="{{state.abbreviation}}">{{state.abbreviation}}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -75,8 +75,12 @@
                   <mat-error>This field is required</mat-error>
                 </mat-form-field>
 
-                <mat-form-field fxFlex="60%">
+                <mat-form-field fxFlex="30%">
                   <input matInput type="text" placeholder="Club's USATT Affiliation Expiration Date" name="clubAffiliationExpiration" [ngModel]="(sanctionRequest$ | async).requestContents.clubAffiliationExpiration">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="30%">
+                  <input matInput type="text" placeholder="Total Prize Money" name="totalPrizeMoney" [ngModel]="(sanctionRequest$ | async).requestContents.totalPrizeMoney">
                 </mat-form-field>
               </div>
 
@@ -187,7 +191,36 @@
             </div>
           </mat-step>
           <mat-step label="Pay and Submit">
-            Payment controls
+            <div fxLayout="row">
+              <div fxFlex="40%">
+                <table class="prizeMoney">
+                  <thead>
+                  <td>Total Prize Money</td><td>Sanction Fee</td>
+                  </thead>
+                  <tbody>
+                  <tr><td>$0</td><td>Waived</td></tr>
+                  <tr><td>$0 - $400</td><td>$40</td></tr>
+                  <tr><td>$401 - $1000</td><td>$80</td></tr>
+                  <tr><td>$1001 - $3000</td><td>$150</td></tr>
+                  <tr><td>$3001 - $6000</td><td>$300</td></tr>
+                  <tr><td>$6001 +</td><td>$400</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div fxFlex="60%">
+                <h4>Total Rating Points: {{ totalPoints }} qualify this tournament for {{ getQualifiedStarLevel() }} star rating </h4>
+                <mat-form-field>
+                  <label for="starLevel">Downgrade star level</label>
+                  <input matInput type="number" id="starLevel" name="starLevel" [ngModel]="(sanctionRequest$ | async).starLevel"
+                         min="0" [max]="getQualifiedStarLevel()" maxlength="1" (change)="starLevelChanged($event)">
+                  <mat-error>This field is required</mat-error>
+                </mat-form-field>
+                <h4>Based on selected star rating this tournament will be submitted for sanctioning to
+                  {{ (sanctionRequest$ | async).coordinatorFirstName }} {{ (sanctionRequest$ | async).coordinatorLastName }}.
+                  The coordinator will be notified by email about your submission
+                </h4>
+              </div>
+            </div>
             <div>
               <button mat-button matStepperPrevious type="button">Back</button>
               <button mat-button matStepperNext type="button">Next</button>

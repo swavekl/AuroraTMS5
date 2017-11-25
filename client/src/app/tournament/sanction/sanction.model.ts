@@ -421,6 +421,8 @@ export class SanctionRequest {
       this.status = SanctionRequestStatus.Started;
     }
     // apply rating criteria
+    this.starLevel = formValues.starLevel;
+
     this.requestContents.applyChanges(formValues);
     this.requestContentsJSON = JSON.stringify (this.requestContents);
 //    console.log ('JSON length ', this.requestContentsJSON.length);
