@@ -1,11 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy  } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy  } from '@angular/core';
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 
 import { Observable } from "rxjs/Observable";
+import { ISubscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import * as fromSanctionRequest from '../sanction.reducer';
 import * as RouterActions from './../../../router.actions';
-import { SanctionRequest, SanctionRequestStatus } from './../sanction.model';
+import { SanctionRequest, SanctionRequestStatus, SanctionCategory } from './../sanction.model';
 
 import { SanctionRequestAddAction, SanctionRequestEditAction, SanctionRequestDuplicateAction, SanctionRequestSaveAction } from './../sanction.actions';
 import { CoordinatorInfo, coordinatorList } from './../../../utils/coordinator-list';
@@ -20,21 +21,38 @@ import { MessageDialogComponent } from './../../../shared/message-dialog/message
   styleUrls: ['./sanction-edit.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SanctionEditComponent implements OnInit {
+export class SanctionEditComponent implements OnInit, OnDestroy {
   // this is what we edit
   sanctionRequest$: Observable<SanctionRequest>;
   // this is its id
   editedId: number;
 
+  sanctionRequestSubscription: ISubscription;
+
   statesList: any [];
 
   step:number = 0;
+
+  // total rating points
+  totalPoints: number = 0;
+
+  // keep categories around so we can quickly recalculate total
+  categories: SanctionCategory[] = [];
 
   constructor(private store: Store<fromSanctionRequest.State>,
               private activatedRoute: ActivatedRoute,
               private messageDialog: MatDialog) {
     this.sanctionRequest$ = store.select (fromSanctionRequest.getEdited);
+    // subscribe to this observable to extract categories for recalculating total
+    this.sanctionRequestSubscription = this.sanctionRequest$.subscribe(sanctionRequest => {
+      this.categories = sanctionRequest.requestContents.categories;
+      this.totalPoints = this.calculateTotal();
+    });
     this.statesList = new StatesList().getList();
+  }
+
+  ngOnDestroy() {
+    this.sanctionRequestSubscription.unsubscribe();
   }
 
   ngOnInit() {
@@ -62,30 +80,30 @@ export class SanctionEditComponent implements OnInit {
         }
   }
 
-      setStep(index: number) {
-        this.step = index;
-      }
+  setStep(index: number) {
+    this.step = index;
+  }
 
-      nextStep() {
-        this.step++;
-      }
+  nextStep() {
+    this.step++;
+  }
 
-      prevStep() {
-        this.step--;
-      }
+  prevStep() {
+    this.step--;
+  }
 
-      isCurrentStep(index: number) {
-          return this.step == index;
-      }
+  isCurrentStep(index: number) {
+      return this.step == index;
+  }
 
-      notFirst(index: number) {
-        return this.step > 0;
-      }
+  notFirst(index: number) {
+    return this.step > 0;
+  }
 
-      notLast(index: number) {
-        let totalSteps = 14; // this.sanctionRequest$.requestContents.categories.length;
-        return (index != (totalSteps - 1));
-      }
+  notLast(index: number) {
+    let totalSteps = 14; // this.sanctionRequest$.requestContents.categories.length;
+    return (index != (totalSteps - 1));
+  }
 
   /**
   * transfers values from form object to SanctionRequest object
@@ -211,5 +229,25 @@ export class SanctionEditComponent implements OnInit {
       // check if the current user is a sanction coordinator
       // if not don't show the approve/reject step
       return false;
+    }
+
+    // event handler for when radio button is clicked
+    onRadioGroupChange(event) {
+      this.totalPoints = this.calculateTotal();
+    }
+
+    // event handler for when checkbox button is clicked
+    onCheckBoxChange (event) {
+      this.totalPoints = this.calculateTotal();
+    }
+
+    // recalculates total rating points when selection changes
+    calculateTotal () {
+      let total: number = 0;
+      for (var i = 0; i < this.categories.length; i++) {
+        let category: SanctionCategory = this.categories[i];
+        total += category.getSubTotal();
+      }
+      return total;
     }
 }

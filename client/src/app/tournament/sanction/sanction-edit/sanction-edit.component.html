@@ -63,7 +63,7 @@
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field fxFlex="10%">
-                  <input matInput type="text" placeholder="Zip Code" name="venueZip" [ngModel]="(sanctionRequest$ | async).requestContents.venueZip" required  pattern="^[1-9][0-9]{4}" maxlength="6">
+                  <input matInput type="text" placeholder="Zip Code" name="venueZipCode" [ngModel]="(sanctionRequest$ | async).requestContents.venueZipCode" required  pattern="^[1-9][0-9]{4}" maxlength="6">
                   <mat-error>This field is required</mat-error>
                 </mat-form-field>
               </div>
@@ -143,10 +143,13 @@
                     <mat-panel-title>
                       <h4>{{category.title}}</h4>
                     </mat-panel-title>
+                    <mat-panel-description>
+                      {{ category.getSubTotal() }} points
+                    </mat-panel-description>
                   </mat-expansion-panel-header>
 
                   <div *ngIf="category.selectOne; else multiSelection">
-                    <mat-radio-group class="criteria-radio-group" name="{{ category.name }}" [ngModel]="category.selectedValue" fxFlex="70%">
+                    <mat-radio-group class="criteria-radio-group" name="{{ category.name }}" [(ngModel)]="category.selectedValue" fxFlex="70%" (change)="onRadioGroupChange($event)">
                       <div fxLayout="row" *ngFor="let criteria of category.criteria; index as i">
                         <div fxFlex="80%">
                           <mat-radio-button class="criteria-radio-button" name="category.name + i"
@@ -161,8 +164,8 @@
                     <div fxFlex="70%">
                       <div fxLayout="row" *ngFor="let criteria of category.criteria; index as i" class="criteria-checkbox-row">
                         <div fxFlex="80%">
-                          <mat-checkbox [ngModel]="criteria.selected" name="{{ category.name + i}}"
-                                        value="{{ criteria.points }}">{{ criteria.name }}
+                          <mat-checkbox [(ngModel)]="criteria.selected" name="{{ category.name + i}}"
+                                        value="{{ criteria.points }}" (change)="onCheckBoxChange($event)">{{ criteria.name }}
                           </mat-checkbox>
                         </div>
                         <div fxFlex="20%">{{ criteria.requiredForStarLevel }}</div>
@@ -177,6 +180,7 @@
                 </mat-expansion-panel>
               </div>
             </mat-accordion>
+            <div><h3>Total Rating Points: {{ totalPoints }}</h3></div>
             <div>
               <button mat-button matStepperPrevious type="button">Back</button>
               <button mat-button matStepperNext type="button">Next</button>

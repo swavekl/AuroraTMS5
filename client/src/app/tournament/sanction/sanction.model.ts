@@ -8,70 +8,122 @@ export enum SanctionRequestStatus {
   Withdrawn = 'Withdrawn'
 }
 
-export class SanctionRequest {
-  id: number;
-  tournamentName: string;
-  startDate: Date;
-  endDate: Date;
-  requestDate: Date;
-  status: SanctionRequestStatus;
+/**
+* criteria under sanction category
+*/
+export class SanctionCategoryCriteria {
+    name: string;
+    points: number;
+    selected: boolean;
+    requiredForStarLevel: string;
 
-  // 0 - 5 stars
-  starLevel: number;
-
-  // regional or national coordinator
-  coordinatorFirstName: string;
-  coordinatorLastName: string
-
-  // email retrieved from frontend table
-  coordinatorEmail: string;
-
-  // contents of the request as JSON string
-  requestContentsJSON: string;
-
-  // contents of the request as object
-  requestContents: SanctionRequestContents;
-
-  constructor () {
-    this.tournamentName = '2019 Aurora Cup';
-    this.requestContents = new SanctionRequestContents();
-  }
-
-  // apply changes from form and perform various conversions
-  applyChanges (formValues: any) {
-    // apply new values to this object
-//    Object.assign(this, formValues);
-    this.id = formValues.id;
-    this.tournamentName = formValues.tournamentName;
-
-    // convert dates from local to UTC
-    let requestDate: Date = (formValues.requestDate != null) ? new Date (formValues.requestDate) : new Date();
-
-    let dateUtils = new DateUtils();
-    this.startDate = dateUtils.convertFromLocalToUTCDate (formValues.startDate);
-    this.endDate = dateUtils.convertFromLocalToUTCDate(formValues.endDate);
-    this.requestDate = dateUtils.convertFromLocalToUTCDate (requestDate);
-
-    if (this.status == null) {
-      this.status = SanctionRequestStatus.Started;
+    constructor () {
+      this.name = "";
+      this.points = 0;
+      this.selected = false;
+      this.requiredForStarLevel = "";
     }
-    // apply rating criteria
-    this.requestContents.applyChanges(formValues);
-    this.requestContentsJSON = JSON.stringify (this.requestContents);
-//    console.log ('JSON length ', this.requestContentsJSON.length);
-    this.requestContents = null;
-  }
 
-  fillScreenDef () {
-      // convert dates from UTC to local
-      let dateUtils = new DateUtils();
-      this.startDate = dateUtils.convertFromUTCToLocalDate (this.startDate);
-      this.endDate = dateUtils.convertFromUTCToLocalDate (this.endDate);
-      this.requestDate = dateUtils.convertFromUTCToLocalDate (this.requestDate);
+    setValues (name: string, points: number, requiredForStarLevel: string, selected?: boolean) {
+      this.name = name;
+      this.points = points;
+      this.selected = (selected) ? selected : false;
+      this.requiredForStarLevel = requiredForStarLevel;
+    }
 
-    let settings: any = JSON.parse (this.requestContentsJSON);
-    this.requestContents = Object.assign(new SanctionRequestContents(), settings);
-  }
+    applyChanges (criteriaValue: any, selectOne: boolean) {
+      if (selectOne) {
+        this.selected = (this.points == criteriaValue);
+      } else {
+        this.selected = (criteriaValue != undefined) ? criteriaValue : false;
+      }
+    }
+}
+
+
+/**
+* Sanction category
+*/
+export class SanctionCategory {
+    title: string;
+
+    name: string;
+
+    // select one item in category or all that apply
+    selectOne: boolean;
+
+    selectedValue: number;
+
+    criteria: SanctionCategoryCriteria [];
+
+    // default constructor needed for decorator
+    constructor () {
+      this.title = "";
+      this.name = "";
+      this.selectOne = false;
+      this.selectedValue = 0;
+    }
+
+    setValues (title: string, name: string, selectOne: boolean) {
+      this.title = title;
+      this.name = name;
+      this.selectOne = selectOne;
+      this.selectedValue = 0;
+      return this;
+    }
+
+    setCriteria (criteria: SanctionCategoryCriteria []) {
+      this.criteria = criteria;
+    }
+
+    // fills categories from formValues supplied by the html form
+    applyChanges (formValues: any) {
+      for (var i = 0; i < this.criteria.length; i++) {
+        let htmlControlName: string  = this.getHtmlControlName(i);
+        var criteriaValue = formValues[htmlControlName];
+        let criterion: SanctionCategoryCriteria = this.criteria[i];
+        criterion.applyChanges(criteriaValue, this.selectOne);
+        if (this.selectOne && criterion.selected) {
+          this.selectedValue = criteriaValue;
+        }
+      }
+      //console.log ('in applyChanges for ' + this.name + " has selectedValue of " + this.selectedValue);
+    }
+
+    // fills category from supplied sourceCategory generic object
+    fillFromSource(sourceCategory: any) {
+      let criteriaSettings: any [] = sourceCategory.criteria || [];
+      for (var i = 0; i < criteriaSettings.length; i++) {
+        let source : any = criteriaSettings[i];
+        let target : SanctionCategoryCriteria = (this.criteria.length > i) ? this.criteria[i] : null;
+        let criteriaValue = (this.selectOne) ? sourceCategory.selectedValue : source.selected;
+        if (source && target) {
+          target.applyChanges (criteriaValue, this.selectOne);
+        }
+      }
+      if (this.selectOne) {
+          this.selectedValue = sourceCategory.selectedValue;
+      }
+    }
+
+    getHtmlControlName (i: number) {
+      return (this.selectOne === false) ? (this.name + i) : this.name;
+    }
+
+    getSubTotal () {
+      let total: number = 0;
+      if (this.selectOne) {
+        total = this.selectedValue;
+      } else {
+        for (var i = 0; i < this.criteria.length; i++) {
+          let criterion: SanctionCategoryCriteria = this.criteria[i];
+          if (criterion.selected) {
+            total += criterion.points;
+          }
+        }
+      }
+      return total;
+    }
 }
 
 /**
@@ -116,133 +168,134 @@ export class SanctionRequestContents {
       this.makeCategories ();
     }
 
+    // constructs default categories
     makeCategories () {
-      let lighting: SanctionCategory = new SanctionCategory ("Light Strength as measured on table playing surface", "lighting", true);
+      let lighting: SanctionCategory = new SanctionCategory ().setValues ("Light Strength as measured on table playing surface", "lighting", true);
       let lightCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ('300 Lux with fixtures at least 8 ft above the floor', 0, 'Minimum standard', true),
-        new SanctionCategoryCriteria ('400 Lux', 1, ''),
-        new SanctionCategoryCriteria ('600 Lux for feature matches', 2, '3 and up'),
-        new SanctionCategoryCriteria ('600 Lux', 3, ''),
-        new SanctionCategoryCriteria ('800 Lux for feature matches', 4, ''),
-        new SanctionCategoryCriteria ('800 Lux', 5, '')
+        this.makeSanctionCategoryCriteria ('300 Lux with fixtures at least 8 ft above the floor', 0, 'Minimum standard', true),
+        this.makeSanctionCategoryCriteria ('400 Lux', 1, ''),
+        this.makeSanctionCategoryCriteria ('600 Lux for feature matches', 2, '3 and up'),
+        this.makeSanctionCategoryCriteria ('600 Lux', 3, ''),
+        this.makeSanctionCategoryCriteria ('800 Lux for feature matches', 4, ''),
+        this.makeSanctionCategoryCriteria ('800 Lux', 5, '')
       ];
       lighting.setCriteria (lightCriteria);
 
-      let flooring: SanctionCategory = new SanctionCategory ("Flooring Type", "flooring", true);
+      let flooring: SanctionCategory = new SanctionCategory ().setValues ("Flooring Type", "flooring", true);
       let floorCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ('Wood floor or rubberized Mat on concrete or Tile for feature matches', 1, '3 and up'),
-        new SanctionCategoryCriteria ('Wood floor or rubberized Mat on concrete or Tile for all matches', 2, ''),
-        new SanctionCategoryCriteria ('Rubberized Mat on Wood for feature matches ', 3, ''),
-        new SanctionCategoryCriteria ('Rubberized Mat on Wood for all matches', 4, '')
+        this.makeSanctionCategoryCriteria ('Wood floor or rubberized Mat on concrete or Tile for feature matches', 1, '3 and up'),
+        this.makeSanctionCategoryCriteria ('Wood floor or rubberized Mat on concrete or Tile for all matches', 2, ''),
+        this.makeSanctionCategoryCriteria ('Rubberized Mat on Wood for feature matches ', 3, ''),
+        this.makeSanctionCategoryCriteria ('Rubberized Mat on Wood for all matches', 4, '')
       ];
       flooring.setCriteria (floorCriteria);
 
-      let ceiling: SanctionCategory = new SanctionCategory ("Ceiling Height", "ceiling", true);
+      let ceiling: SanctionCategory = new SanctionCategory ().setValues ("Ceiling Height", "ceiling", true);
       let ceilingCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("8 ft ceiling height", 0, 'Minimum standard', true),
-        new SanctionCategoryCriteria ("10 ft ceiling height", 0, '1'),
-        new SanctionCategoryCriteria ("12 ft ceiling height", 1, ''),
-        new SanctionCategoryCriteria ("16 ft ceiling height", 2, '3 and up')
+        this.makeSanctionCategoryCriteria ("8 ft ceiling height", 0, 'Minimum standard', true),
+        this.makeSanctionCategoryCriteria ("10 ft ceiling height", 0, '1'),
+        this.makeSanctionCategoryCriteria ("12 ft ceiling height", 1, ''),
+        this.makeSanctionCategoryCriteria ("16 ft ceiling height", 2, '3 and up')
       ];
       ceiling.setCriteria (ceilingCriteria);
 
-      let courtSize: SanctionCategory = new SanctionCategory ("Court Size", "courtSize", true);
+      let courtSize: SanctionCategory = new SanctionCategory ().setValues ("Court Size", "courtSize", true);
       let courtSizeCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("30 ft length, 10 ft between tables", 0, 'Minimum standard', true),
-        new SanctionCategoryCriteria ("12 feet between tables", 2, '3 and up'),
-        new SanctionCategoryCriteria ("14 feet between tables", 4, ''),
-        new SanctionCategoryCriteria ("19x38 courts for feature matches", 5, '3 and up'),
-        new SanctionCategoryCriteria ("19x38 courts", 6, ''),
-        new SanctionCategoryCriteria ("23x46 courts for feature matches", 7, ''),
-        new SanctionCategoryCriteria ("23x46 courts", 8, '')
+        this.makeSanctionCategoryCriteria ("30 ft length, 10 ft between tables", 0, 'Minimum standard', true),
+        this.makeSanctionCategoryCriteria ("12 feet between tables", 2, '3 and up'),
+        this.makeSanctionCategoryCriteria ("14 feet between tables", 4, ''),
+        this.makeSanctionCategoryCriteria ("19x38 courts for feature matches", 5, '3 and up'),
+        this.makeSanctionCategoryCriteria ("19x38 courts", 6, ''),
+        this.makeSanctionCategoryCriteria ("23x46 courts for feature matches", 7, ''),
+        this.makeSanctionCategoryCriteria ("23x46 courts", 8, '')
       ];
       courtSize.setCriteria (courtSizeCriteria);
 
-      let tables: SanctionCategory = new SanctionCategory ("Tables", "tables", true);
+      let tables: SanctionCategory = new SanctionCategory ().setValues ("Tables", "tables", true);
       let tablesCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("Minimum standard USATT or ITTF Approved", 1, ''),
-        new SanctionCategoryCriteria ("No more than two models in use", 2, '3'),
-        new SanctionCategoryCriteria ("All models alike", 3, '4 and up'),
-        new SanctionCategoryCriteria ("All alike, but show table for feature matches", 4, ''),
+        this.makeSanctionCategoryCriteria ("Minimum standard USATT or ITTF Approved", 1, ''),
+        this.makeSanctionCategoryCriteria ("No more than two models in use", 2, '3'),
+        this.makeSanctionCategoryCriteria ("All models alike", 3, '4 and up'),
+        this.makeSanctionCategoryCriteria ("All alike, but show table for feature matches", 4, ''),
       ];
       tables.setCriteria (tablesCriteria);
 
-      let paraTables: SanctionCategory = new SanctionCategory ("Para Tables", "paraTables", false);
+      let paraTables: SanctionCategory = new SanctionCategory ().setValues ("Para Tables", "paraTables", false);
       let paraTablesCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("Para table if wheelchair players entered", 1, '')
+        this.makeSanctionCategoryCriteria ("Para table if wheelchair players entered", 1, '')
       ];
       paraTables.setCriteria (paraTablesCriteria);
 
-      let barriers: SanctionCategory = new SanctionCategory ("Barriers", "barriers", true);
+      let barriers: SanctionCategory = new SanctionCategory ().setValues ("Barriers", "barriers", true);
       let barriersCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("Barrier at net between tables or at both ends of court", 2, ''),
-        new SanctionCategoryCriteria ("Barrier at net  between tables and at both ends of court", 3, ''),
-        new SanctionCategoryCriteria ("Individually barriered court for feature matches", 4, '3 and up'),
-        new SanctionCategoryCriteria ("All courts fully barriered", 6, '')
+        this.makeSanctionCategoryCriteria ("Barrier at net between tables or at both ends of court", 2, ''),
+        this.makeSanctionCategoryCriteria ("Barrier at net  between tables and at both ends of court", 3, ''),
+        this.makeSanctionCategoryCriteria ("Individually barriered court for feature matches", 4, '3 and up'),
+        this.makeSanctionCategoryCriteria ("All courts fully barriered", 6, '')
       ];
       barriers.setCriteria (barriersCriteria);
 
-      let timeScheduling: SanctionCategory = new SanctionCategory ("Time Scheduling", "timeScheduling", true);
+      let timeScheduling: SanctionCategory = new SanctionCategory ().setValues ("Time Scheduling", "timeScheduling", true);
       let timeSchedulingCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("Event start times", 0, 'Minimum Standard', true),
-        new SanctionCategoryCriteria ("All events, all rounds", 2, '3, 4'),
-        new SanctionCategoryCriteria ("Published schedule for each player, all rounds", 4, '5')
+        this.makeSanctionCategoryCriteria ("Event start times", 0, 'Minimum Standard', true),
+        this.makeSanctionCategoryCriteria ("All events, all rounds", 2, '3, 4'),
+        this.makeSanctionCategoryCriteria ("Published schedule for each player, all rounds", 4, '5')
       ];
       timeScheduling.setCriteria (timeSchedulingCriteria);
 
-      let officials: SanctionCategory = new SanctionCategory ("Officials", "officials", true);
+      let officials: SanctionCategory = new SanctionCategory ().setValues ("Officials", "officials", true);
       let officialsCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("Scorekeepers for featured matches", 1, ''),
-        new SanctionCategoryCriteria ("Umpires for featured matches", 2, '2'),
-        new SanctionCategoryCriteria ("Umpires and scorekeepers for featured matches", 4, '3, 4'),
-        new SanctionCategoryCriteria ("Uniformed Umpires and scorekeepers for all matches", 6, '5')
+        this.makeSanctionCategoryCriteria ("Scorekeepers for featured matches", 1, ''),
+        this.makeSanctionCategoryCriteria ("Umpires for featured matches", 2, '2'),
+        this.makeSanctionCategoryCriteria ("Umpires and scorekeepers for featured matches", 4, '3, 4'),
+        this.makeSanctionCategoryCriteria ("Uniformed Umpires and scorekeepers for all matches", 6, '5')
       ];
       officials.setCriteria (officialsCriteria);
 
-      let eventVariety: SanctionCategory = new SanctionCategory ("Event Variety", "eventVariety", false);
+      let eventVariety: SanctionCategory = new SanctionCategory ().setValues ("Event Variety", "eventVariety", false);
       let eventVarietyCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("Novice event", 1, ''),
-        new SanctionCategoryCriteria ("Women's event", 1, ''),
-        new SanctionCategoryCriteria ("Junior event", 1, ''),
-        new SanctionCategoryCriteria ("Para event", 1, ''),
-        new SanctionCategoryCriteria ("Team event", 1, ''),
-        new SanctionCategoryCriteria ("Doubles event", 1, '')
+        this.makeSanctionCategoryCriteria ("Novice event", 1, ''),
+        this.makeSanctionCategoryCriteria ("Women's event", 1, ''),
+        this.makeSanctionCategoryCriteria ("Junior event", 1, ''),
+        this.makeSanctionCategoryCriteria ("Para event", 1, ''),
+        this.makeSanctionCategoryCriteria ("Team event", 1, ''),
+        this.makeSanctionCategoryCriteria ("Doubles event", 1, '')
       ];
       eventVariety.setCriteria (eventVarietyCriteria);
 
-      let prizeMoney: SanctionCategory = new SanctionCategory ("Prize Money", "prizeMoney", true);
+      let prizeMoney: SanctionCategory = new SanctionCategory ().setValues ("Prize Money", "prizeMoney", true);
       let prizeMoneyCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("$100-$400", 1, ''),
-        new SanctionCategoryCriteria ("$401-$1000", 3, ''),
-        new SanctionCategoryCriteria ("$1001-$3000", 5, ''),
-        new SanctionCategoryCriteria ("$3001-$6000", 7, ''),
-        new SanctionCategoryCriteria ("$6001-$10000", 10, ''),
-        new SanctionCategoryCriteria ("$10001 and up", 15, '')
+        this.makeSanctionCategoryCriteria ("$100-$400", 1, ''),
+        this.makeSanctionCategoryCriteria ("$401-$1000", 3, ''),
+        this.makeSanctionCategoryCriteria ("$1001-$3000", 5, ''),
+        this.makeSanctionCategoryCriteria ("$3001-$6000", 7, ''),
+        this.makeSanctionCategoryCriteria ("$6001-$10000", 10, ''),
+        this.makeSanctionCategoryCriteria ("$10001 and up", 15, '')
       ];
       prizeMoney.setCriteria (prizeMoneyCriteria);
 
-      let amenities: SanctionCategory = new SanctionCategory ("Amenities", "amenities", false);
+      let amenities: SanctionCategory = new SanctionCategory ().setValues ("Amenities", "amenities", false);
       let amenitiesCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("Food & drink available inside venue", 1, ''),
-        new SanctionCategoryCriteria ("Player's lounge available", 1, ''),
-        new SanctionCategoryCriteria ("Officials Lounge available", 1, '')
+        this.makeSanctionCategoryCriteria ("Food & drink available inside venue", 1, ''),
+        this.makeSanctionCategoryCriteria ("Player's lounge available", 1, ''),
+        this.makeSanctionCategoryCriteria ("Officials Lounge available", 1, '')
       ];
       amenities.setCriteria (amenitiesCriteria);
 
-      let spectatorSeating: SanctionCategory = new SanctionCategory ("Spectator Seating", "spectatorSeating", true);
+      let spectatorSeating: SanctionCategory = new SanctionCategory ().setValues ("Spectator Seating", "spectatorSeating", true);
       let spectatorSeatingCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("100 seats available", 1, '3'),
-        new SanctionCategoryCriteria ("250 seats available", 2, '4'),
-        new SanctionCategoryCriteria ("500 seats available", 3, '5')
+        this.makeSanctionCategoryCriteria ("100 seats available", 1, '3'),
+        this.makeSanctionCategoryCriteria ("250 seats available", 2, '4'),
+        this.makeSanctionCategoryCriteria ("500 seats available", 3, '5')
       ];
       spectatorSeating.setCriteria (spectatorSeatingCriteria);
 
-      let mediaCoverage: SanctionCategory = new SanctionCategory ("Media Coverage", "mediaCoverage", false);
+      let mediaCoverage: SanctionCategory = new SanctionCategory ().setValues ("Media Coverage", "mediaCoverage", false);
       let mediaCoverageCriteria: SanctionCategoryCriteria [] = [
-        new SanctionCategoryCriteria ("Print", 2, ''),
-        new SanctionCategoryCriteria ("TV", 2, ''),
-        new SanctionCategoryCriteria ("Live streaming", 3, ''),
-        new SanctionCategoryCriteria ("Live streaming - USATT equipment and commentator", 3, '')
+        this.makeSanctionCategoryCriteria ("Print", 2, ''),
+        this.makeSanctionCategoryCriteria ("TV", 2, ''),
+        this.makeSanctionCategoryCriteria ("Live streaming", 3, ''),
+        this.makeSanctionCategoryCriteria ("Live streaming - USATT equipment and commentator", 3, '')
       ];
       mediaCoverage.setCriteria (mediaCoverageCriteria);
 
@@ -252,85 +305,140 @@ export class SanctionRequestContents {
       ];
     }
 
+    // transfers values from the object created by the html form into this object
+    // selected rating criteria are in properties like 'lighting', 'amenities0'
     applyChanges (formValues: any) {
-    // apply new values to this object
-    Object.assign (this, formValues);
+      // apply new values to this object
+      //Object.assign (this, formValues);
+      this.copySimpleProperties(formValues);
 
-    // now set the criteria
+      // now set the criteria
       for (var i = 0; i < this.categories.length; i++) {
         let category: SanctionCategory = this.categories[i];
         category.applyChanges(formValues);
       }
     }
 
-}
+    // fills requestContents from generic object which doesn't have methods on this class
+    // this generic object has categories and criteria object arrays but they are again plain typescript objects not the ones with methods
+    fillSettings (settings: any) {
+      this.copySimpleProperties(settings);
 
-/**
-* Sanction category
-*/
-export class SanctionCategory {
-    title: string;
-
-    name: string;
-
-    // select one item in category or all that apply
-    selectOne: boolean;
-
-    selectedValue: number;
-
-    criteria: SanctionCategoryCriteria [];
-
-    constructor (title: string, name: string, selectOne: boolean) {
-      this.title = title;
-      this.name = name;
-      this.selectOne = selectOne;
-      this.selectedValue = -1;
-    }
-
-    setCriteria (criteria: SanctionCategoryCriteria []) {
-      this.criteria = criteria;
-    }
-
-    applyChanges (formValues: any) {
-      for (var i = 0; i < this.criteria.length; i++) {
-        let criteria: SanctionCategoryCriteria = this.criteria[i];
-        let htmlControlName: string  = this.getHtmlControlName(i);
-        var criteriaValue = formValues[htmlControlName];
-        criteria.applyChanges(criteriaValue, this.selectOne);
-        if (this.selectOne && criteria.selected) {
-          this.selectedValue = criteriaValue;
+      // now set the criteria
+      for (var i = 0; i < this.categories.length; i++) {
+        let category: SanctionCategory = this.categories[i];
+        let sourceCategory : any = (settings.categories && settings.categories.length > i) ? settings.categories[i] : null;
+        if (sourceCategory && sourceCategory.name == category.name) {
+          category.fillFromSource(sourceCategory);
         }
       }
     }
 
-    getHtmlControlName (i: number) {
-      return (this.selectOne === false) ? (this.name + i) : this.name;
+    // copied only selected items without copying categories selection criteria
+    copySimpleProperties (formValues: any) {
+        this.alternateStartDate                  = formValues.alternateStartDate                ;
+        this.alternateEndDate                    = formValues.alternateEndDate                  ;
+        this.webLinkURL                          = formValues.webLinkURL                        ;
+        this.venueStreetAddress                  = formValues.venueStreetAddress                ;
+        this.venueCity                           = formValues.venueCity                         ;
+        this.venueState                          = formValues.venueState                        ;
+        this.venueZipCode                        = formValues.venueZipCode                      ;
+        this.clubName                            = formValues.clubName                          ;
+        this.clubAffiliationExpiration           = formValues.clubAffiliationExpiration         ;
+        this.contactPersonName                   = formValues.contactPersonName                 ;
+        this.contactPersonPhone                  = formValues.contactPersonPhone                ;
+        this.contactPersonEmail                  = formValues.contactPersonEmail                ;
+        this.contactPersonStreetAddress          = formValues.contactPersonStreetAddress        ;
+        this.contactPersonCity                   = formValues.contactPersonCity                 ;
+        this.contactPersonState                  = formValues.contactPersonState                ;
+        this.contactPersonZip                    = formValues.contactPersonZip                  ;
+        this.tournamentRefereeName               = formValues.tournamentRefereeName             ;
+        this.tournamentRefereeRank               = formValues.tournamentRefereeRank             ;
+        this.tournamentDirectorName              = formValues.tournamentDirectorName            ;
+        this.totalPrizeMoney                     = formValues.totalPrizeMoney                   ;
+        this.sanctionFee                         = formValues.sanctionFee                       ;
+        this.tournamentRefereeMembershipExpires  = formValues.tournamentRefereeMembershipExpires;
     }
+
+    //
+    makeSanctionCategoryCriteria (name: string, points: number, requiredForStarLevel: string, selected?: boolean) {
+      let sanctionCategoryCriteria: SanctionCategoryCriteria = new SanctionCategoryCriteria();
+      sanctionCategoryCriteria.name = name;
+      sanctionCategoryCriteria.points = points;
+      sanctionCategoryCriteria.selected = selected;
+      sanctionCategoryCriteria.requiredForStarLevel = requiredForStarLevel;
+      return sanctionCategoryCriteria;
+    }
+
 }
 
-/**
-* criteria under sanction category
-*/
-export class SanctionCategoryCriteria {
-    name: string;
-    points: number;
-    selected: boolean;
-    requiredForStarLevel: string;
 
-    constructor (name: string, points: number, requiredForStarLevel: string, selected?: boolean) {
-      this.name = name;
-      this.points = points;
-      this.selected = (selected) ? selected : false;
-      this.requiredForStarLevel = requiredForStarLevel;
+export class SanctionRequest {
+
+  id: number;
+  tournamentName: string;
+  startDate: Date;
+  endDate: Date;
+  requestDate: Date;
+  status: SanctionRequestStatus;
+
+  // 0 - 5 stars
+  starLevel: number;
+
+  // regional or national coordinator
+  coordinatorFirstName: string;
+  coordinatorLastName: string
+
+  // email retrieved from frontend table
+  coordinatorEmail: string;
+
+  // contents of the request as JSON string
+  requestContentsJSON: string;
+
+  // contents of the request as object
+  requestContents: SanctionRequestContents;
+
+  constructor () {
+    this.tournamentName = '2019 Aurora Cup';
+    this.requestContents = new SanctionRequestContents();
+  }
+
+  // apply changes from form and perform various conversions
+  applyChanges (formValues: any) {
+    // apply new values to this object
+    this.id = formValues.id;
+    this.tournamentName = formValues.tournamentName;
+
+    // convert dates from local to UTC
+    let requestDate: Date = (formValues.requestDate != null) ? new Date (formValues.requestDate) : new Date();
+
+    let dateUtils = new DateUtils();
+    this.startDate = dateUtils.convertFromLocalToUTCDate (formValues.startDate);
+    this.endDate = dateUtils.convertFromLocalToUTCDate(formValues.endDate);
+    this.requestDate = dateUtils.convertFromLocalToUTCDate (requestDate);
+
+    if (this.status == null) {
+      this.status = SanctionRequestStatus.Started;
     }
+    // apply rating criteria
+    this.requestContents.applyChanges(formValues);
+    this.requestContentsJSON = JSON.stringify (this.requestContents);
+//    console.log ('JSON length ', this.requestContentsJSON.length);
+    this.requestContents = null;
+  }
 
-    applyChanges (criteriaValue: any, selectOne: boolean) {
-//      console.log ('criteriaValue = ', criteriaValue);
-      if (selectOne) {
-        this.selected = (this.points == criteriaValue);
-      } else {
-        this.selected = (criteriaValue != undefined) ? criteriaValue : false;
-      }
-    }
+  fillScreenDef () {
+      // convert dates from UTC to local
+      let dateUtils = new DateUtils();
+      this.startDate = dateUtils.convertFromUTCToLocalDate (this.startDate);
+      this.endDate = dateUtils.convertFromUTCToLocalDate (this.endDate);
+      this.requestDate = dateUtils.convertFromUTCToLocalDate (this.requestDate);
 
+    let settings: any = JSON.parse (this.requestContentsJSON);
+    this.requestContents = new SanctionRequestContents();
+    this.requestContents.fillSettings(settings);
+    this.requestContentsJSON = null;
+  }
 }
+
+
