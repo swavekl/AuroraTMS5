@@ -39,8 +39,7 @@ export class ClubsService {
     let isNew: boolean = club.id == null;
     if(isNew)
       return this.http.post(this.serviceURL, club, null)
-        .map((response:Response) => { console.log ('response from save is ', response);
-        return response.json()});
+        .map((response:Response) => response.json());
     else
       return this.http.put(this.serviceURL+ '/'+ club.id, club, null)
         .map((response:Response) => response.json());

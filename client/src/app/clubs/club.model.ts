@@ -23,7 +23,6 @@ export class Club {
   applyChanges (formValues: any) {
     let dateUtils = new DateUtils();
     formValues.affiliationExpirationDate = dateUtils.convertFromLocalToUTCDate (formValues.affiliationExpirationDate);
-    console.log ('this.affiliationExpirationDate ', this.affiliationExpirationDate);
     Object.assign (this, formValues);
 
   }

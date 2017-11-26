@@ -62,13 +62,13 @@ export class ClubEditContainerComponent implements OnInit {
   }
 
   onSave(updatedClub: Club) {
-    console.log ('container.onSave updatedClub ', updatedClub);
+    //console.log ('container.onSave updatedClub ', updatedClub);
     updatedClub.id = (this.editedId != -1) ? this.editedId : null;
     this.store.dispatch(new ClubSaveAction(updatedClub));
   }
 
   onCancel(event) {
-    console.log ('container.onCancel event', event);
+    //console.log ('container.onCancel event', event);
     this.store.dispatch (new RouterActions.Back());
   }
 

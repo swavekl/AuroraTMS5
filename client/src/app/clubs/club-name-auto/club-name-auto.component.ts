@@ -10,7 +10,6 @@ Usage:
 
 <!--   <club-name-auto (selected)="onClubSelected($event)"></club-name-auto> -->
   onClubSelected(selectedClub:Club) {
-    console.log ('user selectedClub ', selectedClub);
   }
 */
 @Component({

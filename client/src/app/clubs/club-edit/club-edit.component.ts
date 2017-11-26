@@ -21,7 +21,7 @@ export class ClubEditComponent implements OnInit {
 
   onSave (formValues: any) {
     this.club.applyChanges(formValues);
-    console.log ('clubToSave ', this.club);
+    //console.log ('clubToSave ', this.club);
     this.saved.emit(this.club);
   }
 

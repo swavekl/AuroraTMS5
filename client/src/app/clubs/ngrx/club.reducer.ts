@@ -69,8 +69,6 @@ export function clubReducer(state = initialState, action: ClubActions.All) : Sta
          editedTemp.id = -1;
        }
 
-       console.log ('in EDIT_SUCCESS editedTemp ', editedTemp);
-
        return {
          ...state,
          edited: editedTemp,

@@ -53,7 +53,6 @@ export class ClubListContainerComponent implements OnInit {
   }
 
   onSelectedForEdit (selectedId: number) {
-    console.log ('in onSelectedForEdit selectedId = ', selectedId);
     this.store.dispatch ( new RouterActions.Go({path: ['/club/edit/'+selectedId]}));
 
   }
