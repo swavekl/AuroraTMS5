@@ -31,11 +31,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { TournamentModule, TournamentState } from './tournament/tournament.module';
+import { ClubsModule, ClubsState } from './clubs/clubs.module';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './login/register/register.component';
 import { WelcomeComponent } from './login/welcome/welcome.component';
+import { LandingComponent } from './login/landing/landing.component';
 
 // ngrx related stuff
 import { StoreModule } from '@ngrx/store';
@@ -43,12 +45,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterReducerState, routerReducer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RouterEffects } from './router.effects';
-import { LandingComponent } from './login/landing/landing.component';
 
 // now compose the app state from module's states
 export interface AppState {
  routerReducer: RouterReducerState;
  tournamentState: TournamentState;
+ clubsState: ClubsState;
  // other module states?
 }
 
@@ -90,6 +92,7 @@ export const AppEffects = [
     CdkTableModule,
     FlexLayoutModule,
     TournamentModule,
+    ClubsModule,
 
     RouterModule.forRoot(rootRouterConfig),
 

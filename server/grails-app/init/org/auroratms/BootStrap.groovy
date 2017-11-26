@@ -5,6 +5,9 @@ import grails.plugin.springsecurity.SpringSecurityUtils
 import tournament.insurance.InsuranceRequestStatus
 import tournament.sanction.SanctionRequestStatus
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 class BootStrap {
 
     def init = { servletContext ->
@@ -28,6 +31,15 @@ class BootStrap {
         UserRole.withSession {
             it.flush()
             it.clear()
+        }
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-DD");
+        createClub('Fox Valley Table Tennis Club', 'Eola Community Center', dateFormat.parse('2017-10-31'), '555 S. Eola Rd', 'Aurora','IL', 60504)
+        createClub('Schaumburg Table Tennis Club', 'Community Recreation Center', dateFormat.parse('2017-05-31'), '505 N Springingsguth Rd.', 'Schaumburg','IL', 60609)
+        createClub('Edge Table Tennis Club', null, dateFormat.parse('2017-11-31'), '318 E Golf Rd', 'Arlington Heights','IL', 60609)
+        createClub('Experior Table Tennis Club', null, dateFormat.parse('2017-12-31'), '111 S Lombard Rd Unit 8', 'Addison','IL', 60101)
+        750.times {
+            createClub("Chicago Table Tennis Club ${it + 1}", null, dateFormat.parse('2017-12-31'), '2400 Chestnut Ave', 'Glenview','IL', 60101)
         }
 
         createSanctionRequest( '2018 Aurora Cup',  new Date(), new Date(), SanctionRequestStatus.Started, new Date(), 4)
@@ -55,6 +67,24 @@ class BootStrap {
             it.flush()
             it.clear()
         }
+    }
+
+    def createClub(String clubName, String buildingName, Date affiliationExpirationDate, String streetAddress, String city, String state, Integer zipCode) {
+        new Club(
+                name: clubName,
+                buildingName: buildingName,
+                streetAddress: streetAddress,
+                city: city,
+                state: state,
+                zipCode: zipCode,
+                clubAdminName: 'Swavek Lorenc',
+                clubAdminEmail: 's@abc.com',
+                hoursAndDates: 'Wednesday & Friday - 6:30 - 9:30PM',
+                clubPhoneNumber : '630-111-2222',
+                clubPhoneNumber2 : null,
+                clubWebsite : 'https://www.fvttc.org',
+                affiliationExpirationDate: affiliationExpirationDate)
+                .save(flush: true, failOnError: true)
     }
 
     def createSanctionRequest(String tournamentName, Date startDate, Date endDate, SanctionRequestStatus status, Date requestDate, int starLevel) {

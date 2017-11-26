@@ -11,6 +11,12 @@ class UrlMappings {
             }
         }
 
+        '/api/club'(resources: 'club') {
+            collection {
+                get '/search'(controller: 'club', action: 'search')
+            }
+        }
+
         '/api/register' (controller: 'restRegister', action:'register', method: 'POST')
 //        '/api/register/verify' (controller: 'restRegister', action:'restVerify', method: 'POST')
 

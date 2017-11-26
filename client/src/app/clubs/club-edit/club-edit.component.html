@@ -1,0 +1,16 @@
+<form name="form" (ngSubmit)="onSave(f.value)" #f="ngForm" novalidate>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <mat-form-field fxFlex="50%">
+      <input matInput type="text" placeholder="Club Name" name="name" [ngModel]="club.name" required>
+      <mat-error>This field is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="50%" disabled>
+      <input matInput type="text" placeholder="USATT Affiliation Expiration Date" name="affiliationExpirationDate"
+             [ngModel]="club.affiliationExpirationDate | date:'yyyy-MM-dd'">
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button type="submit">Save</button>
+  <button mat-raised-button type="button" (click)="onCancel()">Cancel</button>
+</form>

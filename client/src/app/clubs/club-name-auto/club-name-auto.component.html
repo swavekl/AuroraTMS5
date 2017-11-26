@@ -1,0 +1,13 @@
+<mat-form-field>
+  <input matInput placeholder="Club Name" aria-label="Club name"
+         ngModel
+         name="clubName"
+         [matAutocomplete]="clubNameAuto"
+         (keyup)="onClubNameChanges($event)">
+  <mat-autocomplete #clubNameAuto="matAutocomplete">
+    <mat-option *ngFor="let club of clubs$ | async" [value]="club.name"
+                (onSelectionChange)="onSelectionChange($event, club)">
+      <span>{{ club.name }}</span> |
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

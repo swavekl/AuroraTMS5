@@ -1,0 +1,13 @@
+<mat-list>
+  <mat-list-item *ngFor="let club of clubs">
+    <h3 matLine>{{ club.name }}</h3>
+      <h4 matLine>{{ club.city }}, {{ club.state }} </h4>
+      <button mat-icon-button (click)="onEdit(club.id)">
+        <mat-icon>edit</mat-icon>
+      </button>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
+<p>
+  Clubs count: {{ totalCount }}
+</p>
