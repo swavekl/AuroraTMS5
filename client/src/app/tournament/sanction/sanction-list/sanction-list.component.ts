@@ -1,24 +1,24 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 import {DataSource} from '@angular/cdk/collections';
-import {SanctionService} from './sanction.service';
+import {SanctionService} from './../sanction.service';
 import {PageEvent} from '@angular/material';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/of';
 import { Store } from '@ngrx/store';
 
-import * as fromSanctionRequest from './sanction.reducer'
-import {PagingInfo} from "../insurance/insurance.actions";
-import {SanctionRequestSearchAction} from "./sanction.actions";
-import {Router} from "@angular/router";
-import {SanctionRequest} from "./sanction.model";
-import * as RouterActions from './../../router.actions';
+import { PagingInfo } from './../../../utils/paging-info';
+import * as fromSanctionRequest from './../ngrx/sanction.reducer';
+import {SanctionRequestSearchAction} from "./../ngrx/sanction.actions";
+import {SanctionRequest} from "./../sanction.model";
+import * as RouterActions from './../../../router.actions';
 
 @Component({
   selector: 'app-sanction',
-  templateUrl: './sanction.component.html',
-  styleUrls: ['./sanction.component.css']
+  templateUrl: './sanction-list.component.html',
+  styleUrls: ['./sanction-list.component.css']
 })
-export class SanctionComponent implements OnInit {
+export class SanctionListComponent implements OnInit {
 
   displayColumns = ['tournamentName', 'startDate', 'status', 'edit', 'duplicate'];
   dataSource: SanctionDataSource;
@@ -40,12 +40,12 @@ export class SanctionComponent implements OnInit {
   }
 
   ngOnInit() {
-    let pagingInfo = new PagingInfo (0, this.pageSize);
+    let pagingInfo = new PagingInfo (0, this.pageSize, null);
     this.store.dispatch(new SanctionRequestSearchAction(pagingInfo));
   }
 
   onPageEvent(pageEvent: PageEvent) {
-    let pagingInfo = new PagingInfo (pageEvent.pageIndex * pageEvent.pageSize, pageEvent.pageSize);
+    let pagingInfo = new PagingInfo (pageEvent.pageIndex * pageEvent.pageSize, pageEvent.pageSize, null);
     this.store.dispatch(new SanctionRequestSearchAction(pagingInfo));
   }
 

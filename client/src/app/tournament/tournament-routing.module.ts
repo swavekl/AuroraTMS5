@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { InsuranceComponent } from './insurance/insurance.component';
-import { SanctionComponent } from './sanction/sanction.component';
-import { ConfigureTournamentComponent } from './configure-tournament/configure-tournament.component';
 import { AuthGuard } from '../guards/auth.guard';
+
+import { InsuranceComponent } from './insurance/insurance.component';
 import {InsuranceEditComponent} from "./insurance/insurance-edit/insurance-edit.component";
+
+import { SanctionListComponent } from './sanction/sanction-list/sanction-list.component';
 import {SanctionEditComponent} from "./sanction/sanction-edit/sanction-edit.component";
+import {SanctionEditContainerComponent} from "./sanction/sanction-edit/sanction-edit-container.component";
+
+import { ConfigureTournamentComponent } from './configure-tournament/configure-tournament.component';
 
 const routes: Routes = [
     {path: 'insurance/list', component: InsuranceComponent, canActivate: [AuthGuard] },
@@ -13,10 +17,10 @@ const routes: Routes = [
     {path: 'insurance/edit/:id', component: InsuranceEditComponent, canActivate: [AuthGuard] },
     {path: 'insurance/duplicate/:id', component: InsuranceEditComponent, canActivate: [AuthGuard] },
 
-    {path: 'sanction/list', component: SanctionComponent, canActivate: [AuthGuard] },
-    {path: 'sanction/add', component: SanctionEditComponent, canActivate: [AuthGuard] },
-    {path: 'sanction/edit/:id', component: SanctionEditComponent, canActivate: [AuthGuard] },
-    {path: 'sanction/duplicate/:id', component: SanctionEditComponent, canActivate: [AuthGuard] },
+    {path: 'sanction/list', component: SanctionListComponent, canActivate: [AuthGuard] },
+    {path: 'sanction/add', component: SanctionEditContainerComponent, canActivate: [AuthGuard] },
+    {path: 'sanction/edit/:id', component: SanctionEditContainerComponent, canActivate: [AuthGuard] },
+    {path: 'sanction/duplicate/:id', component: SanctionEditContainerComponent, canActivate: [AuthGuard] },
 
     {path: 'configuretournament', component: ConfigureTournamentComponent}
 ];

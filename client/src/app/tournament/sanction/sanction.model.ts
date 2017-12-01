@@ -111,18 +111,18 @@ export class SanctionCategory {
     }
 
     getSubTotal () {
-      let total: number = 0;
+      let subTotal: number = 0;
       if (this.selectOne) {
-        total = this.selectedValue;
+        subTotal = this.selectedValue;
       } else {
         for (var i = 0; i < this.criteria.length; i++) {
           let criterion: SanctionCategoryCriteria = this.criteria[i];
           if (criterion.selected) {
-            total += criterion.points;
+            subTotal += criterion.points;
           }
         }
       }
-      return total;
+      return subTotal;
     }
 }
 

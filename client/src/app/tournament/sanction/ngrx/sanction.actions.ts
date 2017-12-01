@@ -1,6 +1,6 @@
 import { Action} from '@ngrx/store';
-import { SanctionRequest } from './sanction.model'
-import {PagingInfo} from "../insurance/insurance.actions";
+import { SanctionRequest } from './../sanction.model';
+import { PagingInfo } from './../../../utils/paging-info';
 
 export const SEARCH         = '[SanctionRequest] Search';
 export const SEARCH_SUCCESS = '[SanctionRequest] Search Success';

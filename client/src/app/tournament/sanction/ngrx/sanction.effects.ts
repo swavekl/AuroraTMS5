@@ -9,10 +9,10 @@ import { of } from 'rxjs/observable/of';
 
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import * as RouterActions from './../../router.actions';
+import * as RouterActions from './../../../router.actions';
 
-import { SanctionRequest } from './sanction.model'
-import { SanctionService } from './sanction.service';
+import { SanctionRequest } from './../sanction.model'
+import { SanctionService } from './../sanction.service';
 import * as SanctionRequestActions from './sanction.actions';
 
 /**

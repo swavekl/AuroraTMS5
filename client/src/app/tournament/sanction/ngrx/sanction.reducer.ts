@@ -1,5 +1,5 @@
-import { SanctionRequest, SanctionRequestStatus } from './sanction.model'
-import * as SanctionRequestActions from './sanction.actions';
+import { SanctionRequest, SanctionRequestStatus } from './../sanction.model'
+import * as SanctionRequestActions from './../ngrx/sanction.actions';
 
 export interface State {
   results: SanctionRequest [];

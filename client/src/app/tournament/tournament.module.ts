@@ -8,7 +8,8 @@ import { InsuranceComponent } from './insurance/insurance.component';
 import { InsuranceService } from './insurance/insurance.service';
 import { InsuranceEditComponent } from "./insurance/insurance-edit/insurance-edit.component";
 
-import { SanctionComponent } from './sanction/sanction.component';
+import { SanctionListComponent } from './sanction/sanction-list/sanction-list.component';
+import { SanctionEditContainerComponent } from "./sanction/sanction-edit/sanction-edit-container.component";
 import { SanctionEditComponent } from "./sanction/sanction-edit/sanction-edit.component";
 import { SanctionService } from './sanction/sanction.service';
 
@@ -44,7 +45,7 @@ import {CdkTableModule} from "@angular/cdk/table";
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import * as fromConfigureTournament from './configure-tournament/configure-tournament.reducer';
 import * as fromInsuranceRequest from './insurance/insurance.reducer';
-import * as fromSanctionRequest from './sanction/sanction.reducer';
+import * as fromSanctionRequest from './sanction/ngrx/sanction.reducer';
 
 export const tournamentReducers: ActionReducerMap<any> = {
   subFeature1: fromConfigureTournament.configureTournamentReducer,
@@ -55,7 +56,7 @@ export const tournamentReducers: ActionReducerMap<any> = {
 import { EffectsModule } from '@ngrx/effects';
 import { ConfigureTournamentEffects } from './configure-tournament/configure-tournament.effects';
 import { InsuranceRequestEffects } from './insurance/insurance.effects';
-import {SanctionRequestEffects} from "./sanction/sanction.effects";
+import {SanctionRequestEffects} from "./sanction/ngrx/sanction.effects";
 
 import { SharedModule } from './../shared/shared.module';
 import { MessageDialogComponent } from './../shared/message-dialog/message-dialog.component';
@@ -102,7 +103,8 @@ export interface TournamentState {
   declarations: [
     InsuranceComponent,
     InsuranceEditComponent,
-    SanctionComponent,
+    SanctionListComponent,
+    SanctionEditContainerComponent,
     SanctionEditComponent,
     ConfigureTournamentComponent
   ],
