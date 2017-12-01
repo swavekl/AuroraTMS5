@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MatSidenavModule, MatDrawerContainer, MatDrawer } from '@angular/material'
-import { Router, ActivatedRoute } from '@angular/router';
+import {Component, OnInit, Input} from '@angular/core';
+import {MatSidenavModule, MatDrawerContainer, MatDrawer} from '@angular/material'
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-main-menu',
@@ -13,26 +13,27 @@ export class MainMenuComponent implements OnInit {
   @Input() isMobile: false;
 
   links: Array<MenuItem> = [
-  {label: "Clubs", url: "club/list"},
-  {label: "Sanction", url: "sanction/list"},
-  {label: "Insurance", url: "insurance/list"},
-  {label: "Configure", url: "configuretournament"},
-  {label: "Logout", url: "login"}
+    {label: "Clubs", url: "club/list"},
+    {label: "Sanction", url: "sanction/list"},
+    {label: "Insurance", url: "insurance/list"},
+    {label: "Configure", url: "configuretournament"},
+    {label: "Logout", url: "login"}
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
   }
 
   /**
-  * on mobile devices the menu is opened and when you click on menu item it should close before navigating to this item
-  */
-  closeAndNavigateToRoute (routerLink) {
-  //console.log ('isMobile ', this.isMobile);
-   if (this.sideNav && this.sideNav.opened && this.isMobile) {
-    this.sideNav.close();
-   }
+   * on mobile devices the menu is opened and when you click on menu item it should close before navigating to this item
+   */
+  closeAndNavigateToRoute(routerLink) {
+    //console.log ('isMobile ', this.isMobile);
+    if (this.sideNav && this.sideNav.opened && this.isMobile) {
+      this.sideNav.close();
+    }
     this.router.navigate([routerLink]);
   }
 
