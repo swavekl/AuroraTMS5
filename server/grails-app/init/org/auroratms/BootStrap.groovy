@@ -2,6 +2,7 @@ package org.auroratms
 
 import grails.plugin.springsecurity.SecurityFilterPosition
 import grails.plugin.springsecurity.SpringSecurityUtils
+import tournament.insurance.AdditionalInsuredRole
 import tournament.insurance.InsuranceRequestStatus
 import tournament.sanction.SanctionRequestStatus
 
@@ -42,10 +43,10 @@ class BootStrap {
             createClub("Chicago Table Tennis Club ${it + 1}", null, dateFormat.parse('2017-12-31'), '2400 Chestnut Ave', 'Glenview','IL', 60101)
         }
 
-        createSanctionRequest( '2018 Aurora Cup',  new Date(), new Date(), SanctionRequestStatus.Started, new Date(), 4)
-        createSanctionRequest( '2018 Aurora Spring Open',  new Date(), new Date(), SanctionRequestStatus.Submitted, new Date(), 2)
-        createSanctionRequest( '2018 Aurora Summer Open',  new Date(), new Date(), SanctionRequestStatus.Rejected, new Date(), 2)
-        createSanctionRequest( '2018 Aurora Fall Open',  new Date(), new Date(), SanctionRequestStatus.Approved, new Date(), 2)
+        createSanctionRequest( '2018 Aurora Cup',  dateFormat.parse('2018-01-12'), dateFormat.parse('2018-01-14'), SanctionRequestStatus.Started, dateFormat.parse('2017-08-10'), 4)
+        createSanctionRequest( '2018 Aurora Spring Open',  dateFormat.parse('2018-04-07'), dateFormat.parse('2018-04-07'), SanctionRequestStatus.Submitted, dateFormat.parse('2018-01-22'), 2)
+        createSanctionRequest( '2018 Aurora Summer Open',  dateFormat.parse('2018-07-15'), dateFormat.parse('2018-07-15'), SanctionRequestStatus.Rejected, dateFormat.parse('2018-04-20'), 2)
+        createSanctionRequest( '2018 Aurora Fall Open',  dateFormat.parse('2018-09-29'), dateFormat.parse('2018-09-29'), SanctionRequestStatus.Approved, dateFormat.parse('2018-07-29'), 2)
 
         createInsuranceRequest('Swavek Lorenc', 'swaveklorenc@yahoo.com', 'Fox Valley Table Tennis Club', '2018 Aurora Spring Open', InsuranceRequestStatus.Submitted)
         createInsuranceRequest('Mario Lorenc', 'mariolorenc@yahoo.com',  'Phoenix Table Tennis Club', '2018 Phoenix Sizzler Open ', InsuranceRequestStatus.Approved)
@@ -120,7 +121,9 @@ class BootStrap {
                 eventName: eventName,
                 eventStartDate: new Date(),
                 eventEndDate: new Date (),
-                status: status
+                status: status,
+                isAdditionalInsured: false,
+                additionalInsuredRole : AdditionalInsuredRole.None
         ).save(flush: true, failOnError: true)
 
     }

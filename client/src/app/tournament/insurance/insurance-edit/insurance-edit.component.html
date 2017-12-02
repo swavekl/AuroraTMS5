@@ -14,43 +14,43 @@
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="100%">
-                <input matInput type="text" placeholder="Organization Name" name="orgName" [ngModel]="(insuranceRequest$ | async).orgName" required>
+                <input matInput type="text" placeholder="Organization Name" name="orgName" [ngModel]="insuranceRequest.orgName" required>
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="100%">
-                <input matInput type="text" placeholder="Organization Street Address" name="orgStreetAddress" [ngModel]="(insuranceRequest$ | async).orgStreetAddress" required>
+                <input matInput type="text" placeholder="Organization Street Address" name="orgStreetAddress" [ngModel]="insuranceRequest.orgStreetAddress" required>
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="60%">
-                <input matInput type="text" placeholder="City" name="orgCity" [ngModel]="(insuranceRequest$ | async).orgCity" required>
+                <input matInput type="text" placeholder="City" name="orgCity" [ngModel]="insuranceRequest.orgCity" required>
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <mat-select matInput type="text" placeholder="State" name="orgState" [ngModel]="(insuranceRequest$ | async).orgState" required>
+                <mat-select matInput type="text" placeholder="State" name="orgState" [ngModel]="insuranceRequest.orgState" required>
                   <mat-option *ngFor="let state of statesList" value="{{state.abbreviation}}">{{state.abbreviation}}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <input matInput type="text" placeholder="Zip Code" name="orgZip" [ngModel]="(insuranceRequest$ | async).orgZip" required>
+                <input matInput type="text" placeholder="Zip Code" name="orgZip" [ngModel]="insuranceRequest.orgZip" required>
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="40%">
-                <input matInput type="text" placeholder="Contact Name" name="contactName" [ngModel]="(insuranceRequest$ | async).contactName">
+                <input matInput type="text" placeholder="Contact Name" name="contactName" [ngModel]="insuranceRequest.contactName">
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <input matInput type="tel" placeholder="Contact Phone" name="contactPhoneNumber" [ngModel]="(insuranceRequest$ | async).contactPhoneNumber">
+                <input matInput type="tel" placeholder="Contact Phone" name="contactPhoneNumber" [ngModel]="insuranceRequest.contactPhoneNumber">
               </mat-form-field>
               <mat-form-field fxFlex="40%">
-                <input matInput type="email" placeholder="Contact Email" name="contactEmail" [ngModel]="(insuranceRequest$ | async).contactEmail" required>
+                <input matInput type="email" placeholder="Contact Email" name="contactEmail" [ngModel]="insuranceRequest.contactEmail" required>
               </mat-form-field>
             </div>
           </div>
@@ -60,41 +60,41 @@
             <mat-card-subtitle class="mat-title">Certificate Holder</mat-card-subtitle>
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="100%">
-                <input matInput type="text" placeholder="Facility Name" name="certFacilityName" [ngModel]="(insuranceRequest$ | async).certFacilityName" required>
+                <input matInput type="text" placeholder="Facility Name" name="certFacilityName" [ngModel]="insuranceRequest.certFacilityName" required>
               </mat-form-field>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="100%">
-                <input matInput type="text" placeholder="Street Address" name="certStreetAddress" [ngModel]="(insuranceRequest$ | async).certStreetAddress" required>
+                <input matInput type="text" placeholder="Street Address" name="certStreetAddress" [ngModel]="insuranceRequest.certStreetAddress" required>
               </mat-form-field>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="60%">
-                <input matInput type="text" placeholder="City" name="certCity" [ngModel]="(insuranceRequest$ | async).certCity" required>
+                <input matInput type="text" placeholder="City" name="certCity" [ngModel]="insuranceRequest.certCity" required>
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <mat-select matInput type="text" placeholder="State" name="certState" [ngModel]="(insuranceRequest$ | async).certState">
+                <mat-select matInput type="text" placeholder="State" name="certState" [ngModel]="insuranceRequest.certState">
                   <mat-option *ngFor="let state of statesList" value="{{state.abbreviation}}">{{state.abbreviation}}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <input matInput type="text" placeholder="Zip Code" name="certZip" [ngModel]="(insuranceRequest$ | async).certZip" required  pattern="^[1-9][0-9]{4}" maxlength="6">
+                <input matInput type="text" placeholder="Zip Code" name="certZip" [ngModel]="insuranceRequest.certZip" required  pattern="^[1-9][0-9]{4}" maxlength="6">
                 <mat-error>This field is required</mat-error>
               </mat-form-field>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="40%">
-                <input matInput type="text" placeholder="Contact Person Name" name="certPersonName" [ngModel]="(insuranceRequest$ | async).certPersonName" required>
+                <input matInput type="text" placeholder="Contact Person Name" name="certPersonName" [ngModel]="insuranceRequest.certPersonName" required>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <input matInput type="tel" placeholder="Contact Person Phone" name="certPersonPhoneNumber" [ngModel]="(insuranceRequest$ | async).certPersonPhoneNumber" >
+                <input matInput type="tel" placeholder="Contact Person Phone" name="certPersonPhoneNumber" [ngModel]="insuranceRequest.certPersonPhoneNumber" >
               </mat-form-field>
               <mat-form-field fxFlex="40%">
-                <input matInput type="email" placeholder="Contact Person Email" name="certPersonEmail" [ngModel]="(insuranceRequest$ | async).certPersonEmail" >
+                <input matInput type="email" placeholder="Contact Person Email" name="certPersonEmail" [ngModel]="insuranceRequest.certPersonEmail" >
               </mat-form-field>
             </div>
           </div>
@@ -105,17 +105,17 @@
             <mat-card-subtitle class="mat-title">Event Information</mat-card-subtitle>
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="60%">
-                <input matInput type="text" placeholder="Name of Event" name="eventName" [ngModel]="(insuranceRequest$ | async).eventName" >
+                <input matInput type="text" placeholder="Name of Event" name="eventName" [ngModel]="insuranceRequest.eventName" >
               </mat-form-field>
 
               <mat-form-field fxFlex="20%">
-                <input matInput [matDatepicker]="pickerESD" placeholder="Event Start Date" name="eventStartDate" [ngModel]="(insuranceRequest$ | async).eventStartDate">
+                <input matInput [matDatepicker]="pickerESD" placeholder="Event Start Date" name="eventStartDate" [ngModel]="insuranceRequest.eventStartDate">
                 <mat-datepicker-toggle matSuffix [for]="pickerESD"></mat-datepicker-toggle>
                 <mat-datepicker #pickerESD></mat-datepicker>
               </mat-form-field>
 
               <mat-form-field fxFlex="20%">
-                <input matInput [matDatepicker]="pickerEED" placeholder="Event End Date" name="eventEndDate" [ngModel]="(insuranceRequest$ | async).eventEndDate">
+                <input matInput [matDatepicker]="pickerEED" placeholder="Event End Date" name="eventEndDate" [ngModel]="insuranceRequest.eventEndDate">
                 <mat-datepicker-toggle matSuffix [for]="pickerEED"></mat-datepicker-toggle>
                 <mat-datepicker #pickerEED></mat-datepicker>
               </mat-form-field>
@@ -123,10 +123,10 @@
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="20%">
-              <input matInput [matDatepicker]="picker" placeholder="Date of Request" name="requestDate" [ngModel]="(insuranceRequest$ | async).requestDate | date:'yyyy-MM-dd'" readonly>
+              <input matInput [matDatepicker]="picker" placeholder="Date of Request" name="requestDate" [ngModel]="insuranceRequest.requestDate | date:'yyyy-MM-dd'" readonly>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <input matInput type="text" placeholder="Status" name="status" [ngModel]="(insuranceRequest$ | async).status" readonly>
+                <input matInput type="text" placeholder="Status" name="status" [ngModel]="insuranceRequest.status" readonly>
               </mat-form-field>
             </div>
             <!--<p>Form values: {{f.value | json}}</p>-->
@@ -137,26 +137,26 @@
               <P class=mat-caption>Have you entered into any agreement, contract or permit that contains assumption of liability, indemnification, or hold harmless language? If
                 "yes" please forward a copy of the document with this certificate request form.
               </P>
-              <mat-radio-group>
-                <mat-radio-button value="1">Yes</mat-radio-button>&nbsp;&nbsp;
-                <mat-radio-button value="2">No</mat-radio-button>
+              <mat-radio-group [ngModel]="insuranceRequest.isAdditionalInsured" name="isAdditionalInsured">
+                <mat-radio-button value="true">Yes</mat-radio-button>&nbsp;&nbsp;
+                <mat-radio-button value="false">No</mat-radio-button>
               </mat-radio-group>
             </div>
 
             <div flexLayout="row">
               <mat-form-field fxFlex="100%">
-                <input matInput type="text" placeholder="Additional Insured" name="addtnlInsured" >
+                <input matInput type="text" placeholder="Additional Insured" [ngModel]="insuranceRequest.additionalInsuredName" name="additionalInsuredName">
               </mat-form-field>
             </div>
             <div flexLayout="row">
               <p class=mat-caption>If requesting additional insured status, please indicate the role of the additional insured : </p>
-              <mat-radio-group>
-                <mat-radio-button value="1">Owner Of Premises</mat-radio-button>&nbsp;
-                <mat-radio-button value="2">Sponsor</mat-radio-button>&nbsp;
-                <mat-radio-button value="3">Other</mat-radio-button>&nbsp;
+              <mat-radio-group [ngModel]="insuranceRequest.additionalInsuredRole" name="additionalInsuredRole">
+                <mat-radio-button value="OwnerOfPremises">Owner Of Premises</mat-radio-button>&nbsp;
+                <mat-radio-button value="Sponsor">Sponsor</mat-radio-button>&nbsp;
+                <mat-radio-button value="Other">Other</mat-radio-button>&nbsp;
               </mat-radio-group>
               <mat-form-field fxFlexFill>
-                <input matInput type="text" placeholder="Please Specify" name="otherInsuredRole">
+                <input matInput type="text" placeholder="Please Specify" [ngModel]="insuranceRequest.otherRoleDescription" name="otherRoleDescription">
               </mat-form-field>
             </div>
           </div>

@@ -1,5 +1,6 @@
 package org.auroratms
 
+import tournament.insurance.AdditionalInsuredRole
 import tournament.insurance.InsuranceRequestStatus
 
 class InsuranceRequest {
@@ -29,10 +30,18 @@ class InsuranceRequest {
     Date eventStartDate
     Date eventEndDate
 
+    boolean isAdditionalInsured = false
+    String additionalInsuredName
+
+    AdditionalInsuredRole additionalInsuredRole = AdditionalInsuredRole.None;
+    String otherRoleDescription
+
     // request status - started, submitted, approved, rejected
     InsuranceRequestStatus status;
 
     static constraints = {
         eventEndDate nullable:true
+        additionalInsuredName nullable: true
+        otherRoleDescription nullable: true
     }
 }

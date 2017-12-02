@@ -4,8 +4,9 @@ import { FormsModule, FormGroupName } from '@angular/forms';
 
 import { TournamentRoutingModule } from './tournament-routing.module';
 
-import { InsuranceComponent } from './insurance/insurance.component';
+import { InsuranceListComponent } from './insurance/insurance-list/insurance-list.component';
 import { InsuranceService } from './insurance/insurance.service';
+import { InsuranceEditContainerComponent } from "./insurance/insurance-edit/insurance-edit-container.component";
 import { InsuranceEditComponent } from "./insurance/insurance-edit/insurance-edit.component";
 
 import { SanctionListComponent } from './sanction/sanction-list/sanction-list.component';
@@ -44,7 +45,7 @@ import {CdkTableModule} from "@angular/cdk/table";
 
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import * as fromConfigureTournament from './configure-tournament/configure-tournament.reducer';
-import * as fromInsuranceRequest from './insurance/insurance.reducer';
+import * as fromInsuranceRequest from './insurance/ngrx/insurance.reducer';
 import * as fromSanctionRequest from './sanction/ngrx/sanction.reducer';
 
 export const tournamentReducers: ActionReducerMap<any> = {
@@ -55,7 +56,7 @@ export const tournamentReducers: ActionReducerMap<any> = {
 
 import { EffectsModule } from '@ngrx/effects';
 import { ConfigureTournamentEffects } from './configure-tournament/configure-tournament.effects';
-import { InsuranceRequestEffects } from './insurance/insurance.effects';
+import { InsuranceRequestEffects } from './insurance/ngrx/insurance.effects';
 import {SanctionRequestEffects} from "./sanction/ngrx/sanction.effects";
 
 import { SharedModule } from './../shared/shared.module';
@@ -101,7 +102,8 @@ export interface TournamentState {
     EffectsModule.forFeature(tournamentEffects)
   ],
   declarations: [
-    InsuranceComponent,
+    InsuranceListComponent,
+    InsuranceEditContainerComponent,
     InsuranceEditComponent,
     SanctionListComponent,
     SanctionEditContainerComponent,

@@ -6,6 +6,13 @@ export enum InsuranceRequestStatus {
   Withdrawn = 'Withdrawn'
 }
 
+export enum AdditionalInsuredRole {
+    None = "None",
+    OwnerOfPremises = "OwnerOfPremises",
+    Sponsor = "Sponsor",
+    Other = "Other"
+}
+
 export class InsuranceRequest {
   id: number = 0;
   orgName:string = "";
@@ -33,6 +40,12 @@ export class InsuranceRequest {
   eventName: string = "";
   eventStartDate: Date;
   eventEndDate: Date;
+
+  isAdditionalInsured : boolean = false;
+  additionalInsuredName: string = "";
+
+  additionalInsuredRole = AdditionalInsuredRole.None;
+  otherRoleDescription: string = "";
 
   status: InsuranceRequestStatus = InsuranceRequestStatus.Started;
 

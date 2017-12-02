@@ -1,26 +1,27 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import {PageEvent} from '@angular/material';
-import {InsuranceRequest} from './insurance.model';
-import {InsuranceService} from './insurance.service';
+import {InsuranceRequest} from './../insurance.model';
+import {InsuranceService} from './../insurance.service';
 import {DataSource} from "@angular/cdk/collections";
 import 'rxjs/add/observable/of';
 import {Observable} from "rxjs/Observable";
 import { Store } from '@ngrx/store';
 
-import {InsuranceRequestSearchAction, PagingInfo} from './insurance.actions';
-import * as fromInsuranceRequest from './insurance.reducer';
+import {InsuranceRequestSearchAction} from './../ngrx/insurance.actions';
+import { PagingInfo } from './../../../utils/paging-info';
+import * as fromInsuranceRequest from './../ngrx/insurance.reducer';
 
 
 @Component({
-  selector: 'app-insurance',
+  selector: 'insurance-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './insurance.component.html',
-  styleUrls: ['./insurance.component.css']
+  templateUrl: './insurance-list.component.html',
+  styleUrls: ['./insurance-list.component.css']
 })
 
 
-export class InsuranceComponent implements OnInit {
+export class InsuranceListComponent implements OnInit {
 
   displayColumns = ['eventName', 'eventStartDate', 'status', 'edit', 'duplicate'];
   dataSource: InsuranceDataSource;
@@ -45,12 +46,12 @@ export class InsuranceComponent implements OnInit {
   }
 
   ngOnInit() {
-    let pagingInfo = new PagingInfo (0, this.pageSize);
+    let pagingInfo = new PagingInfo (0, this.pageSize, null);
     this.store.dispatch(new InsuranceRequestSearchAction(pagingInfo));
   }
 
   onPageEvent(pageEvent: PageEvent) {
-    let pagingInfo = new PagingInfo (pageEvent.pageIndex * pageEvent.pageSize, pageEvent.pageSize);
+    let pagingInfo = new PagingInfo (pageEvent.pageIndex * pageEvent.pageSize, pageEvent.pageSize, null);
     this.store.dispatch(new InsuranceRequestSearchAction(pagingInfo));
   }
 

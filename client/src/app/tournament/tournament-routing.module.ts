@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
 
-import { InsuranceComponent } from './insurance/insurance.component';
+import { InsuranceListComponent } from './insurance/insurance-list/insurance-list.component';
+import {InsuranceEditContainerComponent} from "./insurance/insurance-edit/insurance-edit-container.component";
 import {InsuranceEditComponent} from "./insurance/insurance-edit/insurance-edit.component";
 
 import { SanctionListComponent } from './sanction/sanction-list/sanction-list.component';
@@ -12,10 +13,10 @@ import {SanctionEditContainerComponent} from "./sanction/sanction-edit/sanction-
 import { ConfigureTournamentComponent } from './configure-tournament/configure-tournament.component';
 
 const routes: Routes = [
-    {path: 'insurance/list', component: InsuranceComponent, canActivate: [AuthGuard] },
-    {path: 'insurance/add', component: InsuranceEditComponent, canActivate: [AuthGuard] },
-    {path: 'insurance/edit/:id', component: InsuranceEditComponent, canActivate: [AuthGuard] },
-    {path: 'insurance/duplicate/:id', component: InsuranceEditComponent, canActivate: [AuthGuard] },
+    {path: 'insurance/list', component: InsuranceListComponent, canActivate: [AuthGuard] },
+    {path: 'insurance/add', component: InsuranceEditContainerComponent, canActivate: [AuthGuard] },
+    {path: 'insurance/edit/:id', component: InsuranceEditContainerComponent, canActivate: [AuthGuard] },
+    {path: 'insurance/duplicate/:id', component: InsuranceEditContainerComponent, canActivate: [AuthGuard] },
 
     {path: 'sanction/list', component: SanctionListComponent, canActivate: [AuthGuard] },
     {path: 'sanction/add', component: SanctionEditContainerComponent, canActivate: [AuthGuard] },

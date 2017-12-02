@@ -1,6 +1,6 @@
-import { InsuranceRequest, InsuranceRequestStatus } from './insurance.model'
-import * as InsuranceRequestActions from './insurance.actions';
-import { DateUtils } from '../../utils/date-utils';
+import { InsuranceRequest, InsuranceRequestStatus } from './../insurance.model'
+import * as InsuranceRequestActions from './../ngrx/insurance.actions';
+import { DateUtils } from '../../../utils/date-utils';
 
 export interface State {
   results: InsuranceRequest [];

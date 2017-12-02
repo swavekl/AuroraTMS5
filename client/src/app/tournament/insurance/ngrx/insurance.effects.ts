@@ -12,11 +12,11 @@ import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 
-import { InsuranceRequest } from './insurance.model'
-import { InsuranceService } from './insurance.service';
+import { InsuranceRequest } from './../insurance.model'
+import { InsuranceService } from './../insurance.service';
 import * as InsuranceRequestActions from './insurance.actions';
 import {insuranceRequestReducer} from "./insurance.reducer";
-import * as RouterActions from './../../router.actions';
+import * as RouterActions from './../../../router.actions';
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your

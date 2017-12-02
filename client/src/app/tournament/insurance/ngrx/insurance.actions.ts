@@ -1,5 +1,6 @@
 import { Action} from '@ngrx/store';
-import { InsuranceRequest } from './insurance.model'
+import { InsuranceRequest } from './../insurance.model'
+import { PagingInfo } from './../../../utils/paging-info';
 
 export const SEARCH         = '[InsuranceRequest] Search';
 export const SEARCH_SUCCESS = '[InsuranceRequest] Search Success';
@@ -12,11 +13,6 @@ export const SAVE           = '[InsuranceRequest] Save';
 export const SAVE_SUCCESS           = '[InsuranceRequest] Save Success';
 export const SAVE_FAILURE           = '[InsuranceRequest] Save Failure';
 
-
-export class PagingInfo {
-  constructor (public startIndex: number, public pageSize: number) {
-  }
-}
 
 export class InsuranceRequestSearchAction implements Action {
   readonly type = SEARCH;
