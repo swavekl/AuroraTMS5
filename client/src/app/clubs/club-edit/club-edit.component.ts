@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Club } from './../club.model';
+import { StatesList } from '../../shared/states/states';
 
 @Component({
   selector: 'club-edit',
@@ -14,7 +15,11 @@ export class ClubEditComponent implements OnInit {
 
   @Output() canceled = new EventEmitter();
 
-  constructor() { }
+  statesList: any [];
+
+  constructor() {
+    this.statesList = new StatesList().getList();
+  }
 
   ngOnInit() {
   }

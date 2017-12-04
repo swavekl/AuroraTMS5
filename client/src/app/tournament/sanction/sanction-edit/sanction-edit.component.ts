@@ -5,7 +5,7 @@ import * as fromSanctionRequest from './../ngrx/sanction.reducer';
 import { SanctionRequest, SanctionRequestStatus, SanctionCategory } from './../sanction.model';
 
 import { CoordinatorInfo, coordinatorList } from './../../../utils/coordinator-list';
-import { StatesList } from './../../states'
+import { StatesList } from '../../../shared/states/states'
 
 import { MatDialog } from '@angular/material';
 import { MessageDialogComponent } from './../../../shared/message-dialog/message-dialog.component';

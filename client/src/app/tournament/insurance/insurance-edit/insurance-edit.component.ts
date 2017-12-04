@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { DateUtils } from '../../../utils/date-utils';
 
 import {InsuranceRequest} from "../insurance.model";
-import { StatesList } from '../../states'
+import { StatesList } from '../../../shared/states/states'
 
 @Component({
   selector: 'insurance-edit',
