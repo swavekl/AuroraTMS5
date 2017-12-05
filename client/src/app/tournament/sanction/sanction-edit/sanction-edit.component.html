@@ -142,7 +142,7 @@
           <mat-step label="Star Rating Criteria">
             <mat-accordion class="example-headers-align">
               <div *ngFor="let category of sanctionRequest.requestContents.categories; index as catIndex">
-                <mat-expansion-panel [expanded]="isCurrentStep(catIndex)" (opened)="setStep(catIndex)" hideToggle="true">
+                <mat-expansion-panel [expanded]="isCurrentCategory(catIndex)" (opened)="setCategory(catIndex)" hideToggle="true">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
                       <h4>{{category.title}}</h4>
@@ -178,8 +178,8 @@
                   </ng-template>
 
                   <mat-action-row>
-                    <button mat-button type="button" *ngIf="notFirst(catIndex)" color="primary" (click)="prevStep()">Previous</button>
-                    <button mat-button type="button" *ngIf="notLast(catIndex)" color="primary" (click)="nextStep()">Next</button>
+                    <button mat-button type="button" *ngIf="notFirstCategory(catIndex)" color="primary" (click)="prevCategory()">Previous</button>
+                    <button mat-button type="button" *ngIf="notLastCategory(catIndex)" color="primary" (click)="nextCategory()">Next</button>
                   </mat-action-row>
                 </mat-expansion-panel>
               </div>
@@ -223,7 +223,7 @@
             </div>
             <div>
               <button mat-button matStepperPrevious type="button">Back</button>
-              <button mat-button matStepperNext type="button">Next</button>
+              <button mat-button matStepperNext type="button" *ngIf="hasNextStep()">Next</button>
             </div>
           </mat-step>
           <mat-step label="Approve/Reject" *ngIf="isApprovingCoordinator()">

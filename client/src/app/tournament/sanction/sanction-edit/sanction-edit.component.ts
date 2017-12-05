@@ -26,7 +26,8 @@ export class SanctionEditComponent implements OnInit {
 
   statesList: any [];
 
-  step:number = 0;
+  // current category index (lights, flooring etc)
+  currentCategory:number = 0;
 
   // total rating points
   totalPoints: number = 0;
@@ -46,29 +47,33 @@ export class SanctionEditComponent implements OnInit {
     this.totalPoints = this.calculateTotal();
   }
 
-  setStep(index: number) {
-    this.step = index;
+  setCategory(index: number) {
+    this.currentCategory = index;
   }
 
-  nextStep() {
-    this.step++;
+  nextCategory() {
+    this.currentCategory++;
   }
 
-  prevStep() {
-    this.step--;
+  prevCategory() {
+    this.currentCategory--;
   }
 
-  isCurrentStep(index: number) {
-      return this.step == index;
+  isCurrentCategory(index: number) {
+      return this.currentCategory == index;
   }
 
-  notFirst(index: number) {
-    return this.step > 0;
+  notFirstCategory(index: number) {
+    return this.currentCategory > 0;
   }
 
-  notLast(index: number) {
-    let totalSteps = 14; // this.sanctionRequest$.requestContents.categories.length;
-    return (index != (totalSteps - 1));
+  notLastCategory(index: number) {
+    let totalCategories = this.sanctionRequest.requestContents.categories.length;
+    return (index != (totalCategories - 1));
+  }
+
+  hasNextStep () {
+    return this.isApprovingCoordinator();
   }
 
   /**
