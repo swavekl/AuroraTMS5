@@ -24,27 +24,27 @@
               <!-- Dates -->
                 <div fxLayout="row" fxLayoutGap="10px">
                   <mat-form-field fxFlex="24%">
-                    <input matInput [matDatepicker]="pickerESD" placeholder="Start Date" name="startDate" [min]="minStartDate" [max]="maxStartDate" [(ngModel)]="sanctionRequest.startDate" required (dateChange)="onEnableEndDate($event.target.value)">
+                    <input matInput [matDatepicker]="pickerESD" placeholder="Start Date" name="startDate" [min]="minStartDate" [max]="maxStartDate" [(ngModel)]="sanctionRequest.startDate" required (dateChange)="onEnableEndDate($event.target.value)" (input)="onEnableEndDate($event.target.value)" disabled>
                     <mat-datepicker-toggle matSuffix [for]="pickerESD"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerESD></mat-datepicker>
+                    <mat-datepicker #pickerESD disabled="false"></mat-datepicker>
                   </mat-form-field>
 
                   <mat-form-field fxFlex="24%">
-                    <input matInput [matDatepicker]="pickerEED" placeholder="End Date" name="endDate" [disabled]="!endDateEnabled" [min]="minEndDate" [max]="maxEndDate" [(ngModel)]="sanctionRequest.endDate">
+                    <input matInput [matDatepicker]="pickerEED" placeholder="End Date" name="endDate" [min]="minEndDate" [max]="maxEndDate" [(ngModel)]="sanctionRequest.endDate" disabled>
                     <mat-datepicker-toggle matSuffix [for]="pickerEED"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerEED></mat-datepicker>
+                    <mat-datepicker #pickerEED [disabled]="!endDateEnabled"></mat-datepicker>
                   </mat-form-field>
 
                   <mat-form-field fxFlex="24%">
-                    <input matInput [matDatepicker]="pickerAltSD" placeholder="Alternate Start Date" name="altStartDate" [min]="minStartDate" [max]="maxStartDate" [(ngModel)]="sanctionRequest.requestContents.alternateStartDate" (dateChange)="onEnableAltEndDate($event.target.value)">
+                    <input matInput [matDatepicker]="pickerAltSD" placeholder="Alternate Start Date" name="altStartDate" [min]="minStartDate" [max]="maxStartDate" [(ngModel)]="sanctionRequest.requestContents.alternateStartDate" (dateChange)="onEnableAltEndDate($event.target.value)" (input)="onEnableAltEndDate($event.target.value)" disabled>
                     <mat-datepicker-toggle matSuffix [for]="pickerAltSD"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerAltSD></mat-datepicker>
+                    <mat-datepicker #pickerAltSD disabled="false"></mat-datepicker>
                   </mat-form-field>
 
                   <mat-form-field fxFlex="24%">
-                    <input matInput [matDatepicker]="pickerAltED" placeholder="Alternate End Date" name="altEndDate" [disabled]="!altEndDateEnabled" [min]="minAltEndDate" [max]="maxAltEndDate" [(ngModel)]="sanctionRequest.requestContents.alternateEndDate">
+                    <input matInput [matDatepicker]="pickerAltED" placeholder="Alternate End Date" name="altEndDate" [min]="minAltEndDate" [max]="maxAltEndDate" [(ngModel)]="sanctionRequest.requestContents.alternateEndDate" disabled>
                     <mat-datepicker-toggle matSuffix [for]="pickerAltED"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerAltED></mat-datepicker>
+                    <mat-datepicker #pickerAltED [disabled]="!altEndDateEnabled"></mat-datepicker>
                   </mat-form-field>
                 </div>
 

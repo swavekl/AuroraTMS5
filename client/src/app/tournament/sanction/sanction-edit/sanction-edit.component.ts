@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 
@@ -33,7 +33,7 @@ import { MessageDialogComponent } from './../../../shared/message-dialog/message
 })
 
 export class SanctionEditComponent implements OnInit {
-
+  @ViewChild('ESD') ESD: ElementRef;
 
 
   // this is what we edit
@@ -84,6 +84,7 @@ export class SanctionEditComponent implements OnInit {
   altEndDateEnabled = false;
 
   constructor(private messageDialog: MatDialog) {
+
     this.statesList = new StatesList().getList();
     this.minStartDate.setDate(this.minStartDate.getDate() + 30);
     this.maxStartDate.setDate(this.maxStartDate.getDate() + 365);
