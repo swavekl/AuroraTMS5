@@ -1,16 +1,72 @@
 <form name="form" (ngSubmit)="onSave(f.value)" #f="ngForm" novalidate>
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-    <mat-form-field fxFlex="50%">
-      <input matInput type="text" placeholder="Club Name" name="name" [ngModel]="club.name" required>
-      <mat-error>This field is required</mat-error>
-    </mat-form-field>
+  <div fxLayout="column" fxLayoutAlign="start start">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <mat-form-field fxFlex="50%">
+        <input matInput type="text" placeholder="Club Name" name="name" [ngModel]="club.name" required>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
 
-    <mat-form-field fxFlex="50%" disabled>
-      <input matInput type="text" placeholder="USATT Affiliation Expiration Date" name="affiliationExpirationDate"
-             [ngModel]="club.affiliationExpirationDate | date:'yyyy-MM-dd'">
-    </mat-form-field>
+      <mat-form-field fxFlex="50%" disabled>
+        <input matInput type="text" placeholder="USATT Affiliation Expiration Date" name="affiliationExpirationDate"
+               [ngModel]="club.affiliationExpirationDate | date:'yyyy-MM-dd'">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <mat-form-field fxFlex="50%">
+        <input matInput type="text" placeholder="Building Name" name="buildingName" [ngModel]="club.buildingName">
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50%">
+        <input matInput type="text" placeholder="Street Address" name="streetAddress" [ngModel]="club.streetAddress"
+               required>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <mat-form-field fxFlex="50%">
+        <input matInput type="text" placeholder="City" name="city" [ngModel]="club.city" required>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex="20%">
+        <mat-select matInput type="text" placeholder="State" name="state" [ngModel]="club.state">
+          <mat-option *ngFor="let state of statesList" value="{{state.abbreviation}}">{{state.abbreviation}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex="30%">
+        <input matInput type="text" placeholder="Zip Code" name="zipCode" [ngModel]="club.zipCode" required
+               pattern="^[1-9][0-9]{4}" maxlength="6">
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <mat-form-field fxFlex="50%">
+        <input matInput type="text" placeholder="Club Administrator Name" name="clubAdminName" [ngModel]="club.clubAdminName" required>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50%">
+        <input matInput type="email" placeholder="Club Administrator Email" name="clubAdminEmail" [ngModel]="club.clubAdminEmail" required>
+        <mat-error>This field is required</mat-error>
+        <mat-error>Invalid email address</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <mat-form-field fxFlex="25%">
+        <input matInput type="tel" placeholder="Club Phone" name="clubPhoneNumber" [ngModel]="club.clubPhoneNumber" required>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="25%">
+        <input matInput type="tel" placeholder="Club Alternative Phone" name="clubPhoneNumber2" [ngModel]="club.clubPhoneNumber2" required>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50%">
+        <input matInput type="url" placeholder="Club website URL" name="clubWebsite" [ngModel]="club.clubWebsite">
+      </mat-form-field>
+
+    </div>
+
   </div>
-
   <button mat-raised-button type="submit">Save</button>
   <button mat-raised-button type="button" (click)="onCancel()">Cancel</button>
 </form>
