@@ -34,8 +34,26 @@ export class SanctionEditComponent implements OnInit {
   // updated in case it changes
   venueState: string;
 
+  // limit values for start dates
+  minStartDate = new Date();
+  maxStartDate = new Date();
+  minAltStartDate = new Date();
+  maxAltStartDate = new Date();
+
+  minEndDate: Date;
+  maxEndDate: Date;
+  minAltEndDate: Date;
+  maxAltEndDate: Date;
+
+  endDateEnabled = false;
+  altEndDateEnabled = false;
+
   constructor(private messageDialog: MatDialog) {
     this.statesList = new StatesList().getList();
+    this.minStartDate.setDate(this.minStartDate.getDate() + 30);
+    this.maxStartDate.setDate(this.maxStartDate.getDate() + 365);
+    this.minAltStartDate.setDate(this.minStartDate.getDate() + 30);
+    this.maxAltStartDate.setDate(this.maxAltStartDate.getDate() + 365);
   }
 
   ngOnInit() {
@@ -44,6 +62,22 @@ export class SanctionEditComponent implements OnInit {
   // called after Input changes
   ngOnChanges () {
     this.totalPoints = this.calculateTotal();
+  }
+
+  onEnableEndDate(date: Date) {
+    this.endDateEnabled = true;
+    this.minEndDate = new Date(this.sanctionRequest.startDate.getTime());
+    this.minEndDate.setDate(this.minEndDate.getDate() + 1);
+    this.maxEndDate = new Date(this.sanctionRequest.startDate.getTime());
+    this.maxEndDate.setDate(this.maxEndDate.getDate() + 7);
+  }
+
+  onEnableAltEndDate(date: Date) {
+    this.altEndDateEnabled = true;
+    this.minAltEndDate = new Date(this.sanctionRequest.requestContents.alternateStartDate.getTime());
+    this.minAltEndDate.setDate(this.minAltEndDate.getDate() + 1);
+    this.maxAltEndDate = new Date(this.sanctionRequest.requestContents.alternateStartDate.getTime());
+    this.maxAltEndDate.setDate(this.maxAltEndDate.getDate() + 7);
   }
 
   setStep(index: number) {

@@ -7,8 +7,8 @@ export const environment = {
   production: false,
 
   // base url for request from client if client running on separate computer
-//  origin : 'http://gateway-pc:9001'
+ origin : 'http://localhost:9001'
   // if running on the same computer
-  origin : 'http://localhost:9001'
+  // origin : 'https://localhost:8443'
 
 };

@@ -60,13 +60,13 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 ]
 
 // force https for all api calls
-grails.plugin.springsecurity.secureChannel.definition = [
-		[pattern: '/api/**',          access: 'REQUIRES_SECURE_CHANNEL'],
-		[pattern: '/register/**',     access: 'REQUIRES_SECURE_CHANNEL'],
-		[pattern: '/maps/**',         access: 'REQUIRES_INSECURE_CHANNEL'],
-		[pattern: '/images/login/**', access: 'REQUIRES_SECURE_CHANNEL'],
-		[pattern: '/images/**',       access: 'ANY_CHANNEL']
-]
+//grails.plugin.springsecurity.secureChannel.definition = [
+//		[pattern: '/api/**',          access: 'REQUIRES_SECURE_CHANNEL'],
+//		[pattern: '/register/**',     access: 'REQUIRES_SECURE_CHANNEL'],
+//		[pattern: '/maps/**',         access: 'REQUIRES_INSECURE_CHANNEL'],
+//		[pattern: '/images/login/**', access: 'REQUIRES_SECURE_CHANNEL'],
+//		[pattern: '/images/**',       access: 'ANY_CHANNEL']
+//]
 
 
 
