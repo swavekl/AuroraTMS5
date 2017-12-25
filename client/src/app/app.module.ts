@@ -46,6 +46,7 @@ import { StoreRouterConnectingModule, RouterReducerState, routerReducer } from '
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RouterEffects } from './router.effects';
 
+
 // now compose the app state from module's states
 export interface AppState {
  routerReducer: RouterReducerState;
