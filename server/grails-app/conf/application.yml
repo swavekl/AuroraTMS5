@@ -83,8 +83,8 @@ dataSource:
 
 environments:
     development:
-#        server:
-#            port: 9001
+        server:
+            port: 9001
         dataSource:
             dbCreate: create-drop
             url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
@@ -123,13 +123,13 @@ environments:
 
 #        grails.assets.url: https://auroratms.s3-us-east-2.amazonaws.com/auroratms/
 ---
-server:
-    port: 8443
-    ssl:
-        enabled: true
-        #key-store: C:\grails\AuroraTMS5_Slim2\client\ssl\keystore.p12
-        #key-store: C:\grails\AuroraTMS5_Slim2\client\ssl2\dev.auroratms.org.keystore.p12
-        key-store: ${SSL_DIR}\keystore.p12
-        key-store-password: exportpassword
-        keyStoreType: PKCS12
-        keyAlias: tomcat
+#server:
+#    port: 8443
+#    ssl:
+#        enabled: true
+#        #key-store: C:\grails\AuroraTMS5_Slim2\client\ssl\keystore.p12
+#        #key-store: C:\grails\AuroraTMS5_Slim2\client\ssl2\dev.auroratms.org.keystore.p12
+#        key-store: ${SSL_DIR}\keystore.p12
+#        key-store-password: exportpassword
+#        keyStoreType: PKCS12
+#        keyAlias: tomcat
