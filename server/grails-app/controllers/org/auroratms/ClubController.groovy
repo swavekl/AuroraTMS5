@@ -19,6 +19,9 @@ class ClubController extends RestfulController {
         List<Club> results = query.list(max: Math.min( max ?: 10, 100))
         def responseMap = ['count': count, 'results': results]
         respond responseMap
+//        return [
+//                clubCount: count, clubList: results
+//        ]
     }
 
     def index(Integer max) {
@@ -27,5 +30,8 @@ class ClubController extends RestfulController {
         List<Club> results = listAllResources(params)
         def responseMap = ['count': count, 'results': results]
         respond responseMap
+//        return [
+//                clubCount: count, clubList: results
+//        ]
     }
 }
