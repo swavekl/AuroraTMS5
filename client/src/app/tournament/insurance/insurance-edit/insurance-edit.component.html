@@ -37,8 +37,9 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <input matInput type="text" placeholder="Zip Code" name="orgZip" [ngModel]="insuranceRequest.orgZip" required>
-                <mat-error>This field is required</mat-error>
+                <input matInput type="text" placeholder="Zip Code" name="orgZip" [ngModel]="insuranceRequest.orgZip" #orgZip="ngModel" required pattern="^[1-9][0-9]{4}" maxlength="5">
+                <mat-error *ngIf="orgZip.control?.hasError('required')">This field is required</mat-error>
+                <mat-error *ngIf="orgZip.control?.hasError('pattern')">Zip code requires numbers</mat-error>
               </mat-form-field>
             </div>
 
@@ -50,7 +51,8 @@
                 <input matInput type="tel" placeholder="Contact Phone" name="contactPhoneNumber" [ngModel]="insuranceRequest.contactPhoneNumber">
               </mat-form-field>
               <mat-form-field fxFlex="40%">
-                <input matInput type="email" placeholder="Contact Email" name="contactEmail" [ngModel]="insuranceRequest.contactEmail" required>
+                <input matInput type="email" placeholder="Contact Email" name="contactEmail" [ngModel]="insuranceRequest.contactEmail" #contactEmail="ngModel" email>
+                <mat-error *ngIf="contactEmail.control?.hasError('email')">Please provide valid email address</mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -81,8 +83,9 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <input matInput type="text" placeholder="Zip Code" name="certZip" [ngModel]="insuranceRequest.certZip" required  pattern="^[1-9][0-9]{4}" maxlength="6">
-                <mat-error>This field is required</mat-error>
+                <input matInput type="text" placeholder="Zip Code" name="certZip" [ngModel]="insuranceRequest.certZip" #certZip="ngModel" required  pattern="^[1-9][0-9]{4}" maxlength="5">
+                <mat-error *ngIf="certZip.control?.hasError('required')">This field is required</mat-error>
+                <mat-error *ngIf="certZip.control?.hasError('pattern')">Zip code requires numbers</mat-error>
               </mat-form-field>
             </div>
 
@@ -91,10 +94,14 @@
                 <input matInput type="text" placeholder="Contact Person Name" name="certPersonName" [ngModel]="insuranceRequest.certPersonName" required>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
-                <input matInput type="tel" placeholder="Contact Person Phone" name="certPersonPhoneNumber" [ngModel]="insuranceRequest.certPersonPhoneNumber" >
+                <input matInput type="tel" placeholder="Contact Person Phone" name="certPersonPhoneNumber" [ngModel]="insuranceRequest.certPersonPhoneNumber"
+                       #certPersonPhoneNumber="ngModel" pattern="\d{3}[\-]\d{3}[\-]\d{4}" minlength="12" phone>
+                <mat-error *ngIf="certPersonPhoneNumber.control?.hasError('pattern')">Please provide valid phone number</mat-error>
+                <mat-error *ngIf="certPersonPhoneNumber.control?.hasError('minlength')">Phone number can not be less than 10 digits</mat-error>
               </mat-form-field>
               <mat-form-field fxFlex="40%">
-                <input matInput type="email" placeholder="Contact Person Email" name="certPersonEmail" [ngModel]="insuranceRequest.certPersonEmail" >
+                <input matInput type="email" placeholder="Contact Person Email" name="certPersonEmail" [ngModel]="insuranceRequest.certPersonEmail" #certPersonEmail="ngModel" email>
+                <mat-error *ngIf="certPersonEmail.control?.hasError('email')">Please provide valid email address</mat-error>
               </mat-form-field>
             </div>
           </div>
