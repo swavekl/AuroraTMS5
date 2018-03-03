@@ -20,6 +20,14 @@ class UrlMappings {
         '/api/register' (controller: 'restRegister', action:'register', method: 'POST')
 //        '/api/register/verify' (controller: 'restRegister', action:'restVerify', method: 'POST')
 
+        '/api/financialtransaction' (resources: 'financialTransaction')
+
+        '/api/account'(resources: 'account') {
+            collection {
+                get '/system' (controller: 'account', action: 'system')
+            }
+        }
+
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')
         "404"(view: '/notFound')

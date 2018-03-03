@@ -405,7 +405,7 @@
                     <span>Affiliation Expiration Date: {{ club.affiliationExpirationDate | date:'MM-dd-yyyy'}} </span>
                   </div>
                   <div>
-                    <button mat-raised-button color="primary" type="button">Pay $75 Now to Renew</button>
+                    <button mat-raised-button color="primary" type="button" (click)="onPayment()">Pay $75 Now to Renew</button>
                   </div>
                 </div>
               </div>

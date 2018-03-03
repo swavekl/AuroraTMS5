@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout">
+    <div class="form-row">
+      <div id="card-info" #cardInfo></div>
+      <mat-progress-bar *ngIf="loading$ | async; else elseblock" mode="indeterminate" color="primary"></mat-progress-bar>
+      <ng-template #elseblock><mat-progress-bar mode="determinate" color="primary" value="0"></mat-progress-bar></ng-template>
+      <div style="color: red" *ngIf="clientError && error">
+        {{ error }}
+      </div>
+      <div style="color: red" *ngIf="!clientError && error$ | async">{{ error$ | async }}</div>
+      <div style="color: green" *ngIf="success$ | async">Success</div>
+    </div>
+
+    <button mat-button type="submit" [disabled]="disabledButtons" #payButton>Pay</button>
+    <button mat-button type="button" [disabled]="disabledButtons" #cancelButton (click)="onCancel()">Cancel</button>
+    <button mat-button type="button" [disabled]="disabledCloseButtons" #closeButton (click)="onClose()">Close</button>
+  </form>
+</div>

@@ -79,6 +79,13 @@ class BootStrap {
             it.flush()
             it.clear()
         }
+
+        // save USATT account information
+        String stripePublicKey = System.getenv('USATT_STRIPE_PUBLIC_KEY')
+        String stripeSecretKey = System.getenv('USATT_STRIPE_SECRET_KEY')
+        if (stripePublicKey != null && stripeSecretKey != null) {
+            new Account(system: true, gatewayType: 'Stripe', stripePublicKey: stripePublicKey, stripeSecretKey: stripeSecretKey).save(failOnError: true);
+        }
     }
 
     def scrapeClubData () {

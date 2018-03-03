@@ -27,6 +27,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import {CdkTableModule} from "@angular/cdk/table";
+import { SharedModule } from './../shared/shared.module';
+import { CreditCardPopupComponent } from './../shared/credit-card-popup/credit-card-popup.component';
 
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
 
@@ -89,6 +91,7 @@ import { ClubsService } from './clubs.service';
     MatStepperModule,
     FlexLayoutModule,
     CdkTableModule,
+    SharedModule,
 
     MatAutocompleteModule,
 
@@ -105,6 +108,10 @@ import { ClubsService } from './clubs.service';
   ],
     providers: [
       ClubsService,
-    ]
+    ],
+  entryComponents: [
+    CreditCardPopupComponent
+  ]
+
 })
 export class ClubsModule { }

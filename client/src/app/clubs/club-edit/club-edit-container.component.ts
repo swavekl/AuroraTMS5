@@ -9,18 +9,20 @@ import * as RouterActions from './../../router.actions';
 import { ClubAddAction, ClubDuplicateAction, ClubEditAction, ClubSaveAction } from './../ngrx/club.actions';
 
 import { Club } from './../club.model';
-import { ClubsService } from '../clubs.service';
+import * as AccountActions from './../../shared/account/ngrx/account.actions';
+import * as fromAccount from './../../shared/account/ngrx/account.reducer';
+
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/of';
 
 //
-// so called dumb component where all interaction with server is happening
+// so called smart component where all interaction with server is happening
 //
 @Component({
   selector: 'club-edit-container',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-  <club-edit [club]="club$ | async" (saved)="onSave($event)" (canceled)="onCancel($event)"></club-edit>
+  <club-edit [club]="club$ | async" [systemPublicKey]="systemPublicKey$ | async" (saved)="onSave($event)" (canceled)="onCancel($event)"></club-edit>
   `,
 })
 export class ClubEditContainerComponent implements OnInit {
@@ -30,10 +32,13 @@ export class ClubEditContainerComponent implements OnInit {
   // this is its id
   editedId: number;
 
-  constructor(private clubsService: ClubsService,
-              private store: Store<fromClubs.State>,
+  systemPublicKey$:Observable<string>;
+
+  constructor(private store: Store<fromClubs.State>,
+              private accountStore: Store<fromAccount.State>,
               private activatedRoute: ActivatedRoute) {
     this.club$ = store.select (fromClubs.getEdited);
+    this.systemPublicKey$ = accountStore.select(fromAccount.getSystemPublicKey);
   }
 
   ngOnInit() {
@@ -59,6 +64,8 @@ export class ClubEditContainerComponent implements OnInit {
         } else {
           this.store.dispatch(new ClubEditAction(this.editedId));
         }
+        // get stripe system key
+        this.accountStore.dispatch(new AccountActions.AccountSystemAction());
   }
 
   onSave(updatedClub: Club) {
