@@ -81,7 +81,7 @@ export class InsuranceRequestEffects {
     .switchMap((insuranceRequest) => {
       let mappedActions = [
           new InsuranceRequestActions.InsuranceRequestSaveSuccessAction(),
-          new RouterActions.Go({path: ['/insurance/list']})
+          new RouterActions.Go({path: ['/tournament/insurance/list']})
       ];
       return this.insuranceService.save(insuranceRequest)
         .mergeMap(result => mappedActions)

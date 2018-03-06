@@ -78,7 +78,7 @@ export class SanctionRequestEffects {
     .switchMap((sanctionRequest) => {
       let mappedActions = [
           new SanctionRequestActions.SanctionRequestSaveSuccessAction(),
-          new RouterActions.Go({path: ['/sanction/list']})
+          new RouterActions.Go({path: ['/tournament/sanction/list']})
       ];
       return this.sanctionService.save(sanctionRequest)
         .mergeMap(result => mappedActions)

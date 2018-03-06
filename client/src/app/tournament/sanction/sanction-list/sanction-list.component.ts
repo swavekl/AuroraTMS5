@@ -50,15 +50,15 @@ export class SanctionListComponent implements OnInit {
   }
 
   onAddSanction () {
-      this.store.dispatch ( new RouterActions.Go({path: ['/sanction/add']}));
+      this.store.dispatch ( new RouterActions.Go({path: ['/tournament/sanction/add']}));
   }
 
   onEditSanction (requestId: number) {
-      this.store.dispatch ( new RouterActions.Go({path: ['/sanction/edit/'+requestId]}));
+      this.store.dispatch ( new RouterActions.Go({path: ['/tournament/sanction/edit/'+requestId]}));
   }
 
   onDuplicateSanction (requestId: number) {
-      this.store.dispatch ( new RouterActions.Go({path: ['/sanction/duplicate/'+requestId]}));
+      this.store.dispatch ( new RouterActions.Go({path: ['/tournament/sanction/duplicate/'+requestId]}));
   }
 }
 

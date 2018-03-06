@@ -9,6 +9,7 @@ import {
   MatProgressBarModule
 } from '@angular/material';
 import { CreditCardPopupComponent } from './credit-card-popup/credit-card-popup.component';
+import { StatesComponent } from './states/states.component';
 import { FinancialTransactionService } from './financial-transaction/financial-transaction.service'
 import { AccountComponent } from './account/account.component';
 import { AccountService } from './account/account.service';
@@ -56,10 +57,12 @@ export interface sharedState {
   exports: [
     MessageDialogComponent,
     CreditCardPopupComponent,
+    StatesComponent
   ],
   declarations: [
     MessageDialogComponent,
     CreditCardPopupComponent,
+    StatesComponent,
     AccountComponent
   ],
   providers: [

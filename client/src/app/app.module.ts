@@ -5,7 +5,7 @@ import { HttpModule, Http, XHRBackend, RequestOptions} from '@angular/http';
 import { httpFactory } from "./http/http-factory";
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule,  PreloadAllModules } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -30,8 +30,6 @@ import { TodosService } from './todos.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
-import { TournamentModule, TournamentState } from './tournament/tournament.module';
-import { ClubsModule, ClubsState } from './clubs/clubs.module';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -50,8 +48,6 @@ import { RouterEffects } from './router.effects';
 // now compose the app state from module's states
 export interface AppState {
  routerReducer: RouterReducerState;
- tournamentState: TournamentState;
- clubsState: ClubsState;
  // other module states?
 }
 
@@ -92,10 +88,11 @@ export const AppEffects = [
     MatFormFieldModule,
     CdkTableModule,
     FlexLayoutModule,
-    TournamentModule,
-    ClubsModule,
 
-    RouterModule.forRoot(rootRouterConfig),
+    RouterModule.forRoot(rootRouterConfig, {
+      enableTracing: false,
+      preloadingStrategy: PreloadAllModules
+    }),
 
     // ngrx stuff
     StoreModule.forRoot(AppReducers),

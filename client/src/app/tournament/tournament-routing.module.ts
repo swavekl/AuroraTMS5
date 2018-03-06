@@ -13,17 +13,33 @@ import {SanctionEditContainerComponent} from "./sanction/sanction-edit/sanction-
 import { ConfigureTournamentComponent } from './configure-tournament/configure-tournament.component';
 
 const routes: Routes = [
-    {path: 'insurance/list', component: InsuranceListComponent, canActivate: [AuthGuard] },
-    {path: 'insurance/add', component: InsuranceEditContainerComponent, canActivate: [AuthGuard] },
-    {path: 'insurance/edit/:id', component: InsuranceEditContainerComponent, canActivate: [AuthGuard] },
-    {path: 'insurance/duplicate/:id', component: InsuranceEditContainerComponent, canActivate: [AuthGuard] },
-
-    {path: 'sanction/list', component: SanctionListComponent, canActivate: [AuthGuard] },
-    {path: 'sanction/add', component: SanctionEditContainerComponent, canActivate: [AuthGuard] },
-    {path: 'sanction/edit/:id', component: SanctionEditContainerComponent, canActivate: [AuthGuard] },
-    {path: 'sanction/duplicate/:id', component: SanctionEditContainerComponent, canActivate: [AuthGuard] },
-
-    {path: 'configuretournament', component: ConfigureTournamentComponent}
+     // lazy loaded components so path is ''
+     {
+     path: '',
+     children: [
+       {
+          path: 'insurance',
+          children: [
+          {path: 'list', component: InsuranceListComponent, canActivate: [AuthGuard] },
+          {path: 'add', component: InsuranceEditContainerComponent, canActivate: [AuthGuard] },
+          {path: 'edit/:id', component: InsuranceEditContainerComponent, canActivate: [AuthGuard] },
+          {path: 'duplicate/:id', component: InsuranceEditContainerComponent, canActivate: [AuthGuard] },
+          ]
+       },
+       {
+          path: 'sanction',
+          children: [
+            {path: 'list', component: SanctionListComponent, canActivate: [AuthGuard] },
+            {path: 'add', component: SanctionEditContainerComponent, canActivate: [AuthGuard] },
+            {path: 'edit/:id', component: SanctionEditContainerComponent, canActivate: [AuthGuard] },
+            {path: 'duplicate/:id', component: SanctionEditContainerComponent, canActivate: [AuthGuard] },
+            ]
+       },
+       {
+          path: 'configuretournament', component: ConfigureTournamentComponent
+       }
+     ]
+   }
 ];
 
 @NgModule({

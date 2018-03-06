@@ -16,6 +16,37 @@ export class Club {
   clubWebsite: string;
   affiliationExpirationDate: Date;
 
+  mailingCorrespondentsName: string;
+  mailingStreetAddress: string;
+  mailingCity: string;
+  mailingState: string;
+  mailingZipCode: string;
+
+  presidentName: string;
+  presidentEmail: string;
+  presidentPhoneNumber: string;
+
+  vicePresidentName: string;
+  vicePresidentEmail: string;
+  vicePresidentPhoneNumber: string;
+
+  secretaryName: string;
+  secretaryEmail: string;
+  secretaryPhoneNumber: string;
+
+  treasurerName: string;
+  treasurerEmail: string;
+  treasurerPhoneNumber: string;
+
+  hasMembershipStructure: boolean;
+  membershipStructure: string;
+
+  membersCount: number;
+  tablesCount: number;
+
+  programs: string;
+  hasBankAccount: boolean;
+
   constructor () {
 
   }

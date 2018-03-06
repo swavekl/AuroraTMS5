@@ -69,7 +69,7 @@ export class InsuranceEditContainerComponent implements OnInit {
     this.store.dispatch(new InsuranceRequestSaveAction(insuranceRequestToSave));
   }
 
-  onCancel () {
+  onCancel (eventName) {
     this.store.dispatch (new RouterActions.Back());
   }
 }

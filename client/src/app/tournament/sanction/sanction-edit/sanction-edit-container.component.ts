@@ -70,7 +70,7 @@ export class SanctionEditContainerComponent implements OnInit {
     this.store.dispatch(new SanctionRequestSaveAction(sanctionRequestToSave));
   }
 
-  onCancel () {
+  onCancel (eventName) {
     this.store.dispatch (new RouterActions.Back());
   }
 }

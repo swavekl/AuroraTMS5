@@ -56,15 +56,15 @@ export class InsuranceListComponent implements OnInit {
   }
 
   onAddInsurance () {
-    this.router.navigate (['/insurance/add']);
+    this.router.navigate (['/tournament/insurance/add']);
   }
 
   onEditInsurance (requestId: number) {
-    this.router.navigate (['/insurance/edit/'+requestId]);
+    this.router.navigate (['/tournament/insurance/edit/'+requestId]);
   }
 
   onDuplicateInsurance (requestId: number) {
-    this.router.navigate (['/insurance/duplicate/'+requestId]);
+    this.router.navigate (['/tournament/insurance/duplicate/'+requestId]);
   }
 }
 

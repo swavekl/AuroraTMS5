@@ -14,9 +14,9 @@ export class MainMenuComponent implements OnInit {
 
   links: Array<MenuItem> = [
     {label: "Clubs", url: "club/list"},
-    {label: "Sanction", url: "sanction/list"},
-    {label: "Insurance", url: "insurance/list"},
-    {label: "Configure", url: "configuretournament"},
+    {label: "Sanction", url: "tournament/sanction/list"},
+    {label: "Insurance", url: "tournament/insurance/list"},
+    {label: "Configure", url: "tournament/configuretournament"},
     {label: "Logout", url: "login"}
   ];
 

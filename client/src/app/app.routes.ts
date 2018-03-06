@@ -16,6 +16,9 @@ export const rootRouterConfig: Routes = [
     },
     {path: 'welcome', component: WelcomeComponent},
     {path: 'landing', component: LandingComponent},
-    {path: 'logout', component: LoginComponent}
+    {path: 'logout', component: LoginComponent},
+    // lazy loaded modules
+    {path: 'tournament', loadChildren: 'app/tournament/tournament.module#TournamentModule'},
+    {path: 'club', loadChildren: 'app/clubs/clubs.module#ClubsModule'}
 ];
 

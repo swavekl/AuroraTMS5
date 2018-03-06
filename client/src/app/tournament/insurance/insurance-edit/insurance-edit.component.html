@@ -130,7 +130,7 @@
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <mat-form-field fxFlex="20%">
-              <input matInput [matDatepicker]="picker" placeholder="Date of Request" name="requestDate" [ngModel]="insuranceRequest.requestDate | date:'yyyy-MM-dd'" readonly>
+              <input matInput placeholder="Date of Request" name="requestDate" [ngModel]="insuranceRequest.requestDate | date:'yyyy-MM-dd'" readonly>
               </mat-form-field>
               <mat-form-field fxFlex="20%">
                 <input matInput type="text" placeholder="Status" name="status" [ngModel]="insuranceRequest.status" readonly>
