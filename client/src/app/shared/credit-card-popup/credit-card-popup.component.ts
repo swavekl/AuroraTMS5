@@ -33,11 +33,15 @@ export class CreditCardPopupComponent implements OnInit, AfterViewInit, OnDestro
   // native card element from stripe which will be mounted
   @ViewChild('cardInfo') cardInfo: ElementRef;
 
-  // stripe card element with card number, expiration date, CVC and zip code which will be embedded inside cardInfo
-  card: any;
+  // stripe card elements for card number, expiration date, CVC and zip code which will be embedded inside
+  cardNumber: any;
+  cardExpiry: any;
+  cardCvc: any;
+  cardZip: any;
 
   // event handler listening to the change events coming from card
   cardHandler = this.onChange.bind(this);
+  brandingChangeHandler = this.onCreditCardNumberChange.bind(this);
 
   // stripe instance
   private stripe: any;
@@ -72,6 +76,9 @@ export class CreditCardPopupComponent implements OnInit, AfterViewInit, OnDestro
   // we either show error detected on the client by stripe (true) or from server (false)
   clientError:boolean;
 
+  // credit card image recognized from number
+  cardImageSrc:string = 'assets/images/unknown-cc.png';
+
   /**
   * Constructor
   */
@@ -104,6 +111,7 @@ export class CreditCardPopupComponent implements OnInit, AfterViewInit, OnDestro
         // enable close button
         this.disabledButtons = true;
         this.disabledCloseButtons = false;
+        this.cardImageSrc = 'assets/images/empty.png';
         // remove credit card components so they can't enter another card
         this.ngOnDestroy();
       }
@@ -131,16 +139,87 @@ export class CreditCardPopupComponent implements OnInit, AfterViewInit, OnDestro
   onInitStripe () {
       this.stripe = Stripe(this.stripePublicKey);
       const elements = this.stripe.elements();
-      this.card = elements.create('card');
-      this.card.mount(this.cardInfo.nativeElement);
-      this.card.addEventListener('change', this.cardHandler);
+
+     var elementStyles = {
+        base: {
+          fontSize: '18px',
+          fontSmoothing: 'antialiased',
+
+          ':focus': {
+            color: 'blue'
+          },
+
+          '::placeholder': {
+            color: 'gray',
+          },
+
+          ':focus::placeholder': {
+            color: 'gray',
+          },
+        },
+        invalid: {
+          color: 'red',
+          ':focus': {
+            color: 'red',
+          },
+          '::placeholder': {
+            color: 'red',
+          },
+        },
+      };
+
+      var elementClasses = {
+        focus: 'focus',
+        empty: 'empty',
+        invalid: 'invalid',
+      };
+
+     var options = {
+         style: elementStyles,
+         classes: elementClasses,
+     };
+
+      this.cardNumber = elements.create('cardNumber', options);
+      this.cardNumber.mount('#card-number');
+
+      this.cardExpiry = elements.create('cardExpiry', options);
+      this.cardExpiry.mount('#card-expiry');
+
+      this.cardCvc = elements.create('cardCvc', options);
+      this.cardCvc.mount('#card-cvc');
+
+      this.cardZip = elements.create('postalCode', options);
+      this.cardZip.mount('#postal-code');
+
+      this.cardNumber.addEventListener('change', this.cardHandler);
+      this.cardExpiry.addEventListener('change', this.cardHandler);
+      this.cardCvc.addEventListener('change', this.cardHandler);
+      this.cardZip.addEventListener('change', this.cardHandler);
+
+      this.cardNumber.addEventListener('change', this.brandingChangeHandler);
   }
 
   ngOnDestroy() {
-    if (this.card != null) {
-      this.card.removeEventListener('change', this.cardHandler);
-      this.card.destroy();
-      this.card = null;
+    if (this.cardNumber != null) {
+      this.cardNumber.removeEventListener('change', this.cardHandler);
+      this.cardNumber.removeEventListener('change', this.brandingChangeHandler);
+      this.cardNumber.destroy();
+      this.cardNumber = null;
+      }
+    if (this.cardExpiry != null) {
+      this.cardExpiry.removeEventListener('change', this.cardHandler);
+      this.cardExpiry.destroy();
+      this.cardExpiry = null;
+      }
+    if (this.cardCvc != null) {
+      this.cardCvc.removeEventListener('change', this.cardHandler);
+      this.cardCvc.destroy();
+      this.cardCvc = null;
+      }
+    if (this.cardZip != null) {
+      this.cardZip.removeEventListener('change', this.cardHandler);
+      this.cardZip.destroy();
+      this.cardZip = null;
       }
   }
 
@@ -166,6 +245,37 @@ export class CreditCardPopupComponent implements OnInit, AfterViewInit, OnDestro
     this.cd.detectChanges();
   }
 
+  /**
+  * for setting credit card icon
+  */
+  onCreditCardNumberChange ( event ) {
+//    console.log ('in branding handler', event);
+
+    // Switch brand logo
+    if (event.brand) {
+      var brand = event.brand;
+      var cardBrandToPfClass = {
+        'visa': 'visa',
+        'mastercard': 'mastercard',
+        'amex': 'amex',
+        'discover': 'discover',
+        'diners': 'diners',
+        'jcb': 'jcb',
+        'unknown': 'unknown-cc'
+      };
+
+      var iconFile = 'unknown-cc';
+      if (brand in cardBrandToPfClass) {
+        iconFile = cardBrandToPfClass[brand];
+      }
+      this.cardImageSrc = 'assets/images/' + iconFile + '.png';
+    }
+  }
+
+
+  /**
+  * submit handler
+  */
   async onSubmit(form: NgForm) {
 
     // disable buttons so they can't click them
@@ -173,7 +283,7 @@ export class CreditCardPopupComponent implements OnInit, AfterViewInit, OnDestro
     this.disabledCloseButtons = true;
     this.error = null;
 
-    const { token, error } = await this.stripe.createToken(this.card);
+    const { token, error } = await this.stripe.createToken(this.cardNumber);
 
     if (error) {
       this.store.dispatch(new FinancialTransactionActions.FinancialTransactionFailureAction(error.message));

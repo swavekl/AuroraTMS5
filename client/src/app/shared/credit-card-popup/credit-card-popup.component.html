@@ -1,19 +1,56 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
 <div mat-dialog-content>
   <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout">
-    <div class="form-row">
-      <div id="card-info" #cardInfo></div>
-      <mat-progress-bar *ngIf="loading$ | async; else elseblock" mode="indeterminate" color="primary"></mat-progress-bar>
-      <ng-template #elseblock><mat-progress-bar mode="determinate" color="primary" value="0"></mat-progress-bar></ng-template>
-      <div style="color: red" *ngIf="clientError && error">
-        {{ error }}
-      </div>
-      <div style="color: red" *ngIf="!clientError && error$ | async">{{ error$ | async }}</div>
-      <div style="color: green" *ngIf="success$ | async">Success</div>
-    </div>
+    <div fxLayout="column" fxLayoutGap="20px">
 
-    <button mat-button type="submit" [disabled]="disabledButtons" #payButton>Pay</button>
-    <button mat-button type="button" [disabled]="disabledButtons" #cancelButton (click)="onCancel()">Cancel</button>
-    <button mat-button type="button" [disabled]="disabledCloseButtons" #closeButton (click)="onClose()">Close</button>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <div fxFlex="15%"><img [src]="cardImageSrc" class="cc-logos"></div>
+        <div fxFlex="85%">
+          <div id="card-number"></div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="40%">
+          <div id="card-expiry"></div>
+        </div>
+        <div fxFlex="20%">
+          <div id="card-cvc"></div>
+        </div>
+        <div fxFlex="40%">
+          <div id="postal-code"></div>
+        </div>
+      </div>
+
+      <div fxLayout="column">
+        <mat-progress-bar *ngIf="loading$ | async; else elseblock" mode="indeterminate"
+                          color="primary"></mat-progress-bar>
+        <ng-template #elseblock>
+          <mat-progress-bar mode="determinate" color="primary" value="0"></mat-progress-bar>
+        </ng-template>
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="start center">
+        <div style="color: red" *ngIf="clientError && error">
+          {{ error }}
+        </div>
+        <div style="color: red" *ngIf="!clientError && error$ | async">{{ error$ | async }}</div>
+        <div style="color: green" *ngIf="success$ | async">Charge successful!</div>
+        <div style="color: black" *ngIf="loading$ | async">Processing...</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center" [fxHide]="disabledButtons">
+        <button mat-button type="submit" #payButton>Pay</button>
+        <button mat-button type="button" #cancelButton (click)="onCancel()">Cancel</button>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center" [fxHide]="disabledCloseButtons">
+        <button mat-button type="button" #closeButton (click)="onClose()">Close</button>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <img src="assets/images/powered_by_stripe.png">
+      </div>
+    </div>
   </form>
 </div>

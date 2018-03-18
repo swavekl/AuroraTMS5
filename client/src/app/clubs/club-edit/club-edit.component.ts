@@ -42,8 +42,8 @@ export class ClubEditComponent implements OnInit {
           var description = this.club.name + ' club affiliation fee';
           var tags = [this.club.name, 'affiliation fee'];
           let dialogRef = this.messageDialog.open(CreditCardPopupComponent, {
-            width: '480px',
-            data: { title: 'Pay $75 Now', amount: 7500, description: description, tags: tags,
+            width: '300px', height: '370px',
+            data: { title: 'Pay $75', amount: 7500, description: description, tags: tags,
             stripePublicKey: this.systemPublicKey}
           });
 

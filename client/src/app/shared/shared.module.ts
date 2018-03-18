@@ -8,6 +8,8 @@ import {
   MatSelectModule,
   MatProgressBarModule
 } from '@angular/material';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
 import { CreditCardPopupComponent } from './credit-card-popup/credit-card-popup.component';
 import { StatesComponent } from './states/states.component';
 import { FinancialTransactionService } from './financial-transaction/financial-transaction.service'
@@ -50,6 +52,7 @@ export interface sharedState {
     MatSelectModule,
     MatProgressBarModule,
     FormsModule,
+    FlexLayoutModule,
 
     StoreModule.forFeature('featureShared', sharedFeatureReducers),
     EffectsModule.forFeature(sharedFeatureEffects)
