@@ -40,12 +40,12 @@
       </div>
 
       <div fxLayout="row" fxLayoutAlign="space-between center" [fxHide]="disabledButtons">
-        <button mat-button type="submit" #payButton>Pay</button>
-        <button mat-button type="button" #cancelButton (click)="onCancel()">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" #payButton>Pay</button>
+        <button mat-raised-button color="primary" type="button" #cancelButton (click)="onCancel()">Cancel</button>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="center center" [fxHide]="disabledCloseButtons">
-        <button mat-button type="button" #closeButton (click)="onClose()">Close</button>
+        <button mat-raised-button color="primary" type="button" #closeButton (click)="onClose()">Close</button>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="center center">
