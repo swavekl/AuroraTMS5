@@ -116,15 +116,15 @@
               </mat-form-field>
 
               <mat-form-field fxFlex="20%">
-                <input matInput [matDatepicker]="pickerESD" placeholder="Event Start Date" name="eventStartDate" [ngModel]="insuranceRequest.eventStartDate">
+                <input matInput [matDatepicker]="pickerESD" placeholder="Event Start Date" name="eventStartDate" [min]="minStartDate" [max]="maxStartDate" [(ngModel)]="insuranceRequest.eventStartDate" required (dateChange)="onEnableEndDate($event.target.value)" (input)="onEnableEndDate($event.target.value)" disabled>
                 <mat-datepicker-toggle matSuffix [for]="pickerESD"></mat-datepicker-toggle>
-                <mat-datepicker #pickerESD></mat-datepicker>
+                <mat-datepicker #pickerESD disabled="false"></mat-datepicker>
               </mat-form-field>
 
               <mat-form-field fxFlex="20%">
-                <input matInput [matDatepicker]="pickerEED" placeholder="Event End Date" name="eventEndDate" [ngModel]="insuranceRequest.eventEndDate">
+                <input matInput [matDatepicker]="pickerEED" placeholder="Event End Date" name="eventEndDate" [min]="minEndDate" [max]="maxEndDate" [(ngModel)]="insuranceRequest.eventEndDate" disabled>
                 <mat-datepicker-toggle matSuffix [for]="pickerEED"></mat-datepicker-toggle>
-                <mat-datepicker #pickerEED></mat-datepicker>
+                <mat-datepicker #pickerEED [disabled]="!endDateEnabled"></mat-datepicker>
               </mat-form-field>
             </div>
 

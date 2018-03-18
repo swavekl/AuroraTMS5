@@ -22,8 +22,18 @@ export class InsuranceEditComponent implements OnInit {
   // list of states in USA
   statesList: any [];
 
+  minStartDate = new Date();
+  maxStartDate = new Date();
+
+  minEndDate: Date;
+  maxEndDate: Date;
+
+  endDateEnabled = false;
+
   constructor() {
     this.statesList = new StatesList().getList();
+    this.minStartDate.setDate(this.minStartDate.getDate() + 30);
+    this.maxStartDate.setDate(this.maxStartDate.getDate() + 365);
   }
 
   ngOnInit() {
@@ -31,6 +41,14 @@ export class InsuranceEditComponent implements OnInit {
 
   // called after Input changes
   ngOnChanges () {
+  }
+
+  onEnableEndDate(date: Date) {
+    this.endDateEnabled = true;
+    this.minEndDate = new Date(this.insuranceRequest.eventStartDate.getTime());
+    this.minEndDate.setDate(this.minEndDate.getDate() + 1);
+    this.maxEndDate = new Date(this.insuranceRequest.eventStartDate.getTime());
+    this.maxEndDate.setDate(this.maxEndDate.getDate() + 7);
   }
 
   save(formValues: any){
