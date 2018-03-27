@@ -14,8 +14,8 @@ class SanctionRequestSpec extends Specification implements DomainUnitTest<Sancti
 
     void "test basic persistence mocking"() {
         setup:
-        new SanctionRequest(tournamentName: 'Fox Valley Open 22', startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Started).save()
-        new SanctionRequest(tournamentName: 'Schaumburg New Year Open 222', startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Approved).save()
+        new SanctionRequest(tournamentName: 'Fox Valley Open 22', startDate: new Date(), endDate: new Date(), requestDate: new Date(), requestContentsJSON: '{}', status: SanctionRequestStatus.Started).save(failOnError: true)
+        new SanctionRequest(tournamentName: 'Schaumburg New Year Open 222', startDate: new Date(), endDate: new Date(), requestDate: new Date(), requestContentsJSON: '{}', status: SanctionRequestStatus.Approved).save(failOnError: true)
 
         expect:
         SanctionRequest.count() == 2

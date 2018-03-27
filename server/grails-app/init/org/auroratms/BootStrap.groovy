@@ -23,6 +23,7 @@ class BootStrap {
         // make all dates saved in this timezone
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
 
+        def adminRole = new Role(authority: 'ROLE_ADMIN').save()
         def userRole = new Role(authority: 'ROLE_USER').save()
         def tdRole = new Role(authority: 'ROLE_TOURNAMENT_DIRECTOR').save()
         //def facebookRole = new Role(authority: 'ROLE_FACEBOOK').save()
@@ -30,12 +31,15 @@ class BootStrap {
 
         def swavek = new User(username: 'swaveklorenc@yahoo.com', password: 'swavek').save()
         def yichi = new User(username: 'yzhang2@mc.com', password: 'yichi').save()
+        def testuser = new User(username: 'apitestuser@gmail.com', password: 'apitestuser').save()
 
         UserRole.create swavek, userRole
         UserRole.create swavek, tdRole
 
         UserRole.create yichi, userRole
         UserRole.create yichi, tdRole
+
+        UserRole.create testuser, userRole
 
         UserRole.withSession {
             it.flush()

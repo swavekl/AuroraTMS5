@@ -19,10 +19,10 @@ class SanctionRequestServiceSpec extends Specification implements ServiceUnitTes
 
     void "test something"() {
         setup: 'create tournament request'
-            service.create(new SanctionRequest(tournamentName: "Teams tournament", startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Started))
-            service.create(new SanctionRequest(tournamentName: "Fox Valley Open", startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Started))
-            service.create(new SanctionRequest(tournamentName: "Aurora Cup", startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Started))
-            service.create(new SanctionRequest(tournamentName: "Aurora Fall Open", startDate: new Date(), endDate: new Date(), status: SanctionRequestStatus.Started))
+            service.create(new SanctionRequest(tournamentName: "Teams tournament", startDate: new Date(), endDate: new Date(), requestDate: new Date(), requestContentsJSON: '{}',status: SanctionRequestStatus.Started))
+            service.create(new SanctionRequest(tournamentName: "Fox Valley Open", startDate: new Date(), endDate: new Date(), requestDate: new Date(), requestContentsJSON: '{}',status: SanctionRequestStatus.Started))
+            service.create(new SanctionRequest(tournamentName: "Aurora Cup", startDate: new Date(), endDate: new Date(), requestDate: new Date(), requestContentsJSON: '{}',status: SanctionRequestStatus.Started))
+            service.create(new SanctionRequest(tournamentName: "Aurora Fall Open", startDate: new Date(), endDate: new Date(), requestDate: new Date(), requestContentsJSON: '{}',status: SanctionRequestStatus.Started))
 
         when: "we search "
             def results = service.search ('Aurora', 5)
