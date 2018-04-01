@@ -15,7 +15,11 @@ export const SAVE_FAILURE   = '[PlayerProfile] Save Failure';
 export class PlayerProfileSearchAction implements Action {
   readonly type = SEARCH;
 
-  constructor (public payload: PagingInfo) { }
+  constructor (public payload: PagingInfo,
+  public firstName: string,
+  public lastName: string,
+  public membershipId: number
+  ) { }
 }
 
 export class PlayerProfileSearchSuccessAction implements Action {

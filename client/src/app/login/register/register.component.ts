@@ -15,6 +15,8 @@ export class RegisterComponent implements OnInit {
   password: string = "Mario1234";
   password2: string = "Mario1234";
 
+  status: string = "";
+
   constructor(
       private authenticationService: AuthenticationService,
       private route: ActivatedRoute,
@@ -22,16 +24,21 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.status = "";
   }
 
   register() {
-    this.authenticationService.register(this.firstName, this.lastName, this.email, this.password)
+    this.authenticationService.register(this.firstName, this.lastName, this.email, this.password, this.password2)
     .subscribe(data => {
                         if (data == true)
+//                            this.status = "Success";
                             this.router.navigate(['/welcome']);
                         },
                         error => {
-          console.log ('error registering', error);
+                            //console.log ('error registering', error._body);
+                            if (error._body) {
+                                this.status = error._body;
+                            }
                         });
   }
 

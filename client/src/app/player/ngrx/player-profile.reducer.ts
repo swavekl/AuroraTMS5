@@ -118,8 +118,8 @@ export function PlayerProfileReducer(state = initialState, action: PlayerProfile
 }
 
 export const getFeatureState = (state: State) => {
-  let feature = state['featureTournaments'];
-  let subFeature = feature ['subFeatureSanction'];
+  let feature = state['featurePlayerProfile'];
+  let subFeature = feature ['subFeaturePlayerProfile'];
   return subFeature;
 }
 

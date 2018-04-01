@@ -1,3 +1,5 @@
+import { DateUtils } from './../utils/date-utils';
+
 export class PlayerProfile {
     id:number;
     firstName: string;
@@ -17,5 +19,15 @@ export class PlayerProfile {
     zipCode: string;
     country: string;
 //    gender: Gender
+
+  constructor () {
+
+  }
+
+  applyChanges (formValues: any) {
+    let dateUtils = new DateUtils();
+    formValues.expirationDate = dateUtils.convertFromLocalToUTCDate (formValues.expirationDate);
+    Object.assign (this, formValues);
+  }
 
 };
