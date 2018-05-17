@@ -4,6 +4,7 @@ import {SignInComponent} from "./login/sign-in/sign-in.component";
 import {RegisterComponent} from "./login/register/register.component";
 import {WelcomeComponent} from "./login/welcome/welcome.component";
 import { LandingComponent } from './login/landing/landing.component';
+import {OfficialsSearchComponent} from "./officials/officials-search.component";
 
 export const rootRouterConfig: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -20,6 +21,7 @@ export const rootRouterConfig: Routes = [
     // lazy loaded modules
     {path: 'tournament', loadChildren: 'app/tournament/tournament.module#TournamentModule'},
     {path: 'club', loadChildren: 'app/clubs/clubs.module#ClubsModule'},
-    {path: 'playerprofile', loadChildren: 'app/player/player.module#PlayerModule'}
+    {path: 'playerprofile', loadChildren: 'app/player/player.module#PlayerModule'},
+    {path: 'officials-search', component: OfficialsSearchComponent}
 ];
 
