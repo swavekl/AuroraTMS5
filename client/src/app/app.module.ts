@@ -36,6 +36,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './login/register/register.component';
 import { WelcomeComponent } from './login/welcome/welcome.component';
 import { LandingComponent } from './login/landing/landing.component';
+import {OfficialsSearchComponent} from "./officials/officials-search.component";
 
 // ngrx related stuff
 import { StoreModule } from '@ngrx/store';
@@ -67,7 +68,8 @@ export const AppEffects = [
     MainMenuComponent,
     RegisterComponent,
     WelcomeComponent,
-    LandingComponent
+    LandingComponent,
+    OfficialsSearchComponent
   ],
   imports: [
     BrowserModule,

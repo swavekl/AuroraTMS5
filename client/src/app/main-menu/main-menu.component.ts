@@ -17,6 +17,7 @@ export class MainMenuComponent implements OnInit {
     {label: "Sanction", url: "tournament/sanction/list"},
     {label: "Insurance", url: "tournament/insurance/list"},
     {label: "Configure", url: "tournament/configuretournament"},
+    {label: "Officials", url: "officials-search"},
     {label: "Logout", url: "login"}
   ];
 
