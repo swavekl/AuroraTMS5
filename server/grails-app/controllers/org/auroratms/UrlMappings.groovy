@@ -3,6 +3,8 @@ package org.auroratms
 class UrlMappings {
 
     static mappings = {
+        '/api/playerprofile'(resources: 'playerProfile')
+
         '/api/insurancerequest'(resources: 'insuranceRequest')
 
         '/api/sanctionrequest'(resources: 'sanctionRequest') {
@@ -18,7 +20,7 @@ class UrlMappings {
         }
 
         '/api/register' (controller: 'restRegister', action:'register', method: 'POST')
-//        '/api/register/verify' (controller: 'restRegister', action:'restVerify', method: 'POST')
+        '/api/register/verify' (controller: 'restRegister', action:'verifyRegistration', method: 'GET')
 
         '/api/financialtransaction' (resources: 'financialTransaction')
 

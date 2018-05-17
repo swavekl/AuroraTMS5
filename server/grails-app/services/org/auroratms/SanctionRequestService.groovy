@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 class SanctionRequestService {
 
     def create (SanctionRequest sr) {
-        sr.save()
+        sr.save(flush: true, failOnError: true)
     }
 
     def search (String searchTerms, Integer max) {

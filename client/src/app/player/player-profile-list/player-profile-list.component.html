@@ -1,0 +1,13 @@
+<mat-list>
+  <mat-list-item *ngFor="let playerProfile of playerProfileList">
+    <h4 matLine>{{ playerProfile.firstName }} , {{ playerProfile.lastName }}</h4>
+    <h4 matLine>{{ playerProfile.city }}, {{ playerProfile.state }} </h4>
+    <button mat-icon-button (click)="onSelect(playerProfile.id)">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
+<p>
+  Player profiles count: {{ totalCount }}
+</p>
