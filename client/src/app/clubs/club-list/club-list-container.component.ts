@@ -20,26 +20,32 @@ import 'rxjs/add/observable/of';
   selector: 'club-list-container',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-  <div fxLayout="row">
-    <div fxFlex></div>
-    <mat-card>
-      <mat-card-title>USATT Affiliated Clubs</mat-card-title>
-      <mat-progress-bar *ngIf="loading$ | async; else elseblock" mode="indeterminate" color="primary"></mat-progress-bar>
-      <ng-template #elseblock><mat-progress-bar mode="determinate" color="primary" value="0"></mat-progress-bar></ng-template>
-      <mat-card-content>
-      <form>
-       <mat-form-field>
-          <input matInput type="text" placeholder="Search by club name" name="clubName" (keyup)="onFilterChange($event)">
-       </mat-form-field>
-    <!--   <club-name-auto (selected)="onClubSelected($event)"></club-name-auto> -->
-      </form>
-      <club-list [clubs]="(results$ | async )" [totalCount]="(totalCount$ | async)"
-      (selected)=onSelectedForEdit($event)>
-      </club-list>
+    <div fxLayout="row">
+      <div fxFlex></div>
+      <mat-card>
+        <mat-card-title>USATT Affiliated Clubs</mat-card-title>
+        <mat-progress-bar *ngIf="loading$ | async; else elseblock" mode="indeterminate"
+                          color="primary"></mat-progress-bar>
+        <ng-template #elseblock>
+          <mat-progress-bar mode="determinate" color="primary" value="0"></mat-progress-bar>
+        </ng-template>
+        <mat-card-content>
+          <form>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Search by club name" name="clubName"
+                     (keyup)="onFilterChange($event)">
+            </mat-form-field>
+            <!--   <club-name-auto (selected)="onClubSelected($event)"></club-name-auto> -->
+          </form>
+          <club-list [clubs]="(results$ | async )" [totalCount]="(totalCount$ | async)"
+                     (selected)=onSelectedForEdit($event)>
+          </club-list>
         </mat-card-content>
       </mat-card>
-    <div fxFlex></div>
-  `,
+      <div fxFlex>
+      </div>
+    </div>
+  `
 })
 export class ClubListContainerComponent implements OnInit {
 
