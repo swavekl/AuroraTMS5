@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as fromPlayerProfile from './../ngrx/player-profile.reducer';
 import { PlayerProfile } from './../player-profile.model';
+import { StatesList } from '../../shared/states/states';
 
 @Component({
   selector: 'player-profile-edit',
@@ -15,7 +16,13 @@ export class PlayerProfileEditComponent implements OnInit {
   @Output() saved = new EventEmitter();
   @Output() canceled = new EventEmitter();
 
-  constructor() { }
+  statesList: any [];
+
+  maxDateOfBirth = new Date();
+
+  constructor() {
+    this.statesList = new StatesList().getList();
+  }
 
   ngOnInit() {
   }
@@ -23,7 +30,7 @@ export class PlayerProfileEditComponent implements OnInit {
   /**
    * Save the sanction request
    */
-  save(formValues: any){
+  onSave(formValues: any){
     console.log ('profile formValues ', formValues);
     let playerProfileToSave: PlayerProfile = new PlayerProfile();
     playerProfileToSave.applyChanges (formValues);

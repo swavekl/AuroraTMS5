@@ -21,6 +21,7 @@ export class PlayerProfileListComponent implements OnInit {
   }
 
   onSelected (memberId: number) {
+    console.log ('memberId ', memberId);
     this.selected.emit(memberId);
   }
 

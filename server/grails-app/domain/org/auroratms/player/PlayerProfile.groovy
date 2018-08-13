@@ -20,7 +20,7 @@ class PlayerProfile {
     String city
     String state
     String zipCode
-    String country
+    //String country
     Gender gender
     // String club
 
@@ -44,7 +44,7 @@ class PlayerProfile {
         city blank: false, maxSize: 384
         state blank: false
         zipCode blank: false
-        country blank: false, maxSize: 384
+        //country blank: false, maxSize: 384
         expirationDate nullable: true
         playerGroupMember nullable: true
     }

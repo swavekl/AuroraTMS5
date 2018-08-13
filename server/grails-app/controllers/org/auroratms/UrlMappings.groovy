@@ -3,9 +3,13 @@ package org.auroratms
 class UrlMappings {
 
     static mappings = {
-        '/api/playerprofile'(resources: 'playerProfile')
+        '/api/playerprofile'(resources: 'playerProfile') {
+            collection {
+                get '/search'(controller: 'playerProfile', action: 'search')
+            }
+        }
 
-        '/api/insurancerequest'(resources: 'insuranceRequest')
+            '/api/insurancerequest'(resources: 'insuranceRequest')
 
         '/api/sanctionrequest'(resources: 'sanctionRequest') {
             collection {

@@ -1,9 +1,11 @@
 package org.auroratms.player
 
+import grails.gorm.PagedResultList
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.acl.AclService
 import grails.plugin.springsecurity.acl.AclUtilService
 import grails.transaction.Transactional
+import org.auroratms.Club
 import org.auroratms.Role
 import org.auroratms.User
 import org.auroratms.UserRole
@@ -60,6 +62,18 @@ class PlayerProfileService {
     @PreAuthorize('hasPermission(#id, "org.auroratms.player.PlayerProfile", read) or hasPermission(#id, "org.auroratms.player.PlayerProfile", admin)')
     PlayerProfile get(long id) {
         PlayerProfile.get id
+    }
+
+    @PreAuthorize('hasRole("ROLE_USER")')
+    @PostFilter('hasPermission(filterObject, read) or hasPermission(filterObject, admin)')
+    PagedResultList search (String firstName, String lastName, Integer usattId, Integer max) {
+
+        def query = (usattId == 0) ? PlayerProfile.where {
+            firstName == "${firstName}" && lastName == "${lastName}"
+        } : PlayerProfile.where {
+            (usattID == usattId)
+        }
+        query.list(max: Math.min( max ?: 10, 100))
     }
 
     @PreAuthorize('hasRole("ROLE_USER")')

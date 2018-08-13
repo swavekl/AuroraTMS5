@@ -44,9 +44,10 @@ export class PlayerProfileEffects {
   search$: Observable<Action> = this.actions$
     .ofType(PlayerProfileActions.SEARCH)
     .map(toPayload)
-    .switchMap((pagingInfo) => {
+    .switchMap((searchCriteria) => {
       const nextSearch$ = this.actions$.ofType(PlayerProfileActions.SEARCH).skip(1);
-      return this.playerProfileService.list(pagingInfo.startIndex, pagingInfo.pageSize, '')
+      return this.playerProfileService.list(searchCriteria.startIndex, searchCriteria.pageSize,
+        searchCriteria.firstName, searchCriteria.lastName, searchCriteria.usattId)
         .takeUntil(nextSearch$)
         .map(response => new PlayerProfileActions.PlayerProfileSearchSuccessAction(response.results, response.count))
         .catch(response => of(new PlayerProfileActions.PlayerProfileSearchSuccessAction([], 0)));
@@ -69,7 +70,7 @@ export class PlayerProfileEffects {
     .switchMap((PlayerProfile) => {
       let mappedActions = [
           new PlayerProfileActions.PlayerProfileSaveSuccessAction(),
-          new RouterActions.Go({path: ['/tournament/sanction/list']})
+          new RouterActions.Go({path: ['/playerprofile/list']})
       ];
       return this.playerProfileService.save(PlayerProfile)
         .mergeMap(result => mappedActions)

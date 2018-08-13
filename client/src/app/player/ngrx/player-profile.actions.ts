@@ -1,6 +1,7 @@
 import { Action} from '@ngrx/store';
 import { PlayerProfile } from './../player-profile.model';
 import { PagingInfo } from './../../utils/paging-info';
+import {PlayerProfileSearchCriteria} from "../PlayerProfileSearchCriteria";
 
 export const SEARCH         = '[PlayerProfile] Search';
 export const SEARCH_SUCCESS = '[PlayerProfile] Search Success';
@@ -14,12 +15,8 @@ export const SAVE_FAILURE   = '[PlayerProfile] Save Failure';
 
 export class PlayerProfileSearchAction implements Action {
   readonly type = SEARCH;
-
-  constructor (public payload: PagingInfo,
-  public firstName: string,
-  public lastName: string,
-  public membershipId: number
-  ) { }
+  constructor (public payload: PlayerProfileSearchCriteria) {
+  }
 }
 
 export class PlayerProfileSearchSuccessAction implements Action {

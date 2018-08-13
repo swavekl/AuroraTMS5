@@ -14,8 +14,20 @@ export class PlayerProfileService {
 
   constructor(private http: Http) { }
 
-  list (startIndex: number, pageSize: number, searchTerms: string) {
-    return this.http.get (this.serviceURL)
+  list (startIndex: number, pageSize: number, firstName: string, lastName: string, usattId: number) {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('max', pageSize.toString());
+    params.set('sort', 'lastName');
+    params.set('order', 'desc');
+
+    if (firstName != null || lastName != null) {
+      params.set('firstName', firstName);
+      params.set('lastName', lastName);
+      params.set('usattId', "0");
+    } else if (usattId != null) {
+      params.set('usattId', usattId.toString());
+    }
+    return this.http.get (this.serviceURL + '/search', {search: params})
       .map ((response:Response) => response.json());
   }
 

@@ -20,7 +20,7 @@ const initialState : State = {
   error: null,
   duplicating: false,
   saving: false
-}
+};
 
 /**
  * Reducer function returning new copy of a state

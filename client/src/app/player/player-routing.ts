@@ -9,10 +9,10 @@ const routes: Routes = [
     // this path is lazy loaded so it is '' here
     {path: '',
       children: [
-        {path: 'list**', component: PlayerProfileListContainerComponent, canActivate: [AuthGuard] },
+        {path: 'list', component: PlayerProfileListContainerComponent, canActivate: [AuthGuard] },
         {path: 'add', component: PlayerProfileEditContainerComponent, canActivate: [AuthGuard] },
-        {path: 'edit', component: PlayerProfileEditContainerComponent, canActivate: [AuthGuard] }
-//        {path: 'edit/:id', component: PlayerProfileEditContainerComponent, canActivate: [AuthGuard] }
+        // {path: 'edit', component: PlayerProfileEditContainerComponent, canActivate: [AuthGuard] }
+       {path: 'edit/:id', component: PlayerProfileEditContainerComponent, canActivate: [AuthGuard] }
       ]
     }
 ];

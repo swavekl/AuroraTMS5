@@ -44,7 +44,7 @@ export class PlayerProfileEditContainerComponent implements OnInit {
          isAdd = true;
         }
       }
-      this.editedId = this.activatedRoute.snapshot.params['id'] || -1;
+      this.editedId = this.activatedRoute.snapshot.params['id'] || 0;
       if (isAdd) {
         this.store.dispatch(new PlayerProfileAddAction());
       } else {

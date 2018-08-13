@@ -1,10 +1,12 @@
 package org.auroratms.player
 
+import grails.gorm.PagedResultList
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.*
 import grails.converters.*
 import grails.transaction.Transactional
 import grails.web.http.HttpHeaders
+import org.auroratms.Club
 
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.OK
@@ -18,6 +20,22 @@ class PlayerProfileController extends RestfulController {
 
     PlayerProfileController() {
         super(PlayerProfile)
+    }
+
+    /**
+     * Searches by either
+     * @param firstName
+     * @param lastName
+     * @param usattId
+     * @param max
+     * @return
+     */
+    def search (String firstName, String lastName, Integer usattId, Integer max) {
+        PagedResultList results = playerProfileService.search(firstName, lastName, usattId, max);
+        def count = results.getTotalCount()
+        def list = results.resultList
+        def responseMap = ['count': count, 'results': list]
+        respond responseMap;
     }
 
     /**
@@ -38,7 +56,7 @@ class PlayerProfileController extends RestfulController {
         }
 
         //saveResource instance
-        playerProfileService.create instance
+        playerProfileService.create (instance)
 
         request.withFormat {
             form multipartForm {

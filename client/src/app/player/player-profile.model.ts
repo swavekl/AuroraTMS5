@@ -18,7 +18,7 @@ export class PlayerProfile {
     state: string;
     zipCode: string;
     country: string;
-//    gender: Gender
+    gender: string
 
   constructor () {
 
